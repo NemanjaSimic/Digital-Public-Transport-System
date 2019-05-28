@@ -9,6 +9,8 @@ namespace WebApp.Persistence.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
+        IStanicaRepository Stanice { get; set; }
+        ITipPopustaRepository TipPopustas { get; set; }
         int Complete();
     }
 }

@@ -65,6 +65,10 @@ namespace WebApp.Migrations
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");
             }
+
+            context.Stanice.Add(new Stanica() { Naziv = "Sajam", Adresa = "Bulevar Oslobodjenja 143" , Koordinata = new Koordinata() { } });
+            context.TipPopustas.Add(new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.6 });
+            context.SaveChanges();      
         }
     }
 }

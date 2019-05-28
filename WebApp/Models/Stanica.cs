@@ -13,6 +13,7 @@ namespace WebApp.Models
         public string Naziv { get; set; }
         public string Adresa { get; set; }
         public Koordinata Koordinata { get; set; }
-        public List<Linija> Linije { get; set; }
+
+        public virtual List<Linija> Linije { get; set; }
     }
 }

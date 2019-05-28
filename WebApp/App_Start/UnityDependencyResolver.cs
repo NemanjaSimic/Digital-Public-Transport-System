@@ -67,7 +67,8 @@ namespace WebApp.App_Start
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-           
+            container.RegisterType<IStanicaRepository, StanicaRepository>();
+            container.RegisterType<ITipPopustaRepository, TipPopustaRepository>();
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
         }

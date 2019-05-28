@@ -11,6 +11,8 @@ namespace WebApp.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Stanica> Stanice { get; set; }
+        public DbSet<TipPopusta> TipPopustas { get; set; }
         public ApplicationDbContext()
             : base("name=DefaultConnection", throwIfV1Schema: false)
         {

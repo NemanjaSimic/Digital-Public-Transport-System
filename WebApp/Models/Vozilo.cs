@@ -10,8 +10,8 @@ namespace WebApp.Models
     {
         [Key]
         public int ID { get; set; }
-        public Koordinata Lokacija { get; set; }
 
-
+        public double KordinataX { get; set; }
+        public double KordinataY { get; set; }
     }
 }

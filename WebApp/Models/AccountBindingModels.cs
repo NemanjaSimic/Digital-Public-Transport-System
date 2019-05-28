@@ -13,6 +13,13 @@ namespace WebApp.Models
         public string ExternalAccessToken { get; set; }
     }
 
+    public class StanicaBindingModel
+    {
+        [Required]
+        [Display(Name = "Naziv")]
+        public string Naziv { get; set; }
+    }
+
     public class ChangePasswordBindingModel
     {
         [Required]
