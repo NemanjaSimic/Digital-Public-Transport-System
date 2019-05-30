@@ -272,6 +272,18 @@
     <Compile Include="Migrations\201905281500388_Updated.Designer.cs">
       <DependentUpon>201905281500388_Updated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905301258212_AllTables.cs" />
+    <Compile Include="Migrations\201905301258212_AllTables.Designer.cs">
+      <DependentUpon>201905301258212_AllTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905301341562_AllTables2.cs" />
+    <Compile Include="Migrations\201905301341562_AllTables2.Designer.cs">
+      <DependentUpon>201905301341562_AllTables2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905301350140_AddTablesFinally.cs" />
+    <Compile Include="Migrations\201905301350140_AddTablesFinally.Designer.cs">
+      <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -289,13 +301,26 @@
     <Compile Include="Models\Termin.cs" />
     <Compile Include="Models\TipKarte.cs" />
     <Compile Include="Models\TipPopusta.cs" />
-    <Compile Include="Models\Vozilo.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\Repository\CenovnikRepository.cs" />
+    <Compile Include="Persistence\Repository\ICenovnikRepository.cs" />
+    <Compile Include="Persistence\Repository\IKartaRepository.cs" />
+    <Compile Include="Persistence\Repository\IKoordinataRepository.cs" />
+    <Compile Include="Persistence\Repository\ILinijaRepository.cs" />
+    <Compile Include="Persistence\Repository\IStavkaRepository.cs" />
+    <Compile Include="Persistence\Repository\ITerminRepository.cs" />
+    <Compile Include="Persistence\Repository\ITipKarteRepository.cs" />
+    <Compile Include="Persistence\Repository\KartaRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\IStanicaRepository.cs" />
     <Compile Include="Persistence\Repository\ITipPopustaRepository.cs" />
+    <Compile Include="Persistence\Repository\KoordinataRepository.cs" />
+    <Compile Include="Persistence\Repository\LinijaRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\Repository\StanicaRepository.cs" />
+    <Compile Include="Persistence\Repository\StavkaRepository.cs" />
+    <Compile Include="Persistence\Repository\TerminRepository.cs" />
+    <Compile Include="Persistence\Repository\TipKarteRepository.cs" />
     <Compile Include="Persistence\Repository\TipPopustaRepository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
     <Compile Include="Persistence\UnitOfWork\IUnitOfWork.cs" />
@@ -408,6 +433,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905281500388_Updated.resx">
       <DependentUpon>201905281500388_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301258212_AllTables.resx">
+      <DependentUpon>201905301258212_AllTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301341562_AllTables2.resx">
+      <DependentUpon>201905301341562_AllTables2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905301350140_AddTablesFinally.resx">
+      <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

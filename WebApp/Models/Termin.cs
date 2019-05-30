@@ -13,5 +13,7 @@ namespace WebApp.Models
         public int ID { get; set; }
         public Dan Dan { get; set; }
         public DateTime Polazak { get; set; }
+
+        public virtual List<Linija> Linije { get; set; }
     }
 }

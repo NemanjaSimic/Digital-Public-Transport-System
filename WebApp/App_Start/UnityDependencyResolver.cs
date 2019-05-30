@@ -69,6 +69,15 @@ namespace WebApp.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IStanicaRepository, StanicaRepository>();
             container.RegisterType<ITipPopustaRepository, TipPopustaRepository>();
+            container.RegisterType<ITipKarteRepository, TipKarteRepository>();
+            container.RegisterType<IKartaRepository, KartaRepository>();
+            container.RegisterType<ILinijaRepository, LinijaRepository>();
+            container.RegisterType<ICenovnikRepository, CenovnikRepository>();
+            container.RegisterType<IStavkaRepository, StavkaRepository>();
+            container.RegisterType<ITerminRepository, TerminRepository>();
+            container.RegisterType<IKoordinataRepository, KoordinataRepository>();
+
+
             container.RegisterType<DbContext, ApplicationDbContext>(new PerResolveLifetimeManager());
             container.RegisterType<IUnitOfWork, DemoUnitOfWork>();
         }

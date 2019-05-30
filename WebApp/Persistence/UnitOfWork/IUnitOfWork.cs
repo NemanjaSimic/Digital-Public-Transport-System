@@ -11,6 +11,13 @@ namespace WebApp.Persistence.UnitOfWork
     {
         IStanicaRepository Stanice { get; set; }
         ITipPopustaRepository TipPopustas { get; set; }
+        ITipKarteRepository TipKartas { get; set; }
+        ILinijaRepository Linije { get; set; }
+        IKartaRepository Karte { get; set; }
+        IKoordinataRepository Koordinate { get; set; }
+        ICenovnikRepository Cenovnici { get; set; }
+        IStanicaRepository Stavke { get; set; }
+        ITerminRepository Termini { get; set; }
         int Complete();
     }
 }

@@ -16,8 +16,21 @@ namespace WebApp.Persistence.UnitOfWork
         public IStanicaRepository Stanice { get; set; }
         [Dependency]
         public ITipPopustaRepository TipPopustas { get; set; }
-
-
+        [Dependency]
+        public ITipKarteRepository TipKartas { get; set; }
+        [Dependency]
+        public ILinijaRepository Linije { get; set; }
+        [Dependency]
+        public IKartaRepository Karte { get; set; }
+        [Dependency]
+        public IKoordinataRepository Koordinate { get; set; }
+        [Dependency]
+        public ICenovnikRepository Cenovnici { get; set; }
+        [Dependency]
+        public IStanicaRepository Stavke { get; set; }
+        [Dependency]
+        public ITerminRepository Termini { get; set; }
+      
         public DemoUnitOfWork(DbContext context)
         {
             _context = context;

@@ -13,6 +13,13 @@ namespace WebApp.Persistence
     {
         public DbSet<Stanica> Stanice { get; set; }
         public DbSet<TipPopusta> TipPopustas { get; set; }
+        public DbSet<TipKarte> TipKartes { get; set; }
+        public DbSet<Linija> Linije { get; set; }
+        public DbSet<Termin> Termini { get; set; }
+        public DbSet<Karta> Karte { get; set; }
+        public DbSet<Cenovnik> Cenovnici { get; set; }
+        public DbSet<StavkaCenovnika> Stavke { get; set; }
+        public DbSet<Koordinata> Koordinate { get; set; }
         public ApplicationDbContext()
             : base("name=DefaultConnection", throwIfV1Schema: false)
         {
