@@ -1,0 +1,40 @@
+<div class="container">
+<div class="row">
+<form [formGroup]="redVoznjeForm" (ngSubmit)="onSubmit">
+  <div class="form-group col-md-2">
+      <label>Tip voznje:</label>
+      <select class="form-control" formControlName="TipVoznje" (change)="criteriaChanged()">
+        <option>Gradski</option>
+        <option>Prigradski</option>
+      </select>
+  </div>
+  <div class="form-group col-md-2">
+    <label>Dan:</label>
+    <select class="form-control" formControlName="Dan" (change)="criteriaChanged()">
+      <option>RadniDan</option>
+      <option>Subota</option>
+     <option>Nedelja</option>
+    </select>
+  </div>
+  <div class="form-group col-md-2">
+      <label>Ime stanice:</label>
+      <select class="form-control" formControlName="Ime">
+        <option *ngFor="let linija of linije">{{linija}}</option>
+      </select>
+  </div>
+  <div class="form-group col-md-2">
+    <button (click)="prkaziTermine()">Prikazi</button>
+  </div>
+</form>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-2">
+<ul class="list-group">
+  <li  class="list-group-item" *ngFor="let termin of termini">
+      <span>{{termin}}</span>
+  </li>
+</ul>
+</div>
+</div>
+</div>

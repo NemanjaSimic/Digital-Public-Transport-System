@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
@@ -12,6 +13,17 @@ namespace WebApp.Models
         [Display(Name = "External access token")]
         public string ExternalAccessToken { get; set; }
     }
+
+	public class TerminBindingModel
+	{
+		public DateTime Polazak { get; set; }
+	}
+
+	public class RedVoznjeBindingModel
+	{
+		public string[] Polasci { get; set; }
+
+	}
 
     public class StanicaBindingModel
     {

@@ -26,7 +26,6 @@ namespace WebApp.Controllers
             var stanica = new Stanica() { Naziv = newStanica.Naziv, Adresa = "Micurinova", Koordinata = new Koordinata() };
 
 
-
             unitOfWork.Stanice.Add(stanica);
             unitOfWork.Complete();
 

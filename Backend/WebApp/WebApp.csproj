@@ -253,6 +253,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinijaController.cs" />
     <Compile Include="Controllers\StanicaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -285,6 +286,10 @@
     <Compile Include="Migrations\201905301350140_AddTablesFinally.cs" />
     <Compile Include="Migrations\201905301350140_AddTablesFinally.Designer.cs">
       <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906041750257_TerminChanged.cs" />
+    <Compile Include="Migrations\201906041750257_TerminChanged.Designer.cs">
+      <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -458,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905301350140_AddTablesFinally.resx">
       <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906041750257_TerminChanged.resx">
+      <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
