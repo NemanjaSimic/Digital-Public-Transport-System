@@ -16,56 +16,56 @@ namespace WebApp.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(WebApp.Persistence.ApplicationDbContext context)
-        {
-            //  This method will be called after migrating to the latest version.
+		protected override void Seed(WebApp.Persistence.ApplicationDbContext context)
+		{
+			//  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+			//  to avoid creating duplicate seed data.
 
-            if (!context.Roles.Any(r => r.Name == "Admin"))
-            {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "Admin" };
+			if (!context.Roles.Any(r => r.Name == "Admin"))
+			{
+				var store = new RoleStore<IdentityRole>(context);
+				var manager = new RoleManager<IdentityRole>(store);
+				var role = new IdentityRole { Name = "Admin" };
 
-                manager.Create(role);
-            }
+				manager.Create(role);
+			}
 
-            if (!context.Roles.Any(r => r.Name == "Controller"))
-            {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "Controller" };
+			if (!context.Roles.Any(r => r.Name == "Controller"))
+			{
+				var store = new RoleStore<IdentityRole>(context);
+				var manager = new RoleManager<IdentityRole>(store);
+				var role = new IdentityRole { Name = "Controller" };
 
-                manager.Create(role);
-            }
+				manager.Create(role);
+			}
 
-            if (!context.Roles.Any(r => r.Name == "AppUser"))
-            {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "AppUser" };
+			if (!context.Roles.Any(r => r.Name == "AppUser"))
+			{
+				var store = new RoleStore<IdentityRole>(context);
+				var manager = new RoleManager<IdentityRole>(store);
+				var role = new IdentityRole { Name = "AppUser" };
 
-                manager.Create(role);
-            }
+				manager.Create(role);
+			}
 
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
+			var userStore = new UserStore<ApplicationUser>(context);
+			var userManager = new UserManager<ApplicationUser>(userStore);
 
-            if (!context.Users.Any(u => u.UserName == "admin@yahoo.com"))
-            {
-                var user = new ApplicationUser() { Id = "admin", UserName = "admin@yahoo.com", Email = "admin@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Admin123!") };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "Admin");
-            }
+			if (!context.Users.Any(u => u.UserName == "admin@yahoo.com"))
+			{
+				var user = new ApplicationUser() { Id = "admin", UserName = "admin@yahoo.com", Email = "admin@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Admin123!") };
+				userManager.Create(user);
+				userManager.AddToRole(user.Id, "Admin");
+			}
 
-            if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
-            { 
-                var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "AppUser");
-            }	
+			if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
+			{
+				var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
+				userManager.Create(user);
+				userManager.AddToRole(user.Id, "AppUser");
+			}
 			//Termin termin1 = new Termin() { Dan = Models.Enums.Dan.Subota, Polazak = new TimeSpan(10,0,0) };
 			//Termin termin2 = new Termin() { Dan = Models.Enums.Dan.Nedelja, Polazak = new TimeSpan(10, 0, 0) };
 			//Termin termin3 = new Termin() { Dan = Models.Enums.Dan.Subota, Polazak = new TimeSpan(11, 0, 0) };
@@ -127,6 +127,18 @@ namespace WebApp.Migrations
 			//context.Termini.Add(termin10);
 			//context.Stanice.Add(new Stanica() { Naziv = "Sajam", Adresa = "Bulevar Oslobodjenja 143" , Koordinata = new Koordinata() { } });
 			//context.TipPopustas.Add(new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.6 });
+			//var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Dnevna);
+			//var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Djacka);
+			//var cen = context.Cenovnici.ToList().FirstOrDefault();
+			//cen.Aktuelan = true;
+			//var tipKarte = new TipKarte() { VrstaKarte = Models.Enums.VrstaKarte.Dnevna, CenaKarte = 350 };
+			//var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.2 };
+			//var cen = new Cenovnik() { Od = new DateTime(2019, 1, 1), Do = new DateTime(2019, 12, 31) };
+			//context.Cenovnici.Add(cen);
+			//context.TipKartes.Add(tipKarte);
+			//context.TipPopustas.Add(tipPopusta);
+			//context.Stavke.Add(new StavkaCenovnika() { Cena = 280, TipKarteId = tipKarte.VrstaKarte, TipPopustaId = tipPopusta.VrstaPopusta, Cenovnik = cen });
+
 			//context.SaveChanges();      
 		}
     }

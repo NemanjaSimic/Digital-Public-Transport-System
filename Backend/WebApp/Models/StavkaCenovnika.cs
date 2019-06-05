@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using WebApp.Models.Enums;
 
 namespace WebApp.Models
 {
@@ -10,17 +12,18 @@ namespace WebApp.Models
     {
         [Key]
         public int Id { get; set; }
-        public float Cena { get { return TipKarte.CenaKarte * TipPopusta.Koeficijent; } }
+		public float Cena { get; set; }
 
-
-        public int TipKarteId { get; set; }
+		[ForeignKey("TipKarte")]
+        public VrstaKarte TipKarteId { get; set; }
         public TipKarte TipKarte { get; set; }
 
-        public int TipPopustaId { get; set; }
+		[ForeignKey("TipPopusta")]
+		public VrstaPopusta TipPopustaId { get; set; }
         public TipPopusta TipPopusta { get; set; }
 
-        
-        public int CenovnikId { get; set; }
+		[ForeignKey("Cenovnik")]
+		public int CenovnikId { get; set; }
         public Cenovnik Cenovnik { get; set; }
     }
 }

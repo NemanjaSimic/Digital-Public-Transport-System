@@ -13,5 +13,10 @@ namespace WebApp.Persistence.Repository
         public CenovnikRepository(DbContext context) : base(context)
         {
         }
-    }
+
+		public List<StavkaCenovnika> GetAktuelanCenovnik()
+		{
+			return AppDbContext.Cenovnici.ToList().Find(c => c.Aktuelan == true).Stavke;
+		}
+	}
 }

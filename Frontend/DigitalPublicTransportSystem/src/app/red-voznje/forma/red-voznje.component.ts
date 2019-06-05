@@ -13,7 +13,7 @@ export class RedVoznjeComponent implements OnInit {
   
   redVoznjeForm = this.fb.group({  
     TipVoznje: [''],
-    Dan: [''],
+    Dan: ['RadniDan'],
     Ime:['']
   });
   

@@ -252,9 +252,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CenovnikController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinijaController.cs" />
     <Compile Include="Controllers\StanicaController.cs" />
+    <Compile Include="Controllers\StavkaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -290,6 +292,14 @@
     <Compile Include="Migrations\201906041750257_TerminChanged.cs" />
     <Compile Include="Migrations\201906041750257_TerminChanged.Designer.cs">
       <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.cs" />
+    <Compile Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.Designer.cs">
+      <DependentUpon>201906050758346_StavnkaCenovnikaRepaired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906050836016_CenovnikUpdated.cs" />
+    <Compile Include="Migrations\201906050836016_CenovnikUpdated.Designer.cs">
+      <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -466,6 +476,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906041750257_TerminChanged.resx">
       <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.resx">
+      <DependentUpon>201906050758346_StavnkaCenovnikaRepaired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906050836016_CenovnikUpdated.resx">
+      <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

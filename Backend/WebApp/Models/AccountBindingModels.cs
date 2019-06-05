@@ -5,26 +5,22 @@ using Newtonsoft.Json;
 
 namespace WebApp.Models
 {
-    // Models used as parameters to AccountController actions.
+	// Models used as parameters to AccountController actions.
 
-    public class AddExternalLoginBindingModel
-    {
-        [Required]
-        [Display(Name = "External access token")]
-        public string ExternalAccessToken { get; set; }
-    }
-
-	public class TerminBindingModel
+	public class AddExternalLoginBindingModel
 	{
-		public DateTime Polazak { get; set; }
+		[Required]
+		[Display(Name = "External access token")]
+		public string ExternalAccessToken { get; set; }
 	}
 
-	public class RedVoznjeBindingModel
+	public class StavkaBindingModel
 	{
-		public string[] Polasci { get; set; }
-
+		public string VrstaKarte { get; set; }
+		public string VrstaPopusta { get; set; }
+		public float Cena { get; set; }
 	}
-
+	
     public class StanicaBindingModel
     {
         [Required]

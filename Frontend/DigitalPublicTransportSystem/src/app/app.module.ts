@@ -6,12 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RedVoznjeComponent } from './red-voznje/forma/red-voznje.component';
+import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-prikaz.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RedVoznjeComponent
+    RedVoznjeComponent,
+    CenovnikPrikazComponent
   ],
   imports: [
     BrowserModule,

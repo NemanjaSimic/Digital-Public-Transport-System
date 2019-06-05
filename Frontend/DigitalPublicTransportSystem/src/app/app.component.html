@@ -1,12 +1,12 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<div class="container">
+  <nav class="navbar navbar-default">
       <ul class="nav navbar-nav">
-          <li class="active"><a routerLink="/redVoznje"><span>Red voznje</span></a></li>
+          <li><a routerLink="/redVoznje"><span>Red voznje</span></a></li>
           <li><a href="#">Mreza linija</a></li>
           <li><a href="#"><span>Trenutne lokacije vozila</span></a></li>
-          <li><a href="#">Cenovnik</a></li>
+          <li><a routerLink="/cenovnik">Cenovnik</a></li>
           <li><a href="#">Registracija/Prijava</a></li>
       </ul>
-  </div>
-</nav>
+  </nav>
 <router-outlet></router-outlet>
+</div>
