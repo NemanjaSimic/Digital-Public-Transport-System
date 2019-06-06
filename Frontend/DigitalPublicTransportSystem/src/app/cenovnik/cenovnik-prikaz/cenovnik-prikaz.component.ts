@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CenovnikService } from '../cenovnik.service';
-import { Stavka } from '../cenovnik';
+import { CenovnikService } from '../../services/cenovnik.service';
+import { Stavka } from '../../models/cenovnik';
 
 @Component({
   selector: 'app-cenovnik-prikaz',
@@ -18,5 +18,13 @@ export class CenovnikPrikazComponent implements OnInit {
 
   getCenovnik():void{
     this.cenovnikService.getCenovnik().subscribe(stavka => this.stavke = stavka);
+  }
+  
+  izbrisiStavku(stavka:any){
+
+  }
+
+  izmeniStavku(stavka:any){
+    
   }
 }

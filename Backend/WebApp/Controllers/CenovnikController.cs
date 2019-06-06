@@ -27,10 +27,10 @@ namespace WebApp.Controllers
 				retVal.Add(new StavkaBindingModel()
 				{
 					Cena = item.Cena,
-					VrstaKarte = item.TipKarteId.ToString(),
-					VrstaPopusta = item.TipPopustaId.ToString()
+					VrstaKarte = item.TipKarte.VrstaKarte.ToString(),
+					VrstaPopusta = item.TipPopusta.VrstaPopusta.ToString()
 				});
-			} 
+			}
 
 			return retVal;
 		}

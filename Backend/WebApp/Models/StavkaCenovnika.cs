@@ -14,16 +14,13 @@ namespace WebApp.Models
         public int Id { get; set; }
 		public float Cena { get; set; }
 
-		[ForeignKey("TipKarte")]
-        public VrstaKarte TipKarteId { get; set; }
-        public TipKarte TipKarte { get; set; }
+		//public VrstaKarte TipKarteId { get; set; }
+		public virtual TipKarte TipKarte { get; set; }
 
-		[ForeignKey("TipPopusta")]
-		public VrstaPopusta TipPopustaId { get; set; }
-        public TipPopusta TipPopusta { get; set; }
+		//public VrstaPopusta TipPopustaId { get; set; }
+        public virtual TipPopusta TipPopusta { get; set; }
 
-		[ForeignKey("Cenovnik")]
-		public int CenovnikId { get; set; }
-        public Cenovnik Cenovnik { get; set; }
+		//public int CenovnikId { get; set; }
+		public virtual Cenovnik Cenovnik { get; set; }
     }
 }

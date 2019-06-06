@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
-import { Linija } from './linija';
+import { Linija } from '../models/linija';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json'})

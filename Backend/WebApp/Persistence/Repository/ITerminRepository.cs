@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public interface ITerminRepository
-    {
+    public interface ITerminRepository : IRepository<Termin, int>
+	{
     }
 }

@@ -7,8 +7,8 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public interface ILinijaRepository
-    {
+    public interface ILinijaRepository : IRepository<Linija, int>
+	{
 		List<string> GetAllLinijaNamesByTip(string TipVoznje);
 		List<Termin> GetAllTerminiOfLinija(string Ime);
 

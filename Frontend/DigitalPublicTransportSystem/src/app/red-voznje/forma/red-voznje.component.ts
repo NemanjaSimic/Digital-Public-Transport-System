@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LinijaService } from '../../linija.service';
+import { LinijaService } from '../../services/linija.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 

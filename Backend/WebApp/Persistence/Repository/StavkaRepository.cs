@@ -13,5 +13,22 @@ namespace WebApp.Persistence.Repository
         public StavkaRepository(DbContext context) : base(context)
         {
         }
+
+		public bool DeleteStavka(StavkaBindingModel stavka)
+		{
+			bool result = true;
+			try
+			{
+				var stavke = AppDbContext.Stavke.ToList();
+				stavke.Find(s => s.TipKarte.VrstaKarte.ToString().Equals(stavka.VrstaKarte) && s.TipPopusta.VrstaPopusta.ToString().Equals(stavka.VrstaPopusta));
+			}
+			catch (Exception)
+			{
+
+				throw;
+			}
+
+			return result;
+		}
     }
 }

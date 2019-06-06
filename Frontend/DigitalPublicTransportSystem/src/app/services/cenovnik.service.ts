@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Stavka } from './cenovnik';
+import { Stavka } from '../models/cenovnik';
 import { catchError } from 'rxjs/operators';
 
 
@@ -20,6 +20,10 @@ export class CenovnikService{
         return this.http.get<Stavka[]>(this.GetCenovnikUrl).pipe(
             catchError(this.handleError<Stavka[]>(`getCenovnik`))
         );
+    }
+
+    izmeniStavku(stavka:any):void{
+        
     }
 
 

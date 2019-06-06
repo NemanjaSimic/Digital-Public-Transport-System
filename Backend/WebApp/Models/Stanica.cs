@@ -14,9 +14,7 @@ namespace WebApp.Models
         public string Naziv { get; set; }
         public string Adresa { get; set; }
 
-		[ForeignKey("Koordinata")]
-        public int KoordinataId { get; set; }
-        public Koordinata Koordinata { get; set; }
+        public virtual Koordinata Koordinata { get; set; }
 
         public virtual List<Linija> Linije { get; set; }
     }

@@ -254,6 +254,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CenovnikController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KartaController.cs" />
     <Compile Include="Controllers\LinijaController.cs" />
     <Compile Include="Controllers\StanicaController.cs" />
     <Compile Include="Controllers\StavkaController.cs" />
@@ -300,6 +301,34 @@
     <Compile Include="Migrations\201906050836016_CenovnikUpdated.cs" />
     <Compile Include="Migrations\201906050836016_CenovnikUpdated.Designer.cs">
       <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061035455_repaired.cs" />
+    <Compile Include="Migrations\201906061035455_repaired.Designer.cs">
+      <DependentUpon>201906061035455_repaired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061046460_repaired1.cs" />
+    <Compile Include="Migrations\201906061046460_repaired1.Designer.cs">
+      <DependentUpon>201906061046460_repaired1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061053053_straniKljuc.cs" />
+    <Compile Include="Migrations\201906061053053_straniKljuc.Designer.cs">
+      <DependentUpon>201906061053053_straniKljuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061104380_straniKljuc2.cs" />
+    <Compile Include="Migrations\201906061104380_straniKljuc2.Designer.cs">
+      <DependentUpon>201906061104380_straniKljuc2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061117268_repo.cs" />
+    <Compile Include="Migrations\201906061117268_repo.Designer.cs">
+      <DependentUpon>201906061117268_repo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061120165_virtual.cs" />
+    <Compile Include="Migrations\201906061120165_virtual.Designer.cs">
+      <DependentUpon>201906061120165_virtual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906061128531_virtual1.cs" />
+    <Compile Include="Migrations\201906061128531_virtual1.Designer.cs">
+      <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -482,6 +511,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906050836016_CenovnikUpdated.resx">
       <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061035455_repaired.resx">
+      <DependentUpon>201906061035455_repaired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061046460_repaired1.resx">
+      <DependentUpon>201906061046460_repaired1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061053053_straniKljuc.resx">
+      <DependentUpon>201906061053053_straniKljuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061104380_straniKljuc2.resx">
+      <DependentUpon>201906061104380_straniKljuc2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061117268_repo.resx">
+      <DependentUpon>201906061117268_repo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061120165_virtual.resx">
+      <DependentUpon>201906061120165_virtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906061128531_virtual1.resx">
+      <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

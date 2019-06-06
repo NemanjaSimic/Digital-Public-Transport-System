@@ -14,8 +14,6 @@ namespace WebApp.Models
         public bool Validna { get; set; }
         public DateTime DatumIzdavanja { get; set; }
 
-		[ForeignKey("StavkaCenovnika")]
-        public int StavkaCenovnikaId { get; set; }
-        public StavkaCenovnika StavkaCenovnika { get; set; }
+        public virtual StavkaCenovnika StavkaCenovnika { get; set; }
     }
 }

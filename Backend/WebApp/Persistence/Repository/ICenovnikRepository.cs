@@ -7,8 +7,8 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public interface ICenovnikRepository
-    {
+    public interface ICenovnikRepository : IRepository<Cenovnik, int>
+	{
 		List<StavkaCenovnika> GetAktuelanCenovnik();
 	}
 }

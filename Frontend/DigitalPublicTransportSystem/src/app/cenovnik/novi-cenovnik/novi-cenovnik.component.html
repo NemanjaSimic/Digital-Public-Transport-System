@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Vrsta karte</th>
+      <th scope="col">Vrsta popusta</th>
+      <th scope="col">Cena</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stavka of stavke">
+      <td>{{stavka.VrstaKarte}}</td>
+      <td>{{stavka.VrstaPopusta}}</td>
+      <td>{{stavka.Cena}}</td>
+      <td><button 
+        routerLink="/kupiKartu/{{stavka.VrstaKarte}}/{{stavka.VrstaPopusta}}/{{stavka.Cena}}">
+        Kupi</button>
+      <button (click)="izbrisiStavku(stavka)">Izbrisi</button>
+      <button (click)="izmeniStavku(stavka)">Izmeni</button>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="napra(stavka)">Napravi novi cenovnik</button>

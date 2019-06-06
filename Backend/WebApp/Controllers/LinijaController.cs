@@ -30,6 +30,7 @@ namespace WebApp.Controllers
 				Stanice = new List<Stanica>()
 			};
 		}
+
 		[Route("GetLinijeByTip")]
 		public List<string> GetAllLinijeByTip(string TipVoznje)
 		{

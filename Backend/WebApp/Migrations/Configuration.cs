@@ -127,19 +127,19 @@ namespace WebApp.Migrations
 			//context.Termini.Add(termin10);
 			//context.Stanice.Add(new Stanica() { Naziv = "Sajam", Adresa = "Bulevar Oslobodjenja 143" , Koordinata = new Koordinata() { } });
 			//context.TipPopustas.Add(new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.6 });
-			//var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Dnevna);
-			//var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Djacka);
-			//var cen = context.Cenovnici.ToList().FirstOrDefault();
 			//cen.Aktuelan = true;
-			//var tipKarte = new TipKarte() { VrstaKarte = Models.Enums.VrstaKarte.Dnevna, CenaKarte = 350 };
-			//var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.2 };
+			//var tipKarte = new TipKarte() { VrstaKarte = Models.Enums.VrstaKarte.Vremenska, CenaKarte = 120 };
+			//var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Regularna, Koeficijent = 0 };
 			//var cen = new Cenovnik() { Od = new DateTime(2019, 1, 1), Do = new DateTime(2019, 12, 31) };
 			//context.Cenovnici.Add(cen);
 			//context.TipKartes.Add(tipKarte);
 			//context.TipPopustas.Add(tipPopusta);
-			//context.Stavke.Add(new StavkaCenovnika() { Cena = 280, TipKarteId = tipKarte.VrstaKarte, TipPopustaId = tipPopusta.VrstaPopusta, Cenovnik = cen });
+			var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Vremenska);
+			var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Regularna);
+			var cen = context.Cenovnici.ToList().FirstOrDefault();
+			context.Stavke.Add(new StavkaCenovnika() { Cena = 120, TipKarte = tipKarte, TipPopusta = tipPopusta, Cenovnik = cen });
 
-			//context.SaveChanges();      
+			context.SaveChanges();
 		}
     }
 }
