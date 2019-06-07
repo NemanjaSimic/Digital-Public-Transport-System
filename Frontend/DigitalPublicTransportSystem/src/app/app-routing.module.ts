@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RedVoznjeComponent } from './red-voznje/forma/red-voznje.component';
 import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-prikaz.component';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'kupiKartu/:tip/:popust/:cena',
     component: KupovinaKarteComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
  
 ];
