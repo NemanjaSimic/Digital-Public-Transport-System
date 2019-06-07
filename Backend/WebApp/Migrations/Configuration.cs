@@ -134,12 +134,12 @@ namespace WebApp.Migrations
 			//context.Cenovnici.Add(cen);
 			//context.TipKartes.Add(tipKarte);
 			//context.TipPopustas.Add(tipPopusta);
-			var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Vremenska);
-			var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Regularna);
-			var cen = context.Cenovnici.ToList().FirstOrDefault();
-			context.Stavke.Add(new StavkaCenovnika() { Cena = 120, TipKarte = tipKarte, TipPopusta = tipPopusta, Cenovnik = cen });
+			//var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Vremenska);
+			//var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Regularna);
+			//var cen = context.Cenovnici.ToList().FirstOrDefault();
+			//context.Stavke.Add(new StavkaCenovnika() { Cena = 120, TipKarte = tipKarte, TipPopusta = tipPopusta, Cenovnik = cen });
 
-			context.SaveChanges();
+			//context.SaveChanges();
 		}
     }
 }

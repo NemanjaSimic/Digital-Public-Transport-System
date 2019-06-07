@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   LogOut() : void{
     if(this.authService.isLoggedIn())
     {
-      this.authService.logOut().subscribe(
+      this.loginService.logOut().subscribe(
         (response) => {
           this.IsLoggedIn = false;
           this.notificationService.notifyEvent.emit('You have successfully logged out.');

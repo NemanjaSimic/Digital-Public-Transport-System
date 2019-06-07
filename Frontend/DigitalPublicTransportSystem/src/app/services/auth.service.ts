@@ -8,33 +8,47 @@ export class AuthService{
 
     private logOutAddress: string = `http://localhost:52295/Account/Logout`;
 
-    constructor(private http: Http, private notificationService : NotificationService) { }
+    constructor(private notificationService : NotificationService) { }
 
-    logIn(response: Response) : void {
+    logIn(response: any) : void {
 
-        let responseJson = response.json();
-        let accessToken = responseJson.access_token;
-        let role = response.headers.get('Role');
-        let id = response.headers.get('UserId');
+        // let responseJson = response.json();
+        // let accessToken = response.access_token;
+        const jwt =  response.access_token;
 
-        let authdata = new AuthData(accessToken, role, id);
-        localStorage.setItem('token', JSON.stringify(authdata));
-        console.log(authdata);
+
+        let jwtData = jwt.split('.')[1]
+        let decodedJwtJsonData = window.atob(jwtData)
+        let decodedJwtData = JSON.parse(decodedJwtJsonData)
+
+        let role = decodedJwtData.role
+        let userId =  decodedJwtData.unique_name;
+
+        localStorage.setItem('token', jwt)
+        localStorage.setItem('role', role);
+        localStorage.setItem('userId', userId);
+        // let authdata = new AuthData(accessToken, role, id);
+        // localStorage.setItem('token', JSON.stringify(authdata));
+        // console.log(authdata);
     }
 
-    logOut(): Observable<any> {       
-        if(this.isLoggedIn() === true) {
-            let token = localStorage.getItem("token");
+    logOut(): void {       
+        // if(this.isLoggedIn() === true) {
+        //     let token = localStorage.getItem("token");
 
-            let headers = new Headers();
-            headers.append('Content-type', 'application/x-www-form-urlencoded');
-            headers.append('Authorization', 'Bearer ' + JSON.parse(token).token);
+        //     let headers = new Headers();
+        //     headers.append('Content-type', 'application/x-www-form-urlencoded');
+        //     headers.append('Authorization', 'Bearer ' +token);
 
-            localStorage.removeItem('token');
-            this.notificationService.sessionEvent.emit(false);
+        //     localStorage.clear();
 
-            return this.http.post(this.logOutAddress, "", { headers: headers });
-        }
+        //     this.notificationService.sessionEvent.emit(false);
+
+        //     return this.http.post(this.logOutAddress, "", { headers: headers });
+        // }
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("userId");
     }
 
     isLoggedIn(): boolean {
