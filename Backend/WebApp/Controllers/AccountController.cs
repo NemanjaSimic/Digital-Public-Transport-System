@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
+using WebApp.Models.Enums;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -50,6 +51,14 @@ namespace WebApp.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+		//[Route("Register")]
+		//public IHttpActionResult Register(RegisterBindingModel newAcc)
+		//{
+
+
+
+		//	return Ok();
+		//}
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
@@ -328,14 +337,39 @@ namespace WebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+			var user = new ApplicationUser()
+			{
+				UserName = model.Username,
+				Name = model.Name,
+				Surname = model.Surname,
+				Email = model.Email,
+				PasswordHash = ApplicationUser.HashPassword(model.Password),
+				Address = model.Address,
+				DateOfBirth = model.DateOfBirth,
+				UserType = (VrstaPopusta)model.UserType,
+				ImgUrl = model.ImgUrl,
+				IsVerified = false,
+				Id = model.Username,
+				EmailConfirmed = false
+			};
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+			IdentityResult result = await UserManager.CreateAsync(user);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
-            }
+			}
+			else
+			{
+				ApplicationUser currentUser = UserManager.FindByName(user.UserName);
+
+				IdentityResult roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "AppUser");
+
+				if (!roleResult.Succeeded)
+				{
+					return GetErrorResult(roleResult);
+				}
+			}
 
             return Ok();
         }

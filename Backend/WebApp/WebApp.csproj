@@ -330,6 +330,22 @@
     <Compile Include="Migrations\201906061128531_virtual1.Designer.cs">
       <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906071800519_user.cs" />
+    <Compile Include="Migrations\201906071800519_user.Designer.cs">
+      <DependentUpon>201906071800519_user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906071815137_user2.cs" />
+    <Compile Include="Migrations\201906071815137_user2.Designer.cs">
+      <DependentUpon>201906071815137_user2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906071827161_User3.cs" />
+    <Compile Include="Migrations\201906071827161_User3.Designer.cs">
+      <DependentUpon>201906071827161_User3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906071830546_User4.cs" />
+    <Compile Include="Migrations\201906071830546_User4.Designer.cs">
+      <DependentUpon>201906071830546_User4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -532,6 +548,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906061128531_virtual1.resx">
       <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906071800519_user.resx">
+      <DependentUpon>201906071800519_user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906071815137_user2.resx">
+      <DependentUpon>201906071815137_user2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906071827161_User3.resx">
+      <DependentUpon>201906071827161_User3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906071830546_User4.resx">
+      <DependentUpon>201906071830546_User4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

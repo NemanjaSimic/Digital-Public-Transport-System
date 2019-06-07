@@ -6,8 +6,6 @@ import { NotificationService } from './notification.service';
 @Injectable({ providedIn: 'root'})
 export class AuthService{
 
-    private logOutAddress: string = `http://localhost:52295/Account/Logout`;
-
     constructor(private notificationService : NotificationService) { }
 
     logIn(response: any) : void {

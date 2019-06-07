@@ -3,23 +3,52 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
+using WebApp.Models.Enums;
 
 namespace WebApp.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
+
+		[Display(Name = "Name")]
+		public string Name { get; set; }
+
+
+		[Display(Name = "Surname")]
+		public string Surname { get; set; }
+
+
+		[Display(Name = "Address")]
+		public string Address { get; set; }
+
+
+		[DataType(DataType.Date)]
+		[Display(Name = "DateOfBirth")]
+		public DateTime DateOfBirth { get; set; }
+
+
+		[Display(Name = "UserType")]
+		public VrstaPopusta UserType { get; set; }
+
+		[Display(Name = "ImgUrl")]
+		public string ImgUrl { get; set; }
+
+
+		[Display(Name= "IsVerified")]
+		public bool IsVerified { get; set; }
+
+		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // Add custom user claims here
-            
             return userIdentity;
         }
 

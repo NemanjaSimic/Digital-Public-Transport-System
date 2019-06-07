@@ -38,7 +38,7 @@ export class LoginService
 
             let header = new HttpHeaders();
             header.append('Content-type', 'application/x-www-form-urlencoded');
-            header.append('Authorization', 'Bearer ' +token);
+            header.append('Authorization', 'Bearer ' + token);
             const httpOptions = {
                 headers: header
               };
