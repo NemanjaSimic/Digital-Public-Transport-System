@@ -12,7 +12,7 @@ import { NoviCenovnikComponent } from './cenovnik/novi-cenovnik/novi-cenovnik.co
 import { LoginComponent } from './login/login.component';
 import { HttpModule } from '@angular/http';
 import { NavbarComponent } from './navbar/navbar.component';
-//import { RegistracijaComponent } from './registracija/registracija.component';
+import { RegistracijaComponent } from './registracija/registracija.component';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     NoviCenovnikComponent,
     LoginComponent,
     NavbarComponent,
-   // RegistracijaComponent
+    RegistracijaComponent,
   ],
   imports: [
     BrowserModule,

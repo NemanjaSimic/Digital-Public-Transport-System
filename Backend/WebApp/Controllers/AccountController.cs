@@ -346,7 +346,7 @@ namespace WebApp.Controllers
 				PasswordHash = ApplicationUser.HashPassword(model.Password),
 				Address = model.Address,
 				DateOfBirth = model.DateOfBirth,
-				UserType = (VrstaPopusta)model.UserType,
+				UserType = model.UserType,
 				ImgUrl = model.ImgUrl,
 				IsVerified = false,
 				Id = model.Username,

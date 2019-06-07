@@ -1,0 +1,97 @@
+<div class="signup-form">
+  <div class="col-7">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h2>Register</h2>
+    <div class="form-group">
+      <input type="text" id="name" formControlName="name" placeholder="Name" required class="form-control" />
+        <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-danger">
+          <ng-container *ngIf="f.name.errors.required">
+            <p>Name is required.</p>
+          </ng-container>
+        </div>
+     </div>
+
+      <div class="form-group">    
+         <input type="text" id="surname" formControlName="surname" placeholder="Surname" required class="form-control" />
+            <div *ngIf="f.surname.invalid && (f.surname.dirty || f.surname.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.surname.errors.required">
+                <p>Surname is required.</p>
+              </ng-container>
+            </div>
+      </div>
+
+      <div class="form-group">
+          <input type="text" id="address" formControlName="address" placeholder="Address" required class="form-control" />
+            <div *ngIf="f.address.invalid && (f.address.dirty || f.address.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.address.errors.required">
+                <p>Address is required.</p>
+               </ng-container>
+            </div>
+      </div>
+
+      <div class="form-group">
+          <input type="text" formControlName="email" placeholder="E - mail" required class="form-control" />
+            <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+              <div *ngIf="f.email.errors.required">
+                <p>Email is required.</p>
+              </div>
+              <div *ngIf="f.email.errors.email">
+                <p>Please enter valid email address.</p>
+              </div>
+            </div>
+      </div>
+
+    <div class="form-group">
+        <input type="text" id="username" formControlName="username" placeholder="Username" required class="form-control">
+          <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)" class="alert alert-danger">
+            <ng-container *ngIf="f.username.errors.required">
+              <p>Username is required.</p>
+            </ng-container>
+            <ng-container *ngIf="f.username.errors.minlength">
+               <p>Username must be at least 6 characters long.</p>
+            </ng-container>
+         </div>
+    </div>
+    <div class="form-group">
+        <input type="password" formControlName="password" placeholder="Password" required class="form-control">
+            <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
+              <ng-container *ngIf="f.password.errors.required">
+                Password is required.
+              </ng-container>
+              <ng-container *ngIf="f.password.errors.minlength">
+                <p>Password must be at least 6 characters long.</p>
+              </ng-container>
+              <ng-container *ngIf="f.password.errors.pattern">
+                <p>Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').</p>
+              </ng-container>
+            </div>
+            <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" required class="form-control" />
+            <div *ngIf="registerForm.errors?.doesntMatch && (f.confirmPassword.dirty || f.confirmPassword.touched)" class="alert alert-danger">
+              <p>Doesnt match with password.</p>
+            </div>
+    </div>
+    <div class="form-group">
+          <label for="dateOfBirth" style="margin-top: 12px; margin-left: 55px">Date of birth:</label>
+          <input type="date" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
+    </div>
+            
+        <div class="form-group">
+            <div class="row">
+              <span>RegularanKorisnik</span>
+              <input type="radio" name="type" value="Regular" formControlName="type" checked="checked" class="form-control" />
+          </div>
+            <div class="row">
+              <span>Penzioner</span>
+              <input type="radio" name="type" value="Senior" formControlName="type" class="form-control" />
+          </div>
+            <div class="row">
+              <span>Student</span>
+              <input type="radio" name="type" value="Student" formControlName="type" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="registerForm.invalid" style="background: rgba(217, 23, 16) !important; outline-color: rgba(217, 23, 16, 0.3) !important">Register</button>
+        </div>
+  </form>
+  </div>
+</div>

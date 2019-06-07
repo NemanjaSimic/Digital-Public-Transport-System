@@ -35,7 +35,7 @@ namespace WebApp.Models
 
 
 		[Display(Name = "UserType")]
-		public VrstaPopusta UserType { get; set; }
+		public string UserType { get; set; }
 
 		[Display(Name = "ImgUrl")]
 		public string ImgUrl { get; set; }

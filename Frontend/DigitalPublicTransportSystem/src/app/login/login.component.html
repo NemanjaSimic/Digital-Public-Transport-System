@@ -5,9 +5,9 @@
     <hr>
     <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" name="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" autocomplete="off" placeholder="Enter email" required>
-        <span class="invalid-input" *ngIf="!f.email.valid && f.email.touched"> Please enter a valid email address. </span>
+        <label for="email">Username</label>
+        <input type="text" name="username" class="form-control" id="username" formControlName="username" autocomplete="off" placeholder="Enter username" required>
+        <span class="invalid-input" *ngIf="!f.username.valid && f.username.touched"> Please enter a username. </span>
       </div>
       <div class="form-group">
         <label for="password">Password</label>

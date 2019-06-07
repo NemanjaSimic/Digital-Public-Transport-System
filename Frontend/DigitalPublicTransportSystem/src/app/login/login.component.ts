@@ -14,11 +14,12 @@ export class LoginComponent implements OnInit {
 
   private submitted: boolean = false;
 
-  email:any;
+  username:any;
   password:any;
 
   loginForm = this.fb.group({
-    email : [this.email, [Validators.required, Validators.email]],
+    username : [this.username, Validators.required],
+    // email : [this.email, [Validators.required, Validators.email]],
     password : [this.password, Validators.required]  
   });
   y
@@ -39,10 +40,10 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.submitted = true;  
     
-    this.email = this.loginForm.get('email').value;
+    this.username = this.loginForm.get('username').value;
     this.password = this.loginForm.get('password').value;
 
-    this.loginService.logIn(this.email,this.password).subscribe( 
+    this.loginService.logIn(this.username,this.password).subscribe( 
       (response) => { 
         this.authService.logIn(response);
         this.notificationService.sessionEvent.emit(true);
@@ -54,8 +55,8 @@ export class LoginComponent implements OnInit {
         this.notificationService.notifyEvent.emit('An error ocurred while trying to log in. The server is probably down.');
         console.log(error);
         if(error.status !== 0){
-          let errorBody = JSON.parse(error._body);
-          this.notificationService.notifyEvent.emit(errorBody.error_description);
+         // let errorBody = JSON.parse(error._body);
+         // this.notificationService.notifyEvent.emit(errorBody.error_description);
         }        
       }
     );

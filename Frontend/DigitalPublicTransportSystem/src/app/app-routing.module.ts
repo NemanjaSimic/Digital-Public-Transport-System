@@ -4,6 +4,7 @@ import { RedVoznjeComponent } from './red-voznje/forma/red-voznje.component';
 import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-prikaz.component';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
 import { LoginComponent } from './login/login.component';
+import { RegistracijaComponent } from './registracija/registracija.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,9 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },{
+    path: 'registracija',
+    component: RegistracijaComponent
   }
  
 ];

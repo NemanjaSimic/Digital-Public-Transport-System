@@ -87,9 +87,8 @@ namespace WebApp.Models
 
 		[Required]
 		[Display(Name = "UserType")]
-		public int UserType { get; set; }
+		public string UserType { get; set; }
 
-		[Required]
 		[Display(Name = "ImgUrl")]
 		public string ImgUrl { get; set; }
 
