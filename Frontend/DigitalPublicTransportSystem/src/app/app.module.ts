@@ -1,18 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RedVoznjeComponent } from './red-voznje/forma/red-voznje.component';
 import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-prikaz.component';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
-import { NoviCenovnikComponent } from './cenovnik/novi-cenovnik/novi-cenovnik.component';
+import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
 import { LoginComponent } from './login/login.component';
 import { HttpModule } from '@angular/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -25,13 +26,15 @@ import { RegistracijaComponent } from './registracija/registracija.component';
     LoginComponent,
     NavbarComponent,
     RegistracijaComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

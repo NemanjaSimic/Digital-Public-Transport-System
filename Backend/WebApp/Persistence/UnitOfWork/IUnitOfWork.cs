@@ -16,7 +16,7 @@ namespace WebApp.Persistence.UnitOfWork
         IKartaRepository Karte { get; set; }
         IKoordinataRepository Koordinate { get; set; }
         ICenovnikRepository Cenovnici { get; set; }
-        IStanicaRepository Stavke { get; set; }
+        IStavkaRepository Stavke { get; set; }
         ITerminRepository Termini { get; set; }
         int Complete();
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Web.Http;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
@@ -17,6 +18,7 @@ namespace WebApp.Controllers
 		{
 			this.unitOfWork = unitOfWork;
 		}
+
 		[Route("GetCenovnik")]
 		public List<StavkaBindingModel> GetStavkeCenovnika()
 		{
@@ -33,6 +35,39 @@ namespace WebApp.Controllers
 			}
 
 			return retVal;
+		}
+		[AllowAnonymous]
+		[Route("NapraviCenovnik")]
+		public IHttpActionResult NapraviCenovnik(NoviCenovnikBindingModel noviCenovnik)
+		{
+			try
+			{
+				var cenovnik = new Cenovnik() { Od = DateTime.Now, Do = noviCenovnik.Do, Aktuelan = true, Stavke = new List<StavkaCenovnika>() };
+				unitOfWork.Cenovnici.NapraviCenovnik(cenovnik);
+			
+				var tkarta1 = new TipKarte() { CenaKarte = noviCenovnik.Godisnja, VrstaKarte = Models.Enums.VrstaKarte.Godisnja };
+				var tkarta2 = new TipKarte() { CenaKarte = noviCenovnik.Vremenska, VrstaKarte = Models.Enums.VrstaKarte.Vremenska };
+				var tkarta3 = new TipKarte() { CenaKarte = noviCenovnik.Dnevna, VrstaKarte = Models.Enums.VrstaKarte.Dnevna };
+				var tkarta4 = new TipKarte() { CenaKarte = noviCenovnik.Mesecna, VrstaKarte = Models.Enums.VrstaKarte.Mesecna };
+
+				unitOfWork.TipKartas.DodajTipKarte(tkarta1);
+				unitOfWork.TipKartas.DodajTipKarte(tkarta2);
+				unitOfWork.TipKartas.DodajTipKarte(tkarta3);
+				unitOfWork.TipKartas.DodajTipKarte(tkarta4);
+
+
+				unitOfWork.Stavke.NovaStavkaSaSvimPopustima(tkarta1, cenovnik);
+				unitOfWork.Stavke.NovaStavkaSaSvimPopustima(tkarta2, cenovnik);
+				unitOfWork.Stavke.NovaStavkaSaSvimPopustima(tkarta3, cenovnik);
+				unitOfWork.Stavke.NovaStavkaSaSvimPopustima(tkarta4, cenovnik);
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+				throw;
+			}
+
+			return Ok();
 		}
 	}
 }

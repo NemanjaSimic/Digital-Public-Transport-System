@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Stavka } from '../models/cenovnik';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { NoviCenovnik } from '../models/novi-cenovnik';
 
 
 const httpOptions = {
@@ -13,6 +14,7 @@ const httpOptions = {
 export class CenovnikService{
 
     private GetCenovnikUrl = 'http://localhost:52295/api/Cenovnik/GetCenovnik';
+    private NapraviCenovnikUrl = 'http://localhost:52295/api/Cenovnik/NapraviCenovnik';
 
     constructor(private http: HttpClient) {}
 
@@ -22,9 +24,10 @@ export class CenovnikService{
         );
     }
 
-    izmeniStavku(stavka:any):void{
-        
+    napraviCenovnik(cenovnik: NoviCenovnik): Observable<any>{
+        return this.http.post<NoviCenovnik>(this.NapraviCenovnikUrl, cenovnik, httpOptions).pipe(catchError(this.handleError<any>('NapraviCenovnik')));
     }
+
 
 
       /**

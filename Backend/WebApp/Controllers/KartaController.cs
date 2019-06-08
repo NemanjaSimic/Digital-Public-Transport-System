@@ -18,11 +18,7 @@ namespace WebApp.Controllers
 		{
 			this.unitOfWork = unitOfWork;
 		}
-		[Route("GetKurac")]
-		public int GetKurac()
-		{
-			return 2;
-		}
+
 
 		[Route("PostNeregKarta")]
 		public IHttpActionResult PostNeregKarta()

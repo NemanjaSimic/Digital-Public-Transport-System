@@ -8,6 +8,16 @@ namespace WebApp.Models
 {
 	// Models used as parameters to AccountController actions.
 
+	public class NoviCenovnikBindingModel
+	{
+		public float Vremenska { get; set; }
+		public float Dnevna { get; set; }
+		public float Mesecna { get; set; }
+		public float Godisnja { get; set; }
+		public DateTime Do { get; set; }
+		
+	}
+
 	public class AddExternalLoginBindingModel
 	{
 		[Required]

@@ -27,7 +27,7 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public ICenovnikRepository Cenovnici { get; set; }
         [Dependency]
-        public IStanicaRepository Stavke { get; set; }
+        public IStavkaRepository Stavke { get; set; }
         [Dependency]
         public ITerminRepository Termini { get; set; }
       

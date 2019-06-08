@@ -168,3 +168,8 @@ D:\Nina\web3\Digital-Public-Transport-System\Backend\WebApp\obj\Debug\WebApp.csp
 D:\Nina\web3\Digital-Public-Transport-System\Backend\WebApp\obj\Debug\WebApp.dll
 D:\Nina\web3\Digital-Public-Transport-System\Backend\WebApp\obj\Debug\WebApp.pdb
 D:\Nina\web3\Digital-Public-Transport-System\Backend\WebApp\obj\Debug\WebApp.Migrations.User5.resources
+C:\Users\Simic\Desktop\WEBProjekat\Digital-Public-Transport-System\Backend\WebApp\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Simic\Desktop\WEBProjekat\Digital-Public-Transport-System\Backend\WebApp\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\Simic\Desktop\WEBProjekat\Digital-Public-Transport-System\Backend\WebApp\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Simic\Desktop\WEBProjekat\Digital-Public-Transport-System\Backend\WebApp\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\Simic\Desktop\WEBProjekat\Digital-Public-Transport-System\Backend\WebApp\bin\roslyn\VBCSCompiler.exe

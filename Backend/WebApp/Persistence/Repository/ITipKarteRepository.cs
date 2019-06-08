@@ -10,5 +10,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface ITipKarteRepository : IRepository<TipKarte, VrstaKarte>
 	{
-    }
+		bool DodajTipKarte(TipKarte tipKarte);
+
+	}
 }

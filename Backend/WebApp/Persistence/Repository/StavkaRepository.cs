@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WebApp.Models;
+using WebApp.Models.Enums;
 
 namespace WebApp.Persistence.Repository
 {
@@ -14,17 +15,29 @@ namespace WebApp.Persistence.Repository
         {
         }
 
-		public bool DeleteStavka(StavkaBindingModel stavka)
+		public bool NovaStavkaSaSvimPopustima(TipKarte karta, Cenovnik cenovnik)
 		{
 			bool result = true;
 			try
 			{
-				var stavke = AppDbContext.Stavke.ToList();
-				stavke.Find(s => s.TipKarte.VrstaKarte.ToString().Equals(stavka.VrstaKarte) && s.TipPopusta.VrstaPopusta.ToString().Equals(stavka.VrstaPopusta));
+				var popusti = AppDbContext.TipPopustas.ToList();
+				var tempKarta = AppDbContext.TipKartes.ToList().Find(k => k.VrstaKarte == karta.VrstaKarte);
+				var tempCenovnik = AppDbContext.Cenovnici.ToList().Find(c => c.Aktuelan);
+				foreach (var item in popusti)
+				{
+					AppDbContext.Stavke.Add(new StavkaCenovnika()
+					{
+						TipKarte = tempKarta,
+						TipPopusta = item,
+						Cena = (item.Koeficijent != 1) ? karta.CenaKarte - (karta.CenaKarte * item.Koeficijent) : karta.CenaKarte,
+						Cenovnik = cenovnik
+					});
+					AppDbContext.SaveChanges();
+				}
 			}
 			catch (Exception)
 			{
-
+				result = false;
 				throw;
 			}
 
