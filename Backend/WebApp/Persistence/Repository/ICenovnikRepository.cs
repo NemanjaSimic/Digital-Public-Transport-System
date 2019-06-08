@@ -10,5 +10,6 @@ namespace WebApp.Persistence.Repository
     public interface ICenovnikRepository : IRepository<Cenovnik, int>
 	{
 		List<StavkaCenovnika> GetAktuelanCenovnik();
+		bool NapraviCenovnik(Cenovnik noviCenovnik);
 	}
 }

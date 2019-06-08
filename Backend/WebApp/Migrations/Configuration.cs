@@ -129,7 +129,7 @@ namespace WebApp.Migrations
 			//context.TipPopustas.Add(new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.6 });
 			//cen.Aktuelan = true;
 			//var tipKarte = new TipKarte() { VrstaKarte = Models.Enums.VrstaKarte.Vremenska, CenaKarte = 120 };
-			//var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Regularna, Koeficijent = 0 };
+			//var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Penzionerska, Koeficijent = (float)0.4 };
 			//var cen = new Cenovnik() { Od = new DateTime(2019, 1, 1), Do = new DateTime(2019, 12, 31) };
 			//context.Cenovnici.Add(cen);
 			//context.TipKartes.Add(tipKarte);

@@ -36,11 +36,8 @@ export class LoginService
         if(this.isLoggedIn() === true) {
             let token = localStorage.getItem("token");
 
-            let header = new HttpHeaders();
-            header.append('Content-type', 'application/x-www-form-urlencoded');
-            header.append('Authorization', 'Bearer ' + token);
             const httpOptions = {
-                headers: header
+                headers: new HttpHeaders({ 'Content-Type': 'application/json' })
               };
             localStorage.clear();
 

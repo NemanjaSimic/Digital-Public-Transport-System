@@ -8,12 +8,13 @@ import { AppComponent } from './app.component';
 import { RedVoznjeComponent } from './red-voznje/forma/red-voznje.component';
 import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-prikaz.component';
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
-import { NoviCenovnikComponent } from './cenovnik/novi-cenovnik/novi-cenovnik.component';
+import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
 import { LoginComponent } from './login/login.component';
 import { HttpModule } from '@angular/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ProfilComponent } from './profil/profil.component';
     NavbarComponent,
     RegistracijaComponent,
     ProfilComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

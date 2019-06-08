@@ -6,6 +6,8 @@ import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.componen
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'profil',
     component: ProfilComponent
+   },
+   {
+    path: 'admin/dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'noviCenovnik',
+    component: NoviCenovnikComponent
   }
  
 ];

@@ -18,5 +18,29 @@ namespace WebApp.Persistence.Repository
 		{
 			return AppDbContext.Cenovnici.ToList().Find(c => c.Aktuelan == true).Stavke;
 		}
+
+		public bool NapraviCenovnik(Cenovnik noviCenovnik)
+		{
+			var cenovnik = AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan);
+			if (cenovnik != null)
+			{
+				cenovnik.Aktuelan = false;
+				if (DateTime.Compare(cenovnik.Do,noviCenovnik.Od) > 0)
+				{
+					cenovnik.Do = noviCenovnik.Od;
+				}
+			}
+
+			try
+			{
+				AppDbContext.Cenovnici.Add(noviCenovnik);
+				AppDbContext.SaveChanges();
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
 	}
 }

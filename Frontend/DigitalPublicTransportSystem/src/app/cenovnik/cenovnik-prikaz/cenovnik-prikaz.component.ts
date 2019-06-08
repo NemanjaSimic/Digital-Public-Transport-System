@@ -20,11 +20,4 @@ export class CenovnikPrikazComponent implements OnInit {
     this.cenovnikService.getCenovnik().subscribe(stavka => this.stavke = stavka);
   }
   
-  izbrisiStavku(stavka:any){
-
-  }
-
-  izmeniStavku(stavka:any){
-    
-  }
 }

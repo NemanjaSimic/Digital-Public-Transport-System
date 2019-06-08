@@ -7,7 +7,8 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    interface IStavkaRepository : IRepository<StavkaCenovnika, int>
+    public interface IStavkaRepository : IRepository<StavkaCenovnika, int>
     {
-    }
+		bool NovaStavkaSaSvimPopustima(TipKarte karta, Cenovnik cenovnik);
+	}
 }
