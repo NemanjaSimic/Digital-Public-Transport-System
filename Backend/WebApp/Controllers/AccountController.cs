@@ -75,12 +75,37 @@ namespace WebApp.Controllers
             };
         }
 
-        // POST api/Account/Logout
+        // POST api/Account/Logout     
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [Route("GetUser")]
+        public RegisterBindingModel GetUser(string username)
+        {
+            RegisterBindingModel retVal = null;
+            ApplicationUser user = UserManager.FindByName(username);
+            if(user != null)
+            {
+                retVal = new RegisterBindingModel()
+                {
+                    Username = user.UserName,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Email = user.Email,
+                    Address = user.Address,
+                    DateOfBirth = user.DateOfBirth,
+                    UserType = user.UserType.ToString(),
+                    IsVerified = user.IsVerified
+                };
+            }
+      
+
+            return retVal;
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true

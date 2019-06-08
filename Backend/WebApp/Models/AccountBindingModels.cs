@@ -92,6 +92,9 @@ namespace WebApp.Models
 		[Display(Name = "ImgUrl")]
 		public string ImgUrl { get; set; }
 
+        [Display(Name = "IsVerified")]
+        public bool IsVerified { get; set; }
+
     }
 
     public class RegisterExternalBindingModel

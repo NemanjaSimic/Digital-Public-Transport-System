@@ -1,28 +1,30 @@
 export class Korisnik {
 
-    username: string;
-    name: string;
-    surname: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    address: string;
-    dateOfBirth: Date;
-    userType: string;
-    imgUrl: string;
+    Username: string;
+    Name: string;
+    Surname: string;
+    Email: string;
+    Password: string;
+    ConfirmPassword: string;
+    Address: string;
+    DateOfBirth: Date;
+    UserType: string;
+    ImgUrl: string;
+    IsVerified: boolean;
 
     constructor(username?: string, firstName?: string, lastName?: string, email?: string, 
                 password?: string, confirmPassword?: string, address?: string, dob?: Date, userType?: string, imgUrl?: string) {
 
-        this.username = username;
-        this.name = firstName;
-        this.surname = lastName;
-        this.email = email;
-        this.password = password;
-        this.confirmPassword = confirmPassword;
-        this.address = address;
-        this.dateOfBirth = dob;
-        this.userType = userType;
-        this.imgUrl = imgUrl;
+        this.Username = username;
+        this.Name = firstName;
+        this.Surname = lastName;
+        this.Email = email;
+        this.Password = password;
+        this.ConfirmPassword = confirmPassword;
+        this.Address = address;
+        this.DateOfBirth = dob;
+        this.UserType = userType;
+        this.ImgUrl = imgUrl;
+        this.IsVerified = false;
     }
 }

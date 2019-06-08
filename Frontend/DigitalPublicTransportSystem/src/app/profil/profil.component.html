@@ -1,0 +1,85 @@
+<div class="container emp-profile">
+        <div class="row">
+          <div class="col-md-8">
+              <div class="tab-content profile-tab" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Username:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.Username}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Ime:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.Name}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Prezime:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.Surname}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>E-mail:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.Email}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Adresa</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.Address}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Datum rodjenja:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.DateOfBirth.toString().substring(0,10)}}</p>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <label>Tip korisnika:</label>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <p>{{user.UserType}}</p>
+                                  </div>
+                              </div>
+                              <div class="row" *ngIf="user.UserType !== 'RegularanKorisnik'">
+                                  <div class="col-md-6">
+                                      <label>Potvrdjen dokument:</label>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <p *ngIf="user.IsVerified">Da</p>
+                                      <p *ngIf="!user.isVerified">Ne</p>
+                                  </div>
+                              </div>
+                              <div class="row" *ngIf="user.UserType !== 'RegularanKorisnik'">
+                                  <div class="col-md-6">
+                                      <label>Slika dokumenta:</label>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="profile-img">
+                                          <img src="{{user.ImgUrl}}" alt=""/>                                       
+                                      </div>
+                                  </div>
+                              </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+</div>

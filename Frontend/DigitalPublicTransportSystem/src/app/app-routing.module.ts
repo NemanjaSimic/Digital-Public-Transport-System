@@ -5,6 +5,7 @@ import { CenovnikPrikazComponent } from './cenovnik/cenovnik-prikaz/cenovnik-pri
 import { KupovinaKarteComponent } from './kupovina-karte/kupovina-karte.component';
 import { LoginComponent } from './login/login.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   {
@@ -27,9 +28,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },{
+  },
+  {
     path: 'registracija',
     component: RegistracijaComponent
+  },
+  {
+    path: 'profil',
+    component: ProfilComponent
   }
  
 ];
