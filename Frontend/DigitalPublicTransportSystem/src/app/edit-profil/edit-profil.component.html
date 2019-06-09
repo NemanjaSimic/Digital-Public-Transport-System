@@ -1,0 +1,93 @@
+<div class="signup-form">
+    <div class="col-7">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <h2>Izmeni profil</h2>
+      <div class="form-group">
+        <label>Ime:</label>
+        <input type="text" id="name" value="{{user.Name}}" formControlName="name" required class="form-control" />
+          <div *ngIf="f.name.invalid && f.name.touched" class="alert alert-danger">
+            <ng-container *ngIf="f.name.errors.required">
+              <p>Name is required.</p>
+            </ng-container>
+          </div>
+       </div>
+  
+        <div class="form-group"> 
+          <label>Prezime:</label>   
+           <input type="text" id="surname" value ="{{user.Surname}}" formControlName="surname" required class="form-control" />
+              <div *ngIf="f.surname.invalid && (f.surname.touched)" class="alert alert-danger">
+                <ng-container *ngIf="f.surname.errors.required">
+                  <p>Surname is required.</p>
+                </ng-container>
+              </div>
+        </div>
+  
+        <div class="form-group">
+            <label>Adresa:</label>
+            <input type="text" id="address" value ="{{user.Address}}" formControlName="address" required class="form-control" />
+              <div *ngIf="f.address.invalid && f.address.touched " class="alert alert-danger">
+                <ng-container *ngIf="f.address.errors.required">
+                  <p>Address is required.</p>
+                 </ng-container>
+              </div>
+        </div>
+  
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="text" value ="{{user.Email}}" formControlName="email" required class="form-control" />
+              <div *ngIf="f.email.invalid && f.email.touched" class="alert alert-danger">
+                <div *ngIf="f.email.errors.required">
+                  <p>Email is required.</p>
+                </div>
+                <div *ngIf="f.email.errors.email">
+                  <p>Please enter valid email address.</p>
+                </div>
+              </div>
+        </div>
+  
+      <div class="form-group">
+          <label>Username:</label>
+          <input type="text" id="username" value ="{{user.Username}}" formControlName="username" required class="form-control">
+            <div *ngIf="f.username.invalid && f.username.touched" class="alert alert-danger">
+              <ng-container *ngIf="f.username.errors.required">
+                <p>Username is required.</p>
+              </ng-container>
+              <ng-container *ngIf="f.username.errors.minlength">
+                 <p>Username must be at least 6 characters long.</p>
+              </ng-container>
+           </div>
+      </div>
+      <div class="form-group">
+          <label>Datum rodjenja:</label>
+            <input type="date" min="1900-01-01" max="2019-01-01" value="{{user.DateOfBirth.toString().substring(0,10)}}" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
+      </div>
+              
+          <div class="form-group">
+              <label>Tip korisnika:</label>
+              <div class="row">
+                <span>RegularanKorisnik</span>
+                <input type="radio" name="type" [(ngModel)]="user.UserType" value="Regular" formControlName="type" class="form-control" />
+            </div>
+              <div class="row">
+                <span>Penzioner</span>
+                <input type="radio" name="type" [(ngModel)]="user.UserType" value="Penzioner" formControlName="type" class="form-control" />
+            </div>
+              <div class="row">
+                <span>Student</span>
+                <input type="radio" name="type"  [(ngModel)]="user.UserType"  value="Student" formControlName="type" class="form-control" />
+              </div>
+          </div>
+          <div class="form-group">
+              <div class=row>
+                  <div *ngIf="editForm.get('type').value != 'Regular'" class="form-group row">
+                      <input  #file type="file" accept="image/*" formControlName="imgUrl" onchange="loadFile(event)" (change)="preview(file.files)" />
+                      <img [src]="imgURL" height="200" *ngIf="imgURL"/>
+                    </div>
+              </div>
+            </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="editForm.invalid" style="background: rgba(217, 23, 16) !important; outline-color: rgba(217, 23, 16, 0.3) !important">Izmeni</button>
+          </div>
+    </form>
+    </div>
+  </div>

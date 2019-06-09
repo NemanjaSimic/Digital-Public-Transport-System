@@ -33,13 +33,30 @@ export class RegistracijaComponent implements OnInit {
       Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])/)]],
     confirmPassword: ['',
       Validators.required],
-    picture: [''],
+    imgUrl: [''],
     
   }, { validators: ConfirmPasswordValidator });
   selectedFile: File = null;
+
+  
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
+
+  public imagePath;
+  imgURL : any;
+  preview(files) {
+    if (files.length === 0)
+      return;
+
+    var reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result;
+    }
+  }
+  
   get f() { return this.registerForm.controls; }
 
   user:Korisnik;
@@ -61,8 +78,8 @@ export class RegistracijaComponent implements OnInit {
       this.registerForm.get('address').value,
       this.registerForm.get('dateOfBirth').value,
       this.registerForm.get('type').value,
-      ""
-      //this.registerForm.get('picture').value
+      this.registerForm.get('imgUrl').value
+      
     );
 
     if(!this.authService.isLoggedIn()){
