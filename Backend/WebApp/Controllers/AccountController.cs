@@ -251,6 +251,7 @@ namespace WebApp.Controllers
             }
             catch(Exception e)
             {
+                return BadRequest("Greska prilikom izmene lozinke");
                 throw e;
             }
             if (!result.Succeeded)
