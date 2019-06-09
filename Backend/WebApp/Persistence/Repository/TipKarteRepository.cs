@@ -40,22 +40,5 @@ namespace WebApp.Persistence.Repository
 			}
 			return result;
 		}
-		//public TipKarte GetTipKarte(string tip)
-		//{
-		//	var retVal = AppDbContext.TipKartes.FirstOrDefault(k => k.VrstaKarte.ToString().Equals(tip));
-
-		//	if (retVal == null)
-		//	{
-		//		retVal = new TipKarte()
-		//		{
-		//			VrstaKarte = (VrstaKarte)Enum.Parse(typeof(VrstaKarte), tip, true),
-		//			CenaKarte =
-		//		};
-		//	}
-		//	return retVal;
-		//}
-
-
-
     }
 }

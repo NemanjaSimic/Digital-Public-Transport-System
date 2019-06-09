@@ -1,0 +1,60 @@
+<div class="container">
+  <form [formGroup]="linijaForm" autocomplete="off" (ngSubmit)="napraviLiniju()">
+    <h2>Unesite sve podatke:</h2>
+    <div  class="form-group">
+    <label>Ime linije:</label>
+    <input type="text" class="form-control" formControlName="Ime"  required/>
+    </div>
+
+    <div  class="form-group">
+    <label>Redni broj linije:</label>
+    <input type="number" class="form-control" formControlName="RedniBroj"  required/>
+    </div>
+  
+    <div  class="form-group">
+    <label>Tip linije:</label>
+    <select class="form-control" formControlName="VrstaLinije" required>
+      <option>Gradski</option>
+      <option>Prigradski</option>
+    </select>
+  </div>
+
+  <hr>
+  <div  class="form-group">
+    <h3>Polasci za radni dan:</h3>
+    <div formArrayName="RadniDanTermini" *ngFor="let termin of RadniDanTermini.controls; let i=index;">
+      <label>
+        Termin:
+        <input type="time" [formControlName] ="i">
+      </label>
+    </div>
+    <button type="button" (click)="DodajRadniDanTermin()">Dodaj termin</button>
+  </div>
+
+  <hr>
+  <div  class="form-group">
+    <h3>Polasci za subotu:</h3>
+    <div formArrayName="SubotaTermini" *ngFor="let termin of SubotaTermini.controls; let i=index;">
+      <label>
+        Termin:
+        <input type="time" [formControlName] ="i">
+      </label>
+    </div>
+    <button type="button" (click)="DodajSubotaTermin()">Dodaj termin</button>
+  </div>
+
+  <hr>
+  <div  class="form-group">
+    <h3>Polasci za nedelju:</h3>
+    <div formArrayName="NedeljaTermini" *ngFor="let termin of NedeljaTermini.controls; let i=index;">
+      <label>
+        Termin:
+        <input type="time" [formControlName] ="i">
+      </label>
+    </div>
+    <button type="button" (click)="DodajNedeljaTermin()">Dodaj termin</button>
+  </div>
+    
+  <button class="btn btn-primary" [disabled]="!linijaForm.valid" type="submit">Napravi liniju</button>
+</form>
+</div>

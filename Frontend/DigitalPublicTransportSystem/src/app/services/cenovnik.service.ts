@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpInterceptor, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Stavka } from '../models/cenovnik';
 import { catchError, map } from 'rxjs/operators';
 import { NoviCenovnik } from '../models/novi-cenovnik';
 
-
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
-};
 
 @Injectable({ providedIn: 'root'})
 export class CenovnikService{
@@ -25,7 +21,8 @@ export class CenovnikService{
     }
 
     napraviCenovnik(cenovnik: NoviCenovnik): Observable<any>{
-        return this.http.post<NoviCenovnik>(this.NapraviCenovnikUrl, cenovnik, httpOptions).pipe(catchError(this.handleError<any>('NapraviCenovnik')));
+        console.log(localStorage.jwt);
+        return this.http.post<NoviCenovnik>(this.NapraviCenovnikUrl, cenovnik).pipe(catchError(this.handleError<any>('NapraviCenovnik')));
     }
 
 

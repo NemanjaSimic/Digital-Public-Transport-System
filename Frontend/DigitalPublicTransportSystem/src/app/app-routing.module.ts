@@ -8,6 +8,7 @@ import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
+import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
 
 const routes: Routes = [
   {
@@ -44,8 +45,12 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'noviCenovnik',
+    path: 'admin/noviCenovnik',
     component: NoviCenovnikComponent
+  },
+  {
+    path: 'admin/novaLinija',
+    component: NapraviLinijuComponent
   }
  
 ];

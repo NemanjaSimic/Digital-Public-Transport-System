@@ -11,6 +11,8 @@ namespace WebApp.Persistence.Repository
 	{
 		List<string> GetAllLinijaNamesByTip(string TipVoznje);
 		List<Termin> GetAllTerminiOfLinija(string Ime);
+		bool PosotjiLinija(string ime);
+		void DodajLiniju(Linija linija);
 
 	}
 

@@ -43,22 +43,7 @@ export class LoginComponent implements OnInit {
     this.username = this.loginForm.get('username').value;
     this.password = this.loginForm.get('password').value;
 
-    this.loginService.logIn(this.username,this.password).subscribe( 
-      (response) => { 
-        this.authService.logIn(response);
-        this.notificationService.sessionEvent.emit(true);
-        this.router.navigate(['/']);      
-      },
+    this.loginService.logIn(this.username,this.password);
 
-      (error) => {
-        this.submitted = false; 
-        this.notificationService.notifyEvent.emit('An error ocurred while trying to log in. The server is probably down.');
-        console.log(error);
-        if(error.status !== 0){
-         // let errorBody = JSON.parse(error._body);
-         // this.notificationService.notifyEvent.emit(errorBody.error_description);
-        }        
-      }
-    );
   }
 }

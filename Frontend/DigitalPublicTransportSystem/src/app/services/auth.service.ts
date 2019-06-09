@@ -44,13 +44,13 @@ export class AuthService{
 
         //     return this.http.post(this.logOutAddress, "", { headers: headers });
         // }
-        localStorage.removeItem("token");
+        localStorage.removeItem("jwt");
         localStorage.removeItem("role");
         localStorage.removeItem("userId");
     }
 
     isLoggedIn(): boolean {
-        if(!localStorage.getItem('token'))
+        if(!localStorage.getItem('jwt'))
             return false;
         else
             return true;
@@ -61,9 +61,7 @@ export class AuthService{
             return false;
         }
 
-        let token = localStorage.getItem('token');
-        let role = JSON.parse(token).role;
-
+        let role = localStorage.getItem('role');
         if (role=="Admin") {
             return true;
         } else {
@@ -76,7 +74,7 @@ export class AuthService{
             return false;
         }
 
-        let token = localStorage.getItem('token');
+        let token = localStorage.getItem('jwt');
         let role = JSON.parse(token).role;
 
         if (role=="Kontrolor") {
@@ -91,7 +89,7 @@ export class AuthService{
             return false;
         }
 
-        let token = localStorage.getItem('token');
+        let token = localStorage.getItem('jwt');
         let role = JSON.parse(token).role;
 
         if (role=="Korisnik") {

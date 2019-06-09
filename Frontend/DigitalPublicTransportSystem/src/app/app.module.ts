@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     RegistracijaComponent,
     ProfilComponent,
     DashboardComponent,
+    NapraviLinijuComponent,
   ],
   imports: [
     BrowserModule,
