@@ -60,12 +60,20 @@ export class NapraviLinijuComponent implements OnInit {
 
     let novaLinija = new NovaLinija();
     novaLinija = this.linijaForm.value;
-    novaLinija.RadniDanTermini = novaLinija.RadniDanTermini.filter(l => l != "") as [];
-    novaLinija.SubotaTermini = novaLinija.SubotaTermini.filter(l => l != "") as [];
-    if(novaLinija.NedeljaTemini != undefined)
-      novaLinija.NedeljaTemini = novaLinija.NedeljaTemini.filter(l => l != "") as [];
+    if(novaLinija.RadniDanTermini != undefined)
+      novaLinija.RadniDanTermini = novaLinija.RadniDanTermini.filter(l => l != "") as [];
     else
-    novaLinija.NedeljaTemini = [];
+      novaLinija.RadniDanTermini = [];
+
+    if(novaLinija.SubotaTermini != undefined)
+      novaLinija.SubotaTermini = novaLinija.SubotaTermini.filter(l => l != "") as [];
+    else
+      novaLinija.SubotaTermini = [];
+
+    if(novaLinija.NedeljaTermini != undefined)
+      novaLinija.NedeljaTermini = novaLinija.NedeljaTermini.filter(l => l != "") as [];
+    else
+    novaLinija.NedeljaTermini = [];
 
     this.linijaService.napraviLiniju(novaLinija).subscribe(
       (response) => {

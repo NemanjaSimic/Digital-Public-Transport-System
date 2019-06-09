@@ -32,9 +32,12 @@ export class RedVoznjeComponent implements OnInit {
   criteriaChanged():void{
     let tip = this.redVoznjeForm.get('TipVoznje').value;
     if(tip){
-      this.linijaService.getLinijeByTip(tip).subscribe(linija => this.linije = linija);
+      this.linijaService.getLinijeByTip(tip).subscribe(
+        (linija) => {
+          this.linije = linija;
+          this.redVoznjeForm.controls['Ime'].setValue(this.linije[0]);
+        });
     }
-    this.redVoznjeForm.controls['Ime'].setValue(this.linije[0]);
   }
 
   prkaziTermine():void{

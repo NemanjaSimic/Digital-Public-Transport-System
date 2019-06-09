@@ -13,6 +13,8 @@ namespace WebApp.Persistence.Repository
 		List<Termin> GetAllTerminiOfLinija(string Ime);
 		bool PosotjiLinija(string ime);
 		void DodajLiniju(Linija linija);
+		Linija GetLinijaByName(string name);
+		void IzmeniLiniju(Linija linija);
 
 	}
 

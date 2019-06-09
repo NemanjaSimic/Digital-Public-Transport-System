@@ -19,18 +19,51 @@ namespace WebApp.Controllers
 			this.unitOfWork = unitOfWork;
 		}
 
+		[HttpGet]
 		[AllowAnonymous]
 		[Route("GetLinija")]
-		public Linija GetLinija()
+		public NovaLinijaBindingModel GetLinija(string name)
 		{
-			return new Linija() {
-				ID = 1,
-				Ime = "Liman",
-				TipLinije = Models.Enums.VrstaLinije.Gradski,
-				RedniBroj = 4,
-				Termini = new List<Termin>(),
-				Stanice = new List<Stanica>()
+			Linija linija;
+			try
+			{
+				linija = unitOfWork.Linije.GetLinijaByName(name);
+			}
+			catch (Exception)
+			{
+
+				throw;
+			} 
+
+			var novaLinija = new NovaLinijaBindingModel()
+			{
+				Ime = linija.Ime,
+				RedniBroj = linija.RedniBroj,
+				VrstaLinije = linija.TipLinije.ToString(),
+				RadniDanTermini = new List<string>(),
+				SubotaTermini = new List<string>(),
+				NedeljaTermini = new List<string>()
 			};
+
+			foreach (var item in linija.Termini)
+			{
+				switch (item.Dan)
+				{
+					case Dan.RadniDan:
+						novaLinija.RadniDanTermini.Add(item.Polazak.ToString());
+						break;
+					case Dan.Subota:
+						novaLinija.SubotaTermini.Add(item.Polazak.ToString());
+						break;
+					case Dan.Nedelja:
+						novaLinija.NedeljaTermini.Add(item.Polazak.ToString());
+						break;
+					default:
+						break;
+				}
+			}
+
+			return novaLinija;
 		}
 
 		[AllowAnonymous]
@@ -68,6 +101,54 @@ namespace WebApp.Controllers
 			}
 			return retVal.Distinct().ToList();
 		}
+		[HttpPut]
+		[AllowAnonymous]
+		[Route("PutLinija")]
+		public IHttpActionResult PutLinija(NovaLinijaBindingModel novaLinija)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+
+			if (!unitOfWork.Linije.PosotjiLinija(novaLinija.Ime))
+			{
+				return BadRequest("Linija ne postoji");
+			}
+
+			var linija = new Linija()
+			{
+				Ime = novaLinija.Ime,
+				RedniBroj = novaLinija.RedniBroj,
+				TipLinije = (VrstaLinije)Enum.Parse(typeof(VrstaLinije), novaLinija.VrstaLinije),
+				Termini = new List<Termin>(),
+				Stanice = new List<Stanica>()
+			};
+
+			try
+			{
+				linija.Termini.AddRange(ConvertToTermins(novaLinija.RadniDanTermini, Dan.RadniDan));
+				linija.Termini.AddRange(ConvertToTermins(novaLinija.SubotaTermini, Dan.Subota));
+				linija.Termini.AddRange(ConvertToTermins(novaLinija.NedeljaTermini, Dan.Nedelja));
+			}
+			catch (Exception)
+			{
+				return BadRequest("Format polazaka je los.");
+			}
+
+			try
+			{
+				unitOfWork.Linije.IzmeniLiniju(linija);
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+			}
+
+			return Ok();
+		}
+
 
 		[HttpPost]
 		[AllowAnonymous]

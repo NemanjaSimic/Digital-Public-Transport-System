@@ -18,6 +18,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { EditProfilComponent } from './edit-profil/edit-profil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
+import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
 
 
 @NgModule({
@@ -32,6 +33,8 @@ import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-li
     RegistracijaComponent,
     ProfilComponent,
     DashboardComponent,
+    NapraviLinijuComponent,
+    EditLinijaComponent,
     EditProfilComponent,
     ChangePasswordComponent,
     NapraviLinijuComponent

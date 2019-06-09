@@ -12,6 +12,7 @@ import { EditProfilComponent } from './edit-profil/edit-profil.component';
 import { ChangePassModel } from './models/changePassModel';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
+import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'admin/novaLinija',
     component: NapraviLinijuComponent
+  },
+  {
+    path: 'admin/editLinija',
+    component: EditLinijaComponent
   }
  
 ];
