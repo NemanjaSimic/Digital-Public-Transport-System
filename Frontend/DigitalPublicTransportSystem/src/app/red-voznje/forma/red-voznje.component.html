@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-1">
     <form class="form-group form-inline" [formGroup]="redVoznjeForm" (ngSubmit)="prkaziTermine()">
-          <label class="mr-sm-2">Tip voznje:</label>
+          <label class="mr-sm-2">Tip linije:</label>
           <select class="form-control mr-sm-5" formControlName="TipVoznje" (change)="criteriaChanged()">
             <option>Gradski</option>
             <option>Prigradski</option>
@@ -12,7 +12,7 @@
           <option>Subota</option>
         <option>Nedelja</option>
         </select>
-          <label class="mr-sm-2">Ime stanice:</label>
+          <label class="mr-sm-2">Ime linije:</label>
           <select class="form-control mr-sm-5" id="ime" formControlName="Ime">
             <option *ngFor="let linija of linije">{{linija}}</option>
           </select>

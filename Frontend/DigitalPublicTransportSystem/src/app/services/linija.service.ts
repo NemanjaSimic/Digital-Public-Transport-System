@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { Linija } from '../models/linija';
+import { NovaLinija } from '../models/nova-linija';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
@@ -10,14 +11,19 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class LinijaService{
-
-    private GetLinijeByTipUrl = 'http://localhost:52295/api/Linija/GetLinijeByTip';
-    private GetTerminiOfLinijaUrl = 'http://localhost:52295/api/Linija/GetTerminiOfLinija';
-    private PostLinijaUrl = 'http://localhost:52295/api/Linija/PostLinija';
+  private PutLinijaUrl = 'http://localhost:52295/api/Linija/PutLinija';
+  private GetLinijaUrl = 'http://localhost:52295/api/Linija/GetLinija';
+  private GetLinijeByTipUrl = 'http://localhost:52295/api/Linija/GetLinijeByTip';
+  private GetTerminiOfLinijaUrl = 'http://localhost:52295/api/Linija/GetTerminiOfLinija';
+  private PostLinijaUrl = 'http://localhost:52295/api/Linija/PostLinija';
 
     constructor(private http: HttpClient) { }
 
-    getLinijeByTip (tip : any): Observable<Array<string>> {
+  getLinija(name: string): Observable<NovaLinija>{
+    return this.http.get<NovaLinija>(`${this.GetLinijaUrl}?name=${name}`);
+  }
+
+  getLinijeByTip (tip : any): Observable<Array<string>> {
       return this.http.get<Array<string>>(`${this.GetLinijeByTipUrl}?TipVoznje=${tip}`).pipe(
           catchError(this.handleError<Array<string>>(`getLinija`))
         );   
@@ -31,6 +37,10 @@ export class LinijaService{
 
   napraviLiniju(linija:any):Observable<any>{
     return this.http.post<any>(this.PostLinijaUrl, linija);
+  }
+
+  izmeniLiniju(linija:any):Observable<any>{
+    return this.http.put<any>(this.PutLinijaUrl, linija);
   }
 
      /**

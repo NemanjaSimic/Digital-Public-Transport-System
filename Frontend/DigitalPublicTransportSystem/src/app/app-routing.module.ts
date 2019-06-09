@@ -9,6 +9,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
 import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
+import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'admin/novaLinija',
     component: NapraviLinijuComponent
+  },
+  {
+    path: 'admin/editLinija',
+    component: EditLinijaComponent
   }
  
 ];
