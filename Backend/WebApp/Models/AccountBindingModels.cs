@@ -104,6 +104,8 @@ namespace WebApp.Models
 
         [Display(Name = "IsVerified")]
         public bool IsVerified { get; set; }
+        [Display(Name = "OldUsername")]
+        public string OldUsername { get; set; }
 
     }
 

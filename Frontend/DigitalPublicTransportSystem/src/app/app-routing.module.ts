@@ -8,6 +8,9 @@ import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.component';
+import { EditProfilComponent } from './edit-profil/edit-profil.component';
+import { ChangePassModel } from './models/changePassModel';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -46,6 +49,14 @@ const routes: Routes = [
   {
     path: 'noviCenovnik',
     component: NoviCenovnikComponent
+  },
+  {
+    path: 'editProfil',
+    component: EditProfilComponent
+  },
+  {
+    path: 'changePassword',
+    component: ChangePasswordComponent
   }
  
 ];

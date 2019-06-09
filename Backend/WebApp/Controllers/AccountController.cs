@@ -51,15 +51,7 @@ namespace WebApp.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-		//[Route("Register")]
-		//public IHttpActionResult Register(RegisterBindingModel newAcc)
-		//{
-
-
-
-		//	return Ok();
-		//}
-
+		
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -100,12 +92,106 @@ namespace WebApp.Controllers
                     Address = user.Address,
                     DateOfBirth = user.DateOfBirth,
                     UserType = user.UserType.ToString(),
-                    IsVerified = user.IsVerified
+                    IsVerified = user.IsVerified,
+                    ImgUrl = user.ImgUrl
                 };
             }
       
 
             return retVal;
+        }
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("EditUser")]
+        public async Task<IHttpActionResult> EditUser(RegisterBindingModel user)
+        {
+            string username = user.OldUsername;
+            if(!user.Username.Equals(username))
+            {
+                ApplicationUser temp = UserManager.FindByName(user.Username);
+                if (temp != null)
+                {
+                    return BadRequest("Username vec postoji!");
+                }
+                else
+                {
+                    ApplicationUser stariUser = UserManager.FindByName(username);
+                    if(stariUser != null)
+                    {
+                        if(stariUser.UserType != user.UserType)
+                        {
+                            user.IsVerified = false;
+                            user.ImgUrl = "";
+                        }
+                    }
+                    temp = new ApplicationUser()
+                    {
+                        Id = user.Username,
+                        UserName = user.Username,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        Email = user.Email,
+                        Address = user.Address,
+                        DateOfBirth = user.DateOfBirth,
+                        UserType = user.UserType,
+                        IsVerified = user.IsVerified,
+                        ImgUrl = user.ImgUrl,
+                        PasswordHash = stariUser.PasswordHash
+                    };
+
+                    IdentityResult result = await UserManager.DeleteAsync(stariUser);
+
+                    IdentityResult result2 = await UserManager.CreateAsync(temp);
+
+                    if (!result.Succeeded || !result2.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+                    return Ok();
+                }
+            }
+            else
+            {
+                ApplicationUser temp = UserManager.FindByName(user.Username);
+                if (temp != null)
+                {
+                    IdentityResult result = await UserManager.DeleteAsync(temp);
+
+                    if (temp.UserType != user.UserType)
+                    {
+                        user.IsVerified = false;
+                        user.ImgUrl = "";
+                    }
+
+                    temp = new ApplicationUser()
+                    {
+                        Id = user.Username,
+                        UserName = user.Username,
+                        Name = user.Name,
+                        Surname = user.Surname,
+                        Email = user.Email,
+                        Address = user.Address,
+                        DateOfBirth = user.DateOfBirth,
+                        UserType = user.UserType,
+                        IsVerified = user.IsVerified,
+                        ImgUrl = user.ImgUrl,
+                        PasswordHash = temp.PasswordHash
+                    };
+
+                    
+
+                    IdentityResult result2 = await UserManager.CreateAsync(temp);
+
+                    if (!result.Succeeded || !result2.Succeeded)
+                    {
+                        return GetErrorResult(result);
+                    }
+                    return Ok();
+                }
+                return BadRequest("Greska prilikom izmene profila.");
+            }
+
+            
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
@@ -150,16 +236,23 @@ namespace WebApp.Controllers
 
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
-                model.NewPassword);
-            
+            IdentityResult result = null;
+            try
+            {
+                result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+                    model.NewPassword);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

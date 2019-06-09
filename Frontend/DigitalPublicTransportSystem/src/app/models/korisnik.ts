@@ -11,6 +11,7 @@ export class Korisnik {
     UserType: string;
     ImgUrl: string;
     IsVerified: boolean;
+    OldUsername: string;
 
     constructor(username?: string, firstName?: string, lastName?: string, email?: string, 
                 password?: string, confirmPassword?: string, address?: string, dob?: Date, userType?: string, imgUrl?: string) {
@@ -26,5 +27,6 @@ export class Korisnik {
         this.UserType = userType;
         this.ImgUrl = imgUrl;
         this.IsVerified = false;
+        this.OldUsername = username;
     }
 }

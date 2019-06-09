@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     // email : [this.email, [Validators.required, Validators.email]],
     password : [this.password, Validators.required]  
   });
-  y
 
   constructor(private notificationService: NotificationService, private loginService: LoginService, 
               private authService: AuthService,

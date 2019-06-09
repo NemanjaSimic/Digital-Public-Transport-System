@@ -59,7 +59,7 @@
                                       <p>{{user.UserType}}</p>
                                   </div>
                               </div>
-                              <div class="row" *ngIf="user.UserType !== 'RegularanKorisnik'">
+                              <div class="row" *ngIf="user.UserType !== 'Regular'">
                                   <div class="col-md-6">
                                       <label>Potvrdjen dokument:</label>
                                   </div>
@@ -68,13 +68,13 @@
                                       <p *ngIf="!user.isVerified">Ne</p>
                                   </div>
                               </div>
-                              <div class="row" *ngIf="user.UserType !== 'RegularanKorisnik'">
+                              <div class="row" *ngIf="user.UserType !== 'Regular'">
                                   <div class="col-md-6">
                                       <label>Slika dokumenta:</label>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="profile-img">
-                                          <img src="{{user.ImgUrl}}" alt=""/>                                       
+                                          <img src="{{user.ImgUrl}}" alt = "NoImageFound"/>                                       
                                       </div>
                                   </div>
                               </div>

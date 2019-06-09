@@ -15,6 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RegistracijaComponent } from './registracija/registracija.component';
 import { ProfilComponent } from './profil/profil.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { EditProfilComponent } from './edit-profil/edit-profil.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
     RegistracijaComponent,
     ProfilComponent,
     DashboardComponent,
+    EditProfilComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
