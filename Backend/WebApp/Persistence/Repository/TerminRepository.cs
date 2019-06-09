@@ -13,5 +13,15 @@ namespace WebApp.Persistence.Repository
         public TerminRepository(DbContext context) : base(context)
         {
         }
+
+		public void NapraviTermin(Termin termin)
+		{
+			var tempTermin = AppDbContext.Termini.ToList().Find(t => t.Dan == termin.Dan && t.Polazak == termin.Polazak);
+			if (tempTermin == null)
+			{
+				AppDbContext.Termini.Add(termin);
+				AppDbContext.SaveChanges();
+			}
+		}
     }
 }

@@ -11,6 +11,7 @@ import { NoviCenovnikComponent } from './admin/novi-cenovnik/novi-cenovnik.compo
 import { EditProfilComponent } from './edit-profil/edit-profil.component';
 import { ChangePassModel } from './models/changePassModel';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
 
 const routes: Routes = [
   {
@@ -47,7 +48,7 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'noviCenovnik',
+    path: 'admin/noviCenovnik',
     component: NoviCenovnikComponent
   },
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'changePassword',
     component: ChangePasswordComponent
+   },
+  {
+    path: 'admin/novaLinija',
+    component: NapraviLinijuComponent
   }
  
 ];

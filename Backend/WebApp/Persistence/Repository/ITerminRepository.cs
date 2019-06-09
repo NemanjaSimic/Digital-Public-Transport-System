@@ -9,5 +9,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface ITerminRepository : IRepository<Termin, int>
 	{
-    }
+		void NapraviTermin(Termin termin);
+
+	}
 }

@@ -36,10 +36,15 @@ namespace WebApp.Controllers
 
 			return retVal;
 		}
-		[AllowAnonymous]
+		[HttpPost]
+		//[Authorize(Roles = "Admin")]
 		[Route("NapraviCenovnik")]
 		public IHttpActionResult NapraviCenovnik(NoviCenovnikBindingModel noviCenovnik)
 		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 			try
 			{
 				var cenovnik = new Cenovnik() { Od = DateTime.Now, Do = noviCenovnik.Do, Aktuelan = true, Stavke = new List<StavkaCenovnika>() };

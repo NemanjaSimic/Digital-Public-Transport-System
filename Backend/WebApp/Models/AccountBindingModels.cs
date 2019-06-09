@@ -7,13 +7,29 @@ using WebApp.Models.Enums;
 namespace WebApp.Models
 {
 	// Models used as parameters to AccountController actions.
-
+	public class NovaLinijaBindingModel
+	{
+		[Required]
+		public string Ime { get; set; }
+		[Required]
+		public int RedniBroj { get; set; }
+		[Required]
+		public string VrstaLinije { get; set; }
+		public List<string> RadniDanTermini { get; set; }
+		public List<string> SubotaTermini { get; set; }
+		public List<string> NedeljaTermini { get; set; }
+	}
 	public class NoviCenovnikBindingModel
 	{
+		[Required]
 		public float Vremenska { get; set; }
+		[Required]
 		public float Dnevna { get; set; }
+		[Required]
 		public float Mesecna { get; set; }
+		[Required]
 		public float Godisnja { get; set; }
+		[Required]
 		public DateTime Do { get; set; }
 		
 	}
@@ -27,8 +43,11 @@ namespace WebApp.Models
 
 	public class StavkaBindingModel
 	{
+		[Required]
 		public string VrstaKarte { get; set; }
+		[Required]
 		public string VrstaPopusta { get; set; }
+		[Required]
 		public float Cena { get; set; }
 	}
 	

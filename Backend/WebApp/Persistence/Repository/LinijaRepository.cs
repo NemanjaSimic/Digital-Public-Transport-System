@@ -32,5 +32,16 @@ namespace WebApp.Persistence.Repository
 		{
 			return AppDbContext.Linije.ToList().Find(l => l.Ime.Equals(Ime)).Termini;
 		}
+
+		public void DodajLiniju(Linija linija)
+		{
+			AppDbContext.Linije.Add(linija);
+			AppDbContext.SaveChanges();
+		}
+
+		public bool PosotjiLinija(string ime)
+		{
+			return (AppDbContext.Linije.ToList().Find(l => l.Ime.Equals(ime)) == null) ? false : true;
+		}
 	}
 }

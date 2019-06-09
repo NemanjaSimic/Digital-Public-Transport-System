@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
     private router: Router){}
 
   IsLoggedIn : boolean;
+  IsAdmin : boolean;
 
   ngOnInit() {
     this.loadData();
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
 
         (error) => {
           this.notificationService.notifyEvent.emit('An error occured while logging out.');
+          this.loadData();
           this.router.navigate(['/']);
         }
       )
@@ -41,9 +43,11 @@ export class NavbarComponent implements OnInit {
 
   loadData() : void{
     this.notificationService.sessionEvent.subscribe((loggedIn : boolean) => {
-      this.IsLoggedIn = loggedIn;
+      this.IsLoggedIn = this.authService.isLoggedIn();
+      this.IsAdmin = this.authService.isAdmin();
   });
 
   this.IsLoggedIn = this.authService.isLoggedIn();
+  this.IsAdmin = this.authService.isAdmin();
   }
 }

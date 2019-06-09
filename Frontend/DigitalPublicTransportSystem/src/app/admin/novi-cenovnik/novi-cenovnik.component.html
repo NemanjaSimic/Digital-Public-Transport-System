@@ -3,16 +3,16 @@
   <form #f="ngForm" autocomplete="off" (ngSubmit)="napraviCenovnik(f.value, f)">
 
     <label>Vremenska</label>
-    <input type="text" class="form-control" name="Vremenska" ngModel required/>
+    <input type="number" class="form-control" name="Vremenska" ngModel required/>
     
     <label>Dnevna</label>
-    <input type="text" class="form-control" name="Dnevna" ngModel required/>
+    <input type="number" class="form-control" name="Dnevna" ngModel required/>
     
     <label>Mesecna</label>
-    <input type="text" class="form-control" name="Mesecna" ngModel required/>
+    <input type="number" class="form-control" name="Mesecna" ngModel required/>
     
     <label>Godisnja</label>
-    <input type="text" class="form-control" name="Godisnja" ngModel required/>
+    <input type="number" class="form-control" name="Godisnja" ngModel required/>
 
     <label style="margin-top: 12px; margin-left: 55px">Datum do kojeg ce trajati:</label>
     <input type="date" id="dateOfBirth" name="Do" class="form-control" style="margin-left: 20px; width: 250px" ngModel required />
