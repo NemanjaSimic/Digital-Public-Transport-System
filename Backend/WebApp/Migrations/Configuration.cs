@@ -23,49 +23,49 @@ namespace WebApp.Migrations
 			//  You can use the DbSet<T>.AddOrUpdate() helper extension method 
 			//  to avoid creating duplicate seed data.
 
-			if (!context.Roles.Any(r => r.Name == "Admin"))
-			{
-				var store = new RoleStore<IdentityRole>(context);
-				var manager = new RoleManager<IdentityRole>(store);
-				var role = new IdentityRole { Name = "Admin" };
+			//if (!context.Roles.Any(r => r.Name == "Admin"))
+			//{
+			//	var store = new RoleStore<IdentityRole>(context);
+			//	var manager = new RoleManager<IdentityRole>(store);
+			//	var role = new IdentityRole { Name = "Admin" };
 
-				manager.Create(role);
-			}
+			//	manager.Create(role);
+			//}
 
-			if (!context.Roles.Any(r => r.Name == "Controller"))
-			{
-				var store = new RoleStore<IdentityRole>(context);
-				var manager = new RoleManager<IdentityRole>(store);
-				var role = new IdentityRole { Name = "Controller" };
+			//if (!context.Roles.Any(r => r.Name == "Controller"))
+			//{
+			//	var store = new RoleStore<IdentityRole>(context);
+			//	var manager = new RoleManager<IdentityRole>(store);
+			//	var role = new IdentityRole { Name = "Controller" };
 
-				manager.Create(role);
-			}
+			//	manager.Create(role);
+			//}
 
-			if (!context.Roles.Any(r => r.Name == "AppUser"))
-			{
-				var store = new RoleStore<IdentityRole>(context);
-				var manager = new RoleManager<IdentityRole>(store);
-				var role = new IdentityRole { Name = "AppUser" };
+			//if (!context.Roles.Any(r => r.Name == "AppUser"))
+			//{
+			//	var store = new RoleStore<IdentityRole>(context);
+			//	var manager = new RoleManager<IdentityRole>(store);
+			//	var role = new IdentityRole { Name = "AppUser" };
 
-				manager.Create(role);
-			}
+			//	manager.Create(role);
+			//}
 
 			var userStore = new UserStore<ApplicationUser>(context);
 			var userManager = new UserManager<ApplicationUser>(userStore);
 
 			if (!context.Users.Any(u => u.UserName == "admin@yahoo.com"))
 			{
-				var user = new ApplicationUser() { Id = "admin", UserName = "admin@yahoo.com", Email = "admin@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Admin123!") };
+				var user = new ApplicationUser() { Id = "admin", UserName = "admin@yahoo.com", Email = "admin@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Admin123!"), DateOfBirth = DateTime.Now };
 				userManager.Create(user);
 				userManager.AddToRole(user.Id, "Admin");
 			}
 
-			if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
-			{
-				var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
-				userManager.Create(user);
-				userManager.AddToRole(user.Id, "AppUser");
-			}
+			//if (!context.Users.Any(u => u.UserName == "appu@yahoo.com"))
+			//{
+			//	var user = new ApplicationUser() { Id = "appu", UserName = "appu@yahoo.com", Email = "appu@yahoo.com", PasswordHash = ApplicationUser.HashPassword("Appu123!") };
+			//	userManager.Create(user);
+			//	userManager.AddToRole(user.Id, "AppUser");
+			//}
 			//Termin termin1 = new Termin() { Dan = Models.Enums.Dan.Subota, Polazak = new TimeSpan(10,0,0) };
 			//Termin termin2 = new Termin() { Dan = Models.Enums.Dan.Nedelja, Polazak = new TimeSpan(10, 0, 0) };
 			//Termin termin3 = new Termin() { Dan = Models.Enums.Dan.Subota, Polazak = new TimeSpan(11, 0, 0) };
@@ -133,13 +133,21 @@ namespace WebApp.Migrations
 			//var cen = new Cenovnik() { Od = new DateTime(2019, 1, 1), Do = new DateTime(2019, 12, 31) };
 			//context.Cenovnici.Add(cen);
 			//context.TipKartes.Add(tipKarte);
+
 			//context.TipPopustas.Add(tipPopusta);
 			//var tipKarte = context.TipKartes.ToList().Find(k => k.VrstaKarte == Models.Enums.VrstaKarte.Vremenska);
 			//var tipPopusta = context.TipPopustas.ToList().Find(p => p.VrstaPopusta == Models.Enums.VrstaPopusta.Regularna);
 			//var cen = context.Cenovnici.ToList().FirstOrDefault();
 			//context.Stavke.Add(new StavkaCenovnika() { Cena = 120, TipKarte = tipKarte, TipPopusta = tipPopusta, Cenovnik = cen });
 
-			//context.SaveChanges();
+			//var tipPopusta1 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Regularna, Koeficijent = 1 };
+			//var tipPopusta2 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.2 };
+			//var tipPopusta3 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Penzionerska, Koeficijent = (float)0.4 };
+			//context.TipPopustas.Add(tipPopusta1);
+			//context.TipPopustas.Add(tipPopusta2);
+			//context.TipPopustas.Add(tipPopusta3);
+
+			context.SaveChanges();
 		}
-    }
+	}
 }

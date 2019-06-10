@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Models.Enums;
 using WebApp.Persistence.UnitOfWork;
@@ -20,36 +21,36 @@ namespace WebApp.Controllers
 		}
 
 		[HttpDelete]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("DeleteLinija")]
 		public IHttpActionResult DeleteLinija(string ime)
 		{
-			try
-			{
-				unitOfWork.Linije.IzbrisiLiniju(ime);
-				return Ok();
-			}
-			catch (Exception)
+
+			var linija = unitOfWork.Linije.GetLinijaByName(ime);
+			if (linija == null)
 			{
 				return BadRequest("Linija ne postoji u bazi.");
 			}
+
+			linija.Izbrisano = true;
+			unitOfWork.Linije.Update(linija);
+			unitOfWork.Complete();
+			return Ok();
+
 		}
 
 		[HttpGet]
 		[AllowAnonymous]
+		[ResponseType(typeof(NovaLinijaBindingModel))]
 		[Route("GetLinija")]
-		public NovaLinijaBindingModel GetLinija(string name)
+		public IHttpActionResult GetLinija(string name)
 		{
-			Linija linija;
-			try
-			{
-				linija = unitOfWork.Linije.GetLinijaByName(name);
-			}
-			catch (Exception)
-			{
+			Linija linija = unitOfWork.Linije.GetLinijaByName(name);
 
-				throw;
-			} 
+			if (linija == null)
+			{
+				return BadRequest();
+			}
 
 			var novaLinija = new NovaLinijaBindingModel()
 			{
@@ -79,7 +80,7 @@ namespace WebApp.Controllers
 				}
 			}
 
-			return novaLinija;
+			return Ok(novaLinija);
 		}
 
 		[AllowAnonymous]
@@ -117,6 +118,7 @@ namespace WebApp.Controllers
 			}
 			return retVal.Distinct().ToList();
 		}
+
 		[HttpPut]
 		[Authorize(Roles = "Admin")]
 		[Route("PutLinija")]
@@ -127,20 +129,17 @@ namespace WebApp.Controllers
 				return BadRequest(ModelState);
 			}
 
-
-			if (!unitOfWork.Linije.PosotjiLinija(novaLinija.Ime))
+			Linija linija = unitOfWork.Linije.GetLinijaByName(novaLinija.Ime);
+			if (linija == null)
 			{
-				return BadRequest("Linija ne postoji");
+				return BadRequest($"Linija sa imenom {novaLinija.Ime} ne postoji.");
+
 			}
 
-			var linija = new Linija()
-			{
-				Ime = novaLinija.Ime,
-				RedniBroj = novaLinija.RedniBroj,
-				TipLinije = (VrstaLinije)Enum.Parse(typeof(VrstaLinije), novaLinija.VrstaLinije),
-				Termini = new List<Termin>(),
-				Stanice = new List<Stanica>()
-			};
+			linija.RedniBroj = novaLinija.RedniBroj;
+			linija.TipLinije = (VrstaLinije)Enum.Parse(typeof(VrstaLinije), novaLinija.VrstaLinije);
+			linija.Termini.Clear();
+			linija.Stanice.Clear();
 
 			try
 			{
@@ -153,14 +152,8 @@ namespace WebApp.Controllers
 				return BadRequest("Format polazaka je los.");
 			}
 
-			try
-			{
-				unitOfWork.Linije.IzmeniLiniju(linija);
-			}
-			catch (Exception)
-			{
-				return BadRequest();
-			}
+			unitOfWork.Linije.Update(linija);
+			unitOfWork.Complete();
 
 			return Ok();
 		}
@@ -176,13 +169,24 @@ namespace WebApp.Controllers
 				return BadRequest(ModelState);
 			}
 
+			Linija linija = unitOfWork.Linije.GetLinijaByName(novaLinija.Ime);
 			
-			if (unitOfWork.Linije.PosotjiLinija(novaLinija.Ime))
+			if (linija != null)
+			{			
+				return BadRequest($"Linija sa imenom {novaLinija.Ime} vec postoji.");
+			}
+			else
 			{
-				return BadRequest("Ime linije vec postoji");
+				linija = unitOfWork.Linije.GetDeletedLine(novaLinija.Ime);
+				if (linija != null)
+				{
+					unitOfWork.Linije.Remove(linija);
+					unitOfWork.Complete();
+				}
+				
 			}
 
-			var linija = new Linija()
+			linija = new Linija()
 			{
 				Ime = novaLinija.Ime,
 				RedniBroj = novaLinija.RedniBroj,
@@ -201,9 +205,10 @@ namespace WebApp.Controllers
 			{
 				return BadRequest("Format polazaka je los.");
 			}
-			
 
-			unitOfWork.Linije.DodajLiniju(linija);
+
+			unitOfWork.Linije.Add(linija);
+			unitOfWork.Complete();
 
 			return Ok();
 		}
@@ -215,12 +220,21 @@ namespace WebApp.Controllers
 			{
 				if (!String.IsNullOrEmpty(item))
 				{
-					var termin = new Termin() { Dan = dan, Polazak = TimeSpan.Parse(item), Linije = new List<Linija>()  };
-					unitOfWork.Termini.NapraviTermin(termin);
-					retVal.Add(termin);
+					Termin terminTemp = unitOfWork.Termini.GetTermin(dan,TimeSpan.Parse(item));
+					Termin termin;
+					if (terminTemp == null)
+					{
+						termin = new Termin() { Dan = dan, Polazak = TimeSpan.Parse(item), Linije = new List<Linija>()  };
+						unitOfWork.Termini.Add(termin);
+						unitOfWork.Complete();
+						retVal.Add(termin);
+					}
+					else
+					{
+						retVal.Add(terminTemp);
+					}
 				}
 			}
-
 			return retVal;
 		}
     }

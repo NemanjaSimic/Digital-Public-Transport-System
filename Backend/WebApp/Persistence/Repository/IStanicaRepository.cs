@@ -10,5 +10,7 @@ namespace WebApp.Persistence.Repository
     public interface IStanicaRepository : IRepository<Stanica, int>
     {
         List<Stanica> GettAllStanicaForSinglePage();
-    }
+		Stanica GetStanicaByNaziv(string name);
+
+	}
 }

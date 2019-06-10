@@ -17,8 +17,6 @@ namespace WebApp.Models
 		public double X { get; set; }
 		[Required]
 		public double Y { get; set; }
-		public int ID { get; set; }
-
 	}
 
 

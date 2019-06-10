@@ -17,7 +17,20 @@ namespace WebApp.Persistence.Repository
 
         public List<Stanica> GettAllStanicaForSinglePage()
         {
-            return AppDbContext.Stanice.ToList();
+			try
+			{
+				return AppDbContext.Stanice.ToList().FindAll(s=>!s.Izbrisano);
+			}
+			catch (Exception)
+			{
+				return new List<Stanica>();
+			}
         }
+
+		public Stanica GetStanicaByNaziv(string name)
+		{
+			return AppDbContext.Stanice.ToList().FirstOrDefault(s => s.Naziv.Equals(name));
+		}
+
     }
 }

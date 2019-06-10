@@ -14,7 +14,6 @@ namespace WebApp.Persistence.UnitOfWork
         ITipKarteRepository TipKartas { get; set; }
         ILinijaRepository Linije { get; set; }
         IKartaRepository Karte { get; set; }
-        IKoordinataRepository Koordinate { get; set; }
         ICenovnikRepository Cenovnici { get; set; }
         IStavkaRepository Stavke { get; set; }
         ITerminRepository Termini { get; set; }

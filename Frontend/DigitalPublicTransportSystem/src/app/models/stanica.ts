@@ -3,6 +3,4 @@ export class Stanica{
     Adresa:string;
     X:number;
     Y:number;
-    Linije:[];
-    ID:number;
 }

@@ -13,7 +13,8 @@ namespace WebApp.Models
         public int ID { get; set; }
         public bool Validna { get; set; }
         public DateTime DatumIzdavanja { get; set; }
+		public bool Izbrisano { get; set; }
 
-        public virtual StavkaCenovnika StavkaCenovnika { get; set; }
+		public virtual StavkaCenovnika StavkaCenovnika { get; set; }
     }
 }

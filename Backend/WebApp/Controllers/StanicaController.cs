@@ -9,28 +9,49 @@ using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
-    [RoutePrefix("api/Stanica")]
-    public class StanicaController : ApiController
-    {
-        private readonly IUnitOfWork unitOfWork;
+	[RoutePrefix("api/Stanica")]
+	public class StanicaController : ApiController
+	{
+		private readonly IUnitOfWork unitOfWork;
 
-        public StanicaController(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
-        }
+		public StanicaController(IUnitOfWork unitOfWork)
+		{
+			this.unitOfWork = unitOfWork;
+		}
+
+		[HttpDelete]
+		[Authorize(Roles = "Admin")]
+		[Route("DeleteStanica")]
+		public IHttpActionResult DeleteStanica(string naziv)
+		{
+			var tempStanica = unitOfWork.Stanice.GetStanicaByNaziv(naziv);
+			if (tempStanica == null || (tempStanica != null && tempStanica.Izbrisano))
+			{
+				return BadRequest($"Stanica sa nazivom {naziv}");
+			}
+
+			tempStanica.Izbrisano = true;
+			unitOfWork.Stanice.Update(tempStanica);
+			unitOfWork.Complete();
+
+			return Ok();
+		}
 
 		[HttpPut]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("PutStanica")]
-		public IHttpActionResult PutStanica(StanicaBindingModel stanica)
+		public IHttpActionResult PutStanica(Stanica stanica)
 		{
-			var tempStanica = new Stanica()
+			var tempStanica = unitOfWork.Stanice.GetStanicaByNaziv(stanica.Naziv);
+			if (tempStanica == null || (tempStanica != null && tempStanica.Izbrisano))
 			{
-				ID = stanica.ID,
-				Naziv = stanica.Naziv,
-				Adresa = stanica.Adresa,
-				Koordinata = new Koordinata() { X = stanica.X, Y = stanica.Y }
-			};
+				return BadRequest($"Stanica sa nazivom {stanica.Naziv}");
+			}
+
+			tempStanica.X = stanica.X;
+			tempStanica.Y = stanica.Y;
+			tempStanica.Adresa = stanica.Adresa;
+			
 
 			try
 			{
@@ -59,34 +80,38 @@ namespace WebApp.Controllers
 				{
 					Naziv = item.Naziv,
 					Adresa = item.Adresa,
-					X = item.Koordinata.X,
-					Y = item.Koordinata.Y,
-					ID = item.ID
+					X = item.X,
+					Y = item.Y
 				});
 			}
-
 			return result;
 		}
 
 		[HttpPost]
 		[AllowAnonymous]
         [Route("PostStanica")]
-        public IHttpActionResult PostStanica(StanicaBindingModel novaStanica)
+        public IHttpActionResult PostStanica(Stanica novaStanica)
         {
-            var stanica = new Stanica()
+			var stanica = unitOfWork.Stanice.GetStanicaByNaziv(novaStanica.Naziv);
+			if (stanica != null)
 			{
-				Naziv = novaStanica.Naziv,
-				Adresa = novaStanica.Adresa,
-				Koordinata = new Koordinata()
+				if (stanica.Izbrisano)
 				{
-					X = novaStanica.X,
-					Y = novaStanica.Y
+					unitOfWork.Stanice.Remove(stanica);
+					unitOfWork.Complete();
 				}
-			};
+				else
+				{
+					return BadRequest($"Stanica sa imenom {novaStanica.Naziv} vec postoji!");
+				}
+			}
+
+
+			novaStanica.Izbrisano = false;
 
 			try
 			{
-				unitOfWork.Stanice.Add(stanica);
+				unitOfWork.Stanice.Add(novaStanica);
 				unitOfWork.Complete();
 			}
 			catch (Exception)

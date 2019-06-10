@@ -19,7 +19,6 @@ namespace WebApp.Persistence
         public DbSet<Karta> Karte { get; set; }
         public DbSet<Cenovnik> Cenovnici { get; set; }
         public DbSet<StavkaCenovnika> Stavke { get; set; }
-        public DbSet<Koordinata> Koordinate { get; set; }
         public ApplicationDbContext()
             : base("name=DefaultConnection", throwIfV1Schema: false)
         {

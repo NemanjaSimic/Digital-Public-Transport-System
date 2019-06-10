@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   selector: 'app-nova-stanica',
   templateUrl: './nova-stanica.component.html',
   styleUrls: ['./nova-stanica.component.css'],
-  styles: ['agm-map {height: 500px; width: 700px;}'] 
+  styles: ['agm-map {height: 600px; width: 1125px;}'] 
 })
 export class NovaStanicaComponent implements OnInit {
 

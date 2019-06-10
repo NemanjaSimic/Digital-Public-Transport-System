@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.Description;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
 
@@ -19,25 +20,30 @@ namespace WebApp.Controllers
 			this.unitOfWork = unitOfWork;
 		}
 
+		[HttpGet]
+		[AllowAnonymous]
+		[ResponseType(typeof(List<StavkaBindingModel>))]
 		[Route("GetCenovnik")]
-		public List<StavkaBindingModel> GetStavkeCenovnika()
+		public IHttpActionResult GetStavkeCenovnika()
 		{
 			List<StavkaBindingModel> retVal = new List<StavkaBindingModel>();
-
-			foreach (var item in unitOfWork.Cenovnici.GetAktuelanCenovnik())
+			var stavke = unitOfWork.Cenovnici.GetAktuelanCenovnik();
+			if (stavke != null)
 			{
-				retVal.Add(new StavkaBindingModel()
+				foreach (var item in stavke)
 				{
-					Cena = item.Cena,
-					VrstaKarte = item.TipKarte.VrstaKarte.ToString(),
-					VrstaPopusta = item.TipPopusta.VrstaPopusta.ToString()
-				});
+					retVal.Add(new StavkaBindingModel()
+					{
+						Cena = item.Cena,
+						VrstaKarte = item.TipKarte.VrstaKarte.ToString(),
+						VrstaPopusta = item.TipPopusta.VrstaPopusta.ToString()
+					});
+				}
 			}
-
-			return retVal;
+			return Ok(retVal);
 		}
 		[HttpPost]
-		//[Authorize(Roles = "Admin")]
+		[Authorize(Roles = "Admin")]
 		[Route("NapraviCenovnik")]
 		public IHttpActionResult NapraviCenovnik(NoviCenovnikBindingModel noviCenovnik)
 		{

@@ -1,4 +1,4 @@
-﻿using System;
+﻿	using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace WebApp.Persistence.Repository
 			List<string> names = new List<string>();
 			foreach (var item in AppDbContext.Linije)
 			{
-				if (!String.IsNullOrEmpty(TipVoznje) && item.TipLinije.ToString().Equals(TipVoznje))
+				if (!String.IsNullOrEmpty(TipVoznje) && item.TipLinije.ToString().Equals(TipVoznje) && !item.Izbrisano)
 				{
 					names.Add(item.Ime);
 				}
@@ -28,78 +28,31 @@ namespace WebApp.Persistence.Repository
 			return names;
 		}
 
-		public void IzbrisiLiniju(string ime)
-		{
-			var linija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(ime));
-			AppDbContext.Linije.Remove(linija);
-			AppDbContext.SaveChanges();
-		}
-
 		public List<Termin> GetAllTerminiOfLinija(string Ime)
 		{
-			return AppDbContext.Linije.ToList().Find(l => l.Ime.Equals(Ime)).Termini;
-		}
-
-		public void DodajLiniju(Linija linija)
-		{
-			var termini = new List<Termin>();
-			foreach (var item in linija.Termini)
-			{
-				var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Dan == item.Dan && t.Polazak == item.Polazak);
-				if (termin != null)
-				{
-					termini.Add(termin);
-				}
-			}
-			linija.Termini = termini;
-			AppDbContext.Linije.Add(linija);
-			AppDbContext.SaveChanges();
-		}
-
-		public bool PosotjiLinija(string ime)
-		{
-			return (AppDbContext.Linije.ToList().Find(l => l.Ime.Equals(ime)) == null) ? false : true;
+			return AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(Ime) && !l.Izbrisano).Termini;
 		}
 
 		public Linija GetLinijaByName(string name)
 		{
-			return AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(name));
+			return AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(name) && !l.Izbrisano);
 		}
 
 		public void IzmeniLiniju(Linija linija)
 		{
-			var tempLinija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(linija.Ime));
+			var tempLinija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(linija.Ime) && !l.Izbrisano);
+
 			tempLinija.Termini.Clear();
-
-			//foreach (var item in tempLinija.Termini)
-			//{
-			//	var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Linije.Contains(tempLinija));
-			//	if (termin != null)
-			//	{
-			//		termini.Add(item);
-			//	}
-			//}
-
-			//foreach (var item in termini)
-			//{
-			//	item.Linije.Remove(tempLinija);
-			//	AppDbContext.SaveChanges();
-			//}
-
-			//termini = new List<Termin>();
-			//foreach (var item in linija.Termini)
-			//{
-			//	var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Dan == item.Dan && t.Polazak == item.Polazak );
-			//	if (termin != null)
-			//	{
-			//		termini.Add(termin);
-			//	}
-			//}
-
 			tempLinija.RedniBroj = linija.RedniBroj;
 			tempLinija.TipLinije = linija.TipLinije;
 			tempLinija.Termini.AddRange(linija.Termini);
+
 			AppDbContext.SaveChanges();
+		}
+
+		public Linija GetDeletedLine(string ime)
+		{
+			return AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(ime) && l.Izbrisano);
 		}
 	}
 }

@@ -14,8 +14,7 @@ import { Stanica } from 'src/app/models/stanica';
 export class EditStanicaComponent implements OnInit {
   stanicaForm = this.fb.group({
     Naziv: [''],
-    Adresa:[''],
-    ID:['']
+    Adresa:['']
   });
   
   public geoLocation: GeoLocation;
@@ -63,7 +62,18 @@ export class EditStanicaComponent implements OnInit {
     this.selectedStanica = stanica;
     this.stanicaForm.controls["Naziv"].setValue(stanica.Naziv);
     this.stanicaForm.controls["Adresa"].setValue(stanica.Adresa);
-    this.stanicaForm.controls["ID"].setValue(stanica.ID);
     this.geoLocation = new GeoLocation(stanica.X, stanica.Y);
+  }
+
+  izbrisiStanicu(){
+    this.stanicService.deleteStanica(this.selectedStanica.Naziv).subscribe(
+      (response)=>{
+          this.selectedStanica = undefined;
+          this.getStanice();
+      },
+      (error)=>{
+        console.log(error);
+      }
+    );
   }
 }

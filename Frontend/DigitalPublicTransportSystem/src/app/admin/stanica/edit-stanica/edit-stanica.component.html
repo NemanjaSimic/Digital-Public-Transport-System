@@ -1,12 +1,16 @@
 <div class="container">
+  <div class="row mt-1">
   <div class="form-group">
-    <select size="7" (change)="OnSelectStanica($event.target.value)">
+    <select id="stanice" size="7" (change)="OnSelectStanica($event.target.value)">
       <option *ngFor="let stanica of stanice">
         {{stanica.Naziv}}
       </option>
     </select>
   </div>
-
+  <div class="group-control">
+  <button class="btn btn-primary mt-5 ml-3" type="button" [disabled]="selectedStanica == undefined" (click)="izbrisiStanicu()">Izbtisi stanicu</button>
+  </div>
+  <hr>
     <form *ngIf="selectedStanica" [formGroup]="stanicaForm" autocomplete="off" (ngSubmit)="izmeniStanicu()">
       <div class="form-group">
         <label>Ime stanice:</label>
@@ -27,4 +31,5 @@
       </div>
       <button type="submit" [disabled]= "!stanicaForm.valid || !geoLocation" class="btn btn-primary btn-block">Izmeni stanicu</button>
     </form>
+  </div>
   </div>

@@ -15,6 +15,7 @@ namespace WebApp.Models
         public DateTime Od { get; set; }
         public DateTime Do { get; set; }
 		public bool Aktuelan { get; set; }
+		public bool Izbrisano { get; set; }
 
         [InverseProperty("Cenovnik")]
         public virtual List<StavkaCenovnika> Stavke { get; set; }

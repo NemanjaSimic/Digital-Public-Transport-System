@@ -21,13 +21,13 @@ namespace WebApp.Persistence.Repository
 			try
 			{
 				var popusti = AppDbContext.TipPopustas.ToList();
-				var tempKarta = AppDbContext.TipKartes.ToList().Find(k => k.VrstaKarte == karta.VrstaKarte);
+				//var tempKarta = AppDbContext.TipKartes.ToList().Find(k => k.VrstaKarte == karta.VrstaKarte);
 				var tempCenovnik = AppDbContext.Cenovnici.ToList().Find(c => c.Aktuelan);
 				foreach (var item in popusti)
 				{
 					AppDbContext.Stavke.Add(new StavkaCenovnika()
 					{
-						TipKarte = tempKarta,
+						TipKarte = karta,
 						TipPopusta = item,
 						Cena = (item.Koeficijent != 1) ? karta.CenaKarte - (karta.CenaKarte * item.Koeficijent) : karta.CenaKarte,
 						Cenovnik = cenovnik
@@ -38,7 +38,6 @@ namespace WebApp.Persistence.Repository
 			catch (Exception)
 			{
 				result = false;
-				throw;
 			}
 
 			return result;

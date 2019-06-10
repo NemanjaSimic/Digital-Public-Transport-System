@@ -36,7 +36,6 @@ namespace WebApp.Persistence.Repository
 			catch (Exception)
 			{
 				result = false;
-				throw;
 			}
 			return result;
 		}

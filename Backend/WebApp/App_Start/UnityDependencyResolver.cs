@@ -77,7 +77,6 @@ namespace WebApp.App_Start
             container.RegisterType<ICenovnikRepository, CenovnikRepository>();
             container.RegisterType<IStavkaRepository, StavkaRepository>();
             container.RegisterType<ITerminRepository, TerminRepository>();
-            container.RegisterType<IKoordinataRepository, KoordinataRepository>();
 
 
         }

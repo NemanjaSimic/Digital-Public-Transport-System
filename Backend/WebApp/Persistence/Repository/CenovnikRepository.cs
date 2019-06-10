@@ -16,7 +16,14 @@ namespace WebApp.Persistence.Repository
 
 		public List<StavkaCenovnika> GetAktuelanCenovnik()
 		{
-			return AppDbContext.Cenovnici.ToList().Find(c => c.Aktuelan == true).Stavke;
+			try
+			{
+				return AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan == true).Stavke;
+			}
+			catch (Exception)
+			{
+				return new List<StavkaCenovnika>();
+			}
 		}
 
 		public bool NapraviCenovnik(Cenovnik noviCenovnik)

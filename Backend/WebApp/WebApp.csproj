@@ -257,7 +257,6 @@
     <Compile Include="Controllers\KartaController.cs" />
     <Compile Include="Controllers\LinijaController.cs" />
     <Compile Include="Controllers\StanicaController.cs" />
-    <Compile Include="Controllers\StavkaController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,89 +265,13 @@
     <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905281234502_AddedStanice.cs" />
-    <Compile Include="Migrations\201905281234502_AddedStanice.Designer.cs">
-      <DependentUpon>201905281234502_AddedStanice.cs</DependentUpon>
+    <Compile Include="Migrations\201906101902342_AllModels.cs" />
+    <Compile Include="Migrations\201906101902342_AllModels.Designer.cs">
+      <DependentUpon>201906101902342_AllModels.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905281354556_AddedTipPopusta.cs" />
-    <Compile Include="Migrations\201905281354556_AddedTipPopusta.Designer.cs">
-      <DependentUpon>201905281354556_AddedTipPopusta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905281500388_Updated.cs" />
-    <Compile Include="Migrations\201905281500388_Updated.Designer.cs">
-      <DependentUpon>201905281500388_Updated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905301258212_AllTables.cs" />
-    <Compile Include="Migrations\201905301258212_AllTables.Designer.cs">
-      <DependentUpon>201905301258212_AllTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905301341562_AllTables2.cs" />
-    <Compile Include="Migrations\201905301341562_AllTables2.Designer.cs">
-      <DependentUpon>201905301341562_AllTables2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905301350140_AddTablesFinally.cs" />
-    <Compile Include="Migrations\201905301350140_AddTablesFinally.Designer.cs">
-      <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906041750257_TerminChanged.cs" />
-    <Compile Include="Migrations\201906041750257_TerminChanged.Designer.cs">
-      <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.cs" />
-    <Compile Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.Designer.cs">
-      <DependentUpon>201906050758346_StavnkaCenovnikaRepaired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906050836016_CenovnikUpdated.cs" />
-    <Compile Include="Migrations\201906050836016_CenovnikUpdated.Designer.cs">
-      <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061035455_repaired.cs" />
-    <Compile Include="Migrations\201906061035455_repaired.Designer.cs">
-      <DependentUpon>201906061035455_repaired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061046460_repaired1.cs" />
-    <Compile Include="Migrations\201906061046460_repaired1.Designer.cs">
-      <DependentUpon>201906061046460_repaired1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061053053_straniKljuc.cs" />
-    <Compile Include="Migrations\201906061053053_straniKljuc.Designer.cs">
-      <DependentUpon>201906061053053_straniKljuc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061104380_straniKljuc2.cs" />
-    <Compile Include="Migrations\201906061104380_straniKljuc2.Designer.cs">
-      <DependentUpon>201906061104380_straniKljuc2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061117268_repo.cs" />
-    <Compile Include="Migrations\201906061117268_repo.Designer.cs">
-      <DependentUpon>201906061117268_repo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061120165_virtual.cs" />
-    <Compile Include="Migrations\201906061120165_virtual.Designer.cs">
-      <DependentUpon>201906061120165_virtual.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906061128531_virtual1.cs" />
-    <Compile Include="Migrations\201906061128531_virtual1.Designer.cs">
-      <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071800519_user.cs" />
-    <Compile Include="Migrations\201906071800519_user.Designer.cs">
-      <DependentUpon>201906071800519_user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071815137_user2.cs" />
-    <Compile Include="Migrations\201906071815137_user2.Designer.cs">
-      <DependentUpon>201906071815137_user2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071827161_User3.cs" />
-    <Compile Include="Migrations\201906071827161_User3.Designer.cs">
-      <DependentUpon>201906071827161_User3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071830546_User4.cs" />
-    <Compile Include="Migrations\201906071830546_User4.Designer.cs">
-      <DependentUpon>201906071830546_User4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071924329_User5.cs" />
-    <Compile Include="Migrations\201906071924329_User5.Designer.cs">
-      <DependentUpon>201906071924329_User5.cs</DependentUpon>
+    <Compile Include="Migrations\201906101912516_TerminPK.cs" />
+    <Compile Include="Migrations\201906101912516_TerminPK.Designer.cs">
+      <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -360,7 +283,6 @@
     <Compile Include="Models\Enums\VrstaLinije.cs" />
     <Compile Include="Models\Enums\VrstaPopusta.cs" />
     <Compile Include="Models\Karta.cs" />
-    <Compile Include="Models\Koordinata.cs" />
     <Compile Include="Models\Linija.cs" />
     <Compile Include="Models\Stanica.cs" />
     <Compile Include="Models\StavkaCenovnika.cs" />
@@ -371,7 +293,6 @@
     <Compile Include="Persistence\Repository\CenovnikRepository.cs" />
     <Compile Include="Persistence\Repository\ICenovnikRepository.cs" />
     <Compile Include="Persistence\Repository\IKartaRepository.cs" />
-    <Compile Include="Persistence\Repository\IKoordinataRepository.cs" />
     <Compile Include="Persistence\Repository\ILinijaRepository.cs" />
     <Compile Include="Persistence\Repository\IStavkaRepository.cs" />
     <Compile Include="Persistence\Repository\ITerminRepository.cs" />
@@ -380,7 +301,6 @@
     <Compile Include="Persistence\Repository\IRepository.cs" />
     <Compile Include="Persistence\Repository\IStanicaRepository.cs" />
     <Compile Include="Persistence\Repository\ITipPopustaRepository.cs" />
-    <Compile Include="Persistence\Repository\KoordinataRepository.cs" />
     <Compile Include="Persistence\Repository\LinijaRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
     <Compile Include="Persistence\Repository\StanicaRepository.cs" />
@@ -505,68 +425,11 @@
     <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905281234502_AddedStanice.resx">
-      <DependentUpon>201905281234502_AddedStanice.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101902342_AllModels.resx">
+      <DependentUpon>201906101902342_AllModels.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905281354556_AddedTipPopusta.resx">
-      <DependentUpon>201905281354556_AddedTipPopusta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905281500388_Updated.resx">
-      <DependentUpon>201905281500388_Updated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905301258212_AllTables.resx">
-      <DependentUpon>201905301258212_AllTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905301341562_AllTables2.resx">
-      <DependentUpon>201905301341562_AllTables2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905301350140_AddTablesFinally.resx">
-      <DependentUpon>201905301350140_AddTablesFinally.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906041750257_TerminChanged.resx">
-      <DependentUpon>201906041750257_TerminChanged.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906050758346_StavnkaCenovnikaRepaired.resx">
-      <DependentUpon>201906050758346_StavnkaCenovnikaRepaired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906050836016_CenovnikUpdated.resx">
-      <DependentUpon>201906050836016_CenovnikUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061035455_repaired.resx">
-      <DependentUpon>201906061035455_repaired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061046460_repaired1.resx">
-      <DependentUpon>201906061046460_repaired1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061053053_straniKljuc.resx">
-      <DependentUpon>201906061053053_straniKljuc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061104380_straniKljuc2.resx">
-      <DependentUpon>201906061104380_straniKljuc2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061117268_repo.resx">
-      <DependentUpon>201906061117268_repo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061120165_virtual.resx">
-      <DependentUpon>201906061120165_virtual.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906061128531_virtual1.resx">
-      <DependentUpon>201906061128531_virtual1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071800519_user.resx">
-      <DependentUpon>201906071800519_user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071815137_user2.resx">
-      <DependentUpon>201906071815137_user2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071827161_User3.resx">
-      <DependentUpon>201906071827161_User3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071830546_User4.resx">
-      <DependentUpon>201906071830546_User4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071924329_User5.resx">
-      <DependentUpon>201906071924329_User5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906101912516_TerminPK.resx">
+      <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

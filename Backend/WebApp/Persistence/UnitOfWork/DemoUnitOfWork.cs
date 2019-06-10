@@ -23,8 +23,6 @@ namespace WebApp.Persistence.UnitOfWork
         [Dependency]
         public IKartaRepository Karte { get; set; }
         [Dependency]
-        public IKoordinataRepository Koordinate { get; set; }
-        [Dependency]
         public ICenovnikRepository Cenovnici { get; set; }
         [Dependency]
         public IStavkaRepository Stavke { get; set; }

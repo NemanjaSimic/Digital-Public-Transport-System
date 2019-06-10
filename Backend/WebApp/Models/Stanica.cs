@@ -10,11 +10,11 @@ namespace WebApp.Models
     public class Stanica
     {
         [Key]
-        public int ID { get; set; }
         public string Naziv { get; set; }
         public string Adresa { get; set; }
-
-        public virtual Koordinata Koordinata { get; set; }
+		public bool Izbrisano { get; set; }
+		public double X { get; set; }
+		public double Y { get; set; }
 
         public virtual List<Linija> Linije { get; set; }
     }
