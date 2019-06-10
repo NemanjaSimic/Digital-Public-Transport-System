@@ -19,6 +19,22 @@ namespace WebApp.Controllers
 			this.unitOfWork = unitOfWork;
 		}
 
+		[HttpDelete]
+		[AllowAnonymous]
+		[Route("DeleteLinija")]
+		public IHttpActionResult DeleteLinija(string ime)
+		{
+			try
+			{
+				unitOfWork.Linije.IzbrisiLiniju(ime);
+				return Ok();
+			}
+			catch (Exception)
+			{
+				return BadRequest("Linija ne postoji u bazi.");
+			}
+		}
+
 		[HttpGet]
 		[AllowAnonymous]
 		[Route("GetLinija")]
@@ -102,7 +118,7 @@ namespace WebApp.Controllers
 			return retVal.Distinct().ToList();
 		}
 		[HttpPut]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("PutLinija")]
 		public IHttpActionResult PutLinija(NovaLinijaBindingModel novaLinija)
 		{
@@ -151,7 +167,7 @@ namespace WebApp.Controllers
 
 
 		[HttpPost]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("PostLinija")]
 		public IHttpActionResult PostLinija(NovaLinijaBindingModel novaLinija)
 		{

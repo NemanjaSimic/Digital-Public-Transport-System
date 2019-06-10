@@ -13,6 +13,8 @@ import { ChangePassModel } from './models/changePassModel';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
 import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
+import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
+import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,14 @@ const routes: Routes = [
   {
     path: 'admin/editLinija',
     component: EditLinijaComponent
+  },
+  {
+    path: 'admin/napraviStanicu',
+    component: NovaStanicaComponent
+  },
+  {
+    path: 'admin/editStanica',
+    component: EditStanicaComponent
   }
  
 ];

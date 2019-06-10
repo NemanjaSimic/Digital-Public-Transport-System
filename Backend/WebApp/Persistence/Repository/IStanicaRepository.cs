@@ -9,6 +9,6 @@ namespace WebApp.Persistence.Repository
 {
     public interface IStanicaRepository : IRepository<Stanica, int>
     {
-        IEnumerable<Stanica> GettAllStanicaForSinglePage(int pageIndex, int pageSize);
+        List<Stanica> GettAllStanicaForSinglePage();
     }
 }

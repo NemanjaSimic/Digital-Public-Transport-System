@@ -15,6 +15,7 @@ namespace WebApp.Persistence.Repository
 		void DodajLiniju(Linija linija);
 		Linija GetLinijaByName(string name);
 		void IzmeniLiniju(Linija linija);
+		void IzbrisiLiniju(string ime);
 
 	}
 

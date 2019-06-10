@@ -1,0 +1,22 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="napraviStanicu(f.value)">
+    <div class="form-group">
+      <label>Ime stanice:</label>
+      <input type="text" class="form-control" name="Ime" ngModel required>
+    </div>
+
+    <div class="form-group">
+      <label>Adresa stanice:</label>
+      <input type="text" class="form-control" name="Adresa" ngModel required>
+    </div>
+  
+    <div class="form-group">
+      <h3>Izaberite lokaciju stanice klikom na mapu</h3>
+      <agm-map [latitude]="45.242268" [longitude]="19.842954" [zoom]="14" (mapClick)="placeMarker($event)">  
+        <agm-marker *ngIf="geoLocation" [latitude]="geoLocation.latitude" [longitude]="geoLocation.longitude">
+        </agm-marker>    
+      </agm-map>
+    </div>
+    <button type="submit" [disabled]= "!f.valid || !geoLocation" class="btn btn-primary btn-block">Napravi stanicu</button>
+  </form>
+</div>
