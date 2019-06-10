@@ -122,7 +122,7 @@ namespace WebApp.Models
 		public string ImgUrl { get; set; }
 
         [Display(Name = "IsVerified")]
-        public bool IsVerified { get; set; }
+        public string IsVerified { get; set; }
         [Display(Name = "OldUsername")]
         public string OldUsername { get; set; }
 

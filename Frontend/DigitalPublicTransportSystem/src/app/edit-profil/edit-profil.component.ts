@@ -13,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class EditProfilComponent implements OnInit {
 
+  novaSlika: boolean = false;
+  mySrc : string;
+
   editForm = this.fb.group({
     name: [Validators.required],
     surname: [Validators.required],
@@ -28,26 +31,16 @@ export class EditProfilComponent implements OnInit {
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
-
-  public imagePath;
-  imgURL : any;
-  preview(files) {
-    if (files.length === 0)
-      return;
-
-    var reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result;
-    }
+  NovaSlika(event)
+  {
+    this.novaSlika = true;
   }
-
     get f() { return this.editForm.controls; }
 
   user:Korisnik = new Korisnik();
   editedUser: Korisnik
   oldUsername : string;
+  date:string;
 
   constructor(private fb : FormBuilder, private profilService : ProfilService, private authService : AuthService,
     private router: Router) { }
@@ -67,7 +60,15 @@ export class EditProfilComponent implements OnInit {
           imgUrl: this.user.ImgUrl
         });
         this.oldUsername = this.user.Username;
-        this.imgURL = this.user.ImgUrl;
+        this.date = this.user.DateOfBirth.toString().substring(0,10);
+        if(this.user.ImgUrl != null)
+        {
+          this.profilService.downloadImage(this.oldUsername).subscribe(
+            data => {
+              this.mySrc = 'data:image/jpeg;base64,' + data;
+              }
+          );
+        }
       }
     );
 
@@ -85,12 +86,20 @@ export class EditProfilComponent implements OnInit {
       this.editedUser.DateOfBirth = this.editForm.get('dateOfBirth').value;
       this.editedUser.UserType = this.editForm.get('type').value;
       this.editedUser.OldUsername = this.oldUsername;
-      this.editedUser.ImgUrl = this.imgURL;
+      this.editedUser.ImgUrl = this.mySrc;
     
 
     if(this.authService.isLoggedIn()){
       this.profilService.editProfile(this.editedUser).subscribe(
         (response) => {
+          if(this.selectedFile != null && this.novaSlika)
+          {
+            let formData: FormData = new FormData();
+            formData.append('image', this.selectedFile, this.selectedFile.name);
+            this.profilService.uploadImage(formData, this.oldUsername).subscribe(
+              data =>  { }
+            )
+          }
           this.router.navigate(['/']);   
         },
         (error) => {}

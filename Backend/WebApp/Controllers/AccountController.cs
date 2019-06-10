@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -15,6 +17,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
 using WebApp.Models.Enums;
+using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
 
@@ -26,9 +29,15 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        public IUnitOfWork UnitOfWork { get; set; }
 
         public AccountController()
         {
+        }
+
+        public AccountController(IUnitOfWork unitOfWork)
+        {
+            UnitOfWork = unitOfWork;
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -92,7 +101,7 @@ namespace WebApp.Controllers
                     Address = user.Address,
                     DateOfBirth = user.DateOfBirth,
                     UserType = user.UserType.ToString(),
-                    IsVerified = user.IsVerified,
+                    IsVerified = user.IsVerified.ToString(),
                     ImgUrl = user.ImgUrl
                 };
             }
@@ -120,7 +129,7 @@ namespace WebApp.Controllers
                     {
                         if(stariUser.UserType != user.UserType)
                         {
-                            user.IsVerified = false;
+                            user.IsVerified = "ProcesiraSe";
                             user.ImgUrl = "";
                         }
                     }
@@ -134,7 +143,7 @@ namespace WebApp.Controllers
                         Address = user.Address,
                         DateOfBirth = user.DateOfBirth,
                         UserType = user.UserType,
-                        IsVerified = user.IsVerified,
+                        IsVerified = (StatusZahteva)Enum.Parse(typeof(StatusZahteva), user.IsVerified),
                         ImgUrl = user.ImgUrl,
                         PasswordHash = stariUser.PasswordHash
                     };
@@ -143,6 +152,7 @@ namespace WebApp.Controllers
 
                     IdentityResult result2 = await UserManager.CreateAsync(temp);
 
+                    UnitOfWork.Complete();
                     if (!result.Succeeded || !result2.Succeeded)
                     {
                         return GetErrorResult(result);
@@ -159,7 +169,7 @@ namespace WebApp.Controllers
 
                     if (temp.UserType != user.UserType)
                     {
-                        user.IsVerified = false;
+                        user.IsVerified = "ProcesiraSe";
                         user.ImgUrl = "";
                     }
 
@@ -173,7 +183,7 @@ namespace WebApp.Controllers
                         Address = user.Address,
                         DateOfBirth = user.DateOfBirth,
                         UserType = user.UserType,
-                        IsVerified = user.IsVerified,
+                        IsVerified = (StatusZahteva)Enum.Parse(typeof(StatusZahteva),user.IsVerified),
                         ImgUrl = user.ImgUrl,
                         PasswordHash = temp.PasswordHash
                     };
@@ -260,6 +270,107 @@ namespace WebApp.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("UploadImage/{username}")]
+        [AllowAnonymous]
+        public IHttpActionResult UploadImage(string username)
+        {
+            var httpRequest = HttpContext.Current.Request;
+
+            try
+            {
+                if (httpRequest.Files.Count > 0)
+                {
+                    foreach (string file in httpRequest.Files)
+                    {
+
+                        ApplicationUser user = UserManager.FindByName(username);
+
+                        if(user == null)
+                        {
+                            return BadRequest("Greska prilikom uploada slike");
+                        }
+
+                            IdentityResult result = UserManager.Delete(user);
+
+                            if (!result.Succeeded)
+                            {
+                                return BadRequest("Greska prilikom uploada slike");
+                            }
+
+                            var postedFile = httpRequest.Files[file];
+                            string fileName = username + "_" + postedFile.FileName;
+                            var filePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + fileName);
+
+
+                            user.ImgUrl = fileName;
+                            user.IsVerified = StatusZahteva.ProcesiraSe;
+
+                            postedFile.SaveAs(filePath);
+                            IdentityResult result2 = UserManager.Create(user);
+                            UnitOfWork.Complete();
+                            if (!result2.Succeeded)
+                            {
+                                return BadRequest("Greska prilikom uploada slike");
+                            }
+                        }
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("DownloadImage/{username}")]
+        public IHttpActionResult DownloadPicture(string username)
+        {
+
+            ApplicationUser user = UserManager.FindByName(username);
+
+            if (user == null)
+            {
+                return BadRequest("User doesn't exists.");
+            }
+
+            if (user.ImgUrl == null)
+            {
+                return BadRequest("Image doesn't exists.");
+            }
+
+
+            var filePath = HttpContext.Current.Server.MapPath("~/UploadFile/" + user.ImgUrl);
+
+            FileInfo fileInfo = new FileInfo(filePath);
+            string type = fileInfo.Extension.Split('.')[1];
+            byte[] data = new byte[fileInfo.Length];
+
+            HttpResponseMessage response = new HttpResponseMessage();
+            using (FileStream fs = fileInfo.OpenRead())
+            {
+                fs.Read(data, 0, data.Length);
+                response.StatusCode = HttpStatusCode.OK;
+                response.Content = new ByteArrayContent(data);
+                response.Content.Headers.ContentLength = data.Length;
+
+            }
+
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/png");
+
+            return Ok(data);
+
+
         }
 
         // POST api/Account/SetPassword
@@ -464,10 +575,10 @@ namespace WebApp.Controllers
 				Email = model.Email,
 				PasswordHash = ApplicationUser.HashPassword(model.Password),
 				Address = model.Address,
-				DateOfBirth = model.DateOfBirth,
+				DateOfBirth = model.DateOfBirth ,
 				UserType = model.UserType,
 				ImgUrl = model.ImgUrl,
-				IsVerified = false,
+				IsVerified = StatusZahteva.ProcesiraSe,
 				Id = model.Username,
 				EmailConfirmed = false
 			};
@@ -483,7 +594,7 @@ namespace WebApp.Controllers
 				ApplicationUser currentUser = UserManager.FindByName(user.UserName);
 
 				IdentityResult roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "AppUser");
-
+                UnitOfWork.Complete();
 				if (!roleResult.Succeeded)
 				{
 					return GetErrorResult(roleResult);

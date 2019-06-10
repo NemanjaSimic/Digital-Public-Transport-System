@@ -6,6 +6,7 @@ import { Korisnik } from '../models/korisnik';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
+import { ProfilService } from '../services/profil.service';
 
 @Component({
   selector: 'app-registracija',
@@ -38,12 +39,14 @@ export class RegistracijaComponent implements OnInit {
   }, { validators: ConfirmPasswordValidator });
   selectedFile: File = null;
 
+  // mySrc: SafeUrl;
+  mySrc: String;
   
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
 
-  public imagePath;
+  /* public imagePath;
   imgURL : any;
   preview(files) {
     if (files.length === 0)
@@ -55,14 +58,15 @@ export class RegistracijaComponent implements OnInit {
     reader.onload = (_event) => { 
       this.imgURL = reader.result;
     }
-  }
+  } */
   
   get f() { return this.registerForm.controls; }
 
   user:Korisnik;
 
   constructor(private fb : FormBuilder, private registerService : RegisterService, private authService:AuthService,
-    private router: Router, private notificationService : NotificationService) { }
+    private router: Router, private notificationService : NotificationService,
+    private profilService : ProfilService) { }
 
   ngOnInit() {
   }
@@ -78,13 +82,25 @@ export class RegistracijaComponent implements OnInit {
       this.registerForm.get('address').value,
       this.registerForm.get('dateOfBirth').value,
       this.registerForm.get('type').value,
-      this.registerForm.get('imgUrl').value
       
     );
 
     if(!this.authService.isLoggedIn()){
       this.registerService.register(this.user).subscribe(
         (response) => {
+          if(this.selectedFile != null)
+          {
+            let formData: FormData = new FormData();
+            formData.append('image', this.selectedFile, this.selectedFile.name);
+            this.profilService.uploadImage(formData, this.registerForm.get('username').value).subscribe(
+              data => {
+                this.profilService.downloadImage(this.registerForm.get('username').value).subscribe(
+                  data => {
+                    this.mySrc = 'data:image/jpeg;base64,' + data;
+                    });
+              }
+            )
+          }
           this.router.navigate(['/login']);   
         },
         (error) => {}

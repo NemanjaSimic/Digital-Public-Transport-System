@@ -59,7 +59,7 @@
       </div>
       <div class="form-group">
           <label>Datum rodjenja:</label>
-            <input type="date" min="1900-01-01" max="2019-01-01" value="{{user.DateOfBirth.toString().substring(0,10)}}" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
+            <input type="date" min="1900-01-01" max="2019-01-01" value="{{date}}" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
       </div>
               
           <div class="form-group">
@@ -80,8 +80,10 @@
           <div class="form-group">
               <div class=row>
                   <div *ngIf="editForm.get('type').value != 'Regular'" class="form-group row">
-                      <input  #file type="file" accept="image/*" formControlName="imgUrl" onchange="loadFile(event)" (change)="preview(file.files)" />
-                      <img [src]="imgURL" height="200" *ngIf="imgURL"/>
+                    <img *ngIf="mySrc!=undefined && mySrc!=null" [src]="mySrc"
+                    style="max-width: 200px; max-height: 200px;" class="btn-md img-fluid img-thumbnail">
+                    <button (click)="NovaSlika($event)" [disabled]="novaSlika">Ucitaj novu sliku</button>
+                    <input *ngIf="novaSlika" type="file" value="" (change)="onFileSelected($event)" />
                     </div>
               </div>
             </div>

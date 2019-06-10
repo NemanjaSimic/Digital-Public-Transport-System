@@ -42,7 +42,7 @@ namespace WebApp.Models
 
 
 		[Display(Name= "IsVerified")]
-		public bool IsVerified { get; set; }
+		public StatusZahteva IsVerified { get; set; }
 
 		public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {

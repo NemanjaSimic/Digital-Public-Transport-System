@@ -93,3 +93,10 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+.img-fluid {
+    margin-top: 50px !important;
+    margin-left: -200px !important;
+    max-width: 300px !important;
+    max-height: 400px !important;
+    height: auto;
+  }
