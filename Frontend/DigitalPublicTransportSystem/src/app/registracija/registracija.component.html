@@ -91,10 +91,12 @@
         </div>
 
         <div class="form-group">
-          <div class=row>
+          <div class=row>      
               <div *ngIf="registerForm.get('type').value != 'Regular'" class="form-group row">
-                  <input  #file type="file" accept="image/*" formControlName="imgUrl" onchange="loadFile(event)" (change)="preview(file.files)" />
-                  <img [src]="imgURL" height="200" *ngIf="imgURL"/>
+                  <input type="file" (change)="onFileSelected($event)" />
+                  <img *ngIf="mySrc!=undefined && mySrc!=null" [src]="mySrc"
+                  style="max-width: 200px; max-height: 200px;" class="btn-md img-fluid img-thumbnail">
+                  
                 </div>
           </div>
         </div>

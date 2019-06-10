@@ -48,7 +48,7 @@
                                       <label>Datum rodjenja:</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>{{user.DateOfBirth.toString().substring(0,10)}}</p>
+                                      <p>{{user.DateOfBirth}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -61,11 +61,10 @@
                               </div>
                               <div class="row" *ngIf="user.UserType !== 'Regular'">
                                   <div class="col-md-6">
-                                      <label>Potvrdjen dokument:</label>
+                                      <label>Status dokumenta:</label>
                                   </div>
                                   <div class="col-md-4">
-                                      <p *ngIf="user.IsVerified">Da</p>
-                                      <p *ngIf="!user.isVerified">Ne</p>
+                                      <p>{{user.IsVerified}}</p>
                                   </div>
                               </div>
                               <div class="row" *ngIf="user.UserType !== 'Regular'">
@@ -74,7 +73,11 @@
                                   </div>
                                   <div class="col-md-4">
                                       <div class="profile-img">
-                                          <img src="{{user.ImgUrl}}" alt = "NoImageFound"/>                                       
+                                            <img *ngIf="mySrc!=undefined && mySrc!=null; else noImg" [src]="mySrc"
+                                            style="max-width: 200px; max-height: 200px;" class="btn-md img-fluid img-thumbnail">
+                                            <ng-template #noImg >
+                                            <img src="" alt="Slika ne postoji"> 
+                                            </ng-template>                                     
                                       </div>
                                   </div>
                               </div>

@@ -11,13 +11,20 @@ import { ProfilService } from '../services/profil.service';
 export class ProfilComponent implements OnInit {
 
   user: Korisnik = new Korisnik();
-
+  mySrc : string;
   constructor(private http: HttpClient, private profilService : ProfilService) { }
 
   ngOnInit() {
     this.profilService.getUser(localStorage.getItem('userId')).subscribe(
       user => {
-        this.user = user
+        this.user = user;
+        if(this.user.ImgUrl != null)
+        {
+        this.profilService.downloadImage(localStorage.getItem('userId')).subscribe(
+          data => {
+              this.mySrc = 'data:image/jpeg;base64,' + data;
+            });
+        }
       }
     );
   }

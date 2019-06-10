@@ -16,7 +16,6 @@ export class LoginService
 {
     log:LOG = new LOG;
     private apiAddress: string = `http://localhost:52295/oauth/token`;
-    private logOutAddress: string = `http://localhost:52295/api/Account/Logout`;
 
     constructor(private httpClient : HttpClient,private notificationService: NotificationService,
                 private authService: AuthService,private router: Router) { }
@@ -65,7 +64,7 @@ export class LoginService
         );
     }
 
-    logOut(): Observable<any>{
+    logOut() : void{
 
         if(this.isLoggedIn() === true) {
             let token = localStorage.getItem("jwt");
@@ -74,10 +73,8 @@ export class LoginService
                 headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
               };
             localStorage.clear();
-
+            this.router.navigate(['/']);
             this.notificationService.sessionEvent.emit(false);
-
-            return this.httpClient.post<any>(this.logOutAddress, token, httpOptions );
         }
      
         

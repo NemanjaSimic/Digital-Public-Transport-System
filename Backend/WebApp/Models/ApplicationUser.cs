@@ -42,7 +42,7 @@ namespace WebApp.Models
 
 
 		[Display(Name= "IsVerified")]
-		public bool IsVerified { get; set; }
+		public StatusZahteva IsVerified { get; set; }
 
 		[Display(Name= "Izbrisano")]
 		public bool Izbrisano { get; set; }

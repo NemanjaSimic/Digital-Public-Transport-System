@@ -10,7 +10,7 @@ export class Korisnik {
     DateOfBirth: Date;
     UserType: string;
     ImgUrl: string;
-    IsVerified: boolean;
+    IsVerified: string;
     OldUsername: string;
 
     constructor(username?: string, firstName?: string, lastName?: string, email?: string, 
@@ -26,7 +26,7 @@ export class Korisnik {
         this.DateOfBirth = dob;
         this.UserType = userType;
         this.ImgUrl = imgUrl;
-        this.IsVerified = false;
+        this.IsVerified = "ProcesiraSe";
         this.OldUsername = username;
     }
 }

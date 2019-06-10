@@ -273,12 +273,17 @@
     <Compile Include="Migrations\201906101912516_TerminPK.Designer.cs">
       <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906101141060_user-StatusZahteva.cs" />
+    <Compile Include="Migrations\201906101141060_user-StatusZahteva.Designer.cs">
+      <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Cenovnik.cs" />
     <Compile Include="Models\Enums\Dan.cs" />
+    <Compile Include="Models\Enums\StatusZahteva.cs" />
     <Compile Include="Models\Enums\VrstaKarte.cs" />
     <Compile Include="Models\Enums\VrstaLinije.cs" />
     <Compile Include="Models\Enums\VrstaPopusta.cs" />
@@ -415,6 +420,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -430,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101912516_TerminPK.resx">
       <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906101141060_user-StatusZahteva.resx">
+      <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
