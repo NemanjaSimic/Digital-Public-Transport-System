@@ -56,6 +56,18 @@ export class NapraviLinijuComponent implements OnInit {
     this.NedeljaTermini.push(this.fb.control(''));
   }
 
+  IzbrisiTerminRadniDan(index:number){
+    this.RadniDanTermini.removeAt(index);
+  }
+
+  IzbrisiTerminSubota(index:number){
+    this.SubotaTermini.removeAt(index);
+  }
+
+  IzbrisiTerminNedelja(index:number){
+    this.NedeljaTermini.removeAt(index);
+  }
+
   napraviLiniju(){ 
 
     let novaLinija = new NovaLinija();

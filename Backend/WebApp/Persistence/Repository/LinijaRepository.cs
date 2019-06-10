@@ -28,6 +28,13 @@ namespace WebApp.Persistence.Repository
 			return names;
 		}
 
+		public void IzbrisiLiniju(string ime)
+		{
+			var linija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(ime));
+			AppDbContext.Linije.Remove(linija);
+			AppDbContext.SaveChanges();
+		}
+
 		public List<Termin> GetAllTerminiOfLinija(string Ime)
 		{
 			return AppDbContext.Linije.ToList().Find(l => l.Ime.Equals(Ime)).Termini;
@@ -35,6 +42,16 @@ namespace WebApp.Persistence.Repository
 
 		public void DodajLiniju(Linija linija)
 		{
+			var termini = new List<Termin>();
+			foreach (var item in linija.Termini)
+			{
+				var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Dan == item.Dan && t.Polazak == item.Polazak);
+				if (termin != null)
+				{
+					termini.Add(termin);
+				}
+			}
+			linija.Termini = termini;
 			AppDbContext.Linije.Add(linija);
 			AppDbContext.SaveChanges();
 		}
@@ -53,6 +70,7 @@ namespace WebApp.Persistence.Repository
 		{
 			var tempLinija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(linija.Ime));
 			var termini = new List<Termin>();
+
 			foreach (var item in tempLinija.Termini)
 			{
 				var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Linije.Contains(tempLinija));

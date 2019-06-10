@@ -19,6 +19,22 @@ namespace WebApp.Controllers
 			this.unitOfWork = unitOfWork;
 		}
 
+		[HttpDelete]
+		[AllowAnonymous]
+		[Route("DeleteLinija")]
+		public IHttpActionResult DeleteLinija(string ime)
+		{
+			try
+			{
+				unitOfWork.Linije.IzbrisiLiniju(ime);
+				return Ok();
+			}
+			catch (Exception)
+			{
+				return BadRequest("Linija ne postoji u bazi.");
+			}
+		}
+
 		[HttpGet]
 		[AllowAnonymous]
 		[Route("GetLinija")]

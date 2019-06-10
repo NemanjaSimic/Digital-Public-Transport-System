@@ -12,12 +12,13 @@
 
           <div class="form-group">  
             <label class="mr-sm-2">Ime linije:</label>
-            <select class="form-control mr-sm-5" id="ime" size="7" formControlName="Ime">
+            <select class="form-control mr-sm-5" id="ime" size="7" formControlName="Ime" (change)="selectedLine($event.target.value)">
               <option *ngFor="let linija of linije">{{linija}}</option>
             </select>
           </div>
 
           <button class="btn btn-primary" type="submit">Izmeni</button>
+          <button class="btn btn-primary ml-4" type="button" [disabled]="this.selectLine ==''" (click)="IzbrisiLiniju()">Izbrisi</button>
       </form>
 
       <hr>

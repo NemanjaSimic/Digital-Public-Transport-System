@@ -3,6 +3,7 @@ import { FormBuilder, FormArray } from '@angular/forms';
 import { LinijaService } from 'src/app/services/linija.service';
 import { Router } from '@angular/router';
 import { NovaLinija } from 'src/app/models/nova-linija';
+import { Linija } from 'src/app/models/linija';
 
 @Component({
   selector: 'app-edit-linija',
@@ -32,6 +33,8 @@ export class EditLinijaComponent implements OnInit {
 
   linije: Array<string> = [];
   izmeni: boolean = false;
+  selectLine: string = '';
+
 
   get RadniDanTermini(){
     return this.izmenaForm.get('RadniDanTermini') as FormArray;
@@ -151,6 +154,20 @@ export class EditLinijaComponent implements OnInit {
       },
       (error) => {console.log(error);}
       );
+  }
 
+  IzbrisiLiniju(){
+      console.log(this.selectLine);
+      this.linijaService.izbrisiLiniju(this.selectLine).subscribe(
+        (response) => {
+          this.criteriaChanged();
+        },
+        (error) => {console.log(error);}
+        );
+  }
+
+  selectedLine(linija: any)
+  {
+    this.selectLine = linija
   }
 }

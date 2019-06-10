@@ -11,6 +11,7 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class LinijaService{
+  private DeleteLinijaUrl = 'http://localhost:52295/api/Linija/DeleteLinija';
   private PutLinijaUrl = 'http://localhost:52295/api/Linija/PutLinija';
   private GetLinijaUrl = 'http://localhost:52295/api/Linija/GetLinija';
   private GetLinijeByTipUrl = 'http://localhost:52295/api/Linija/GetLinijeByTip';
@@ -41,6 +42,10 @@ export class LinijaService{
 
   izmeniLiniju(linija:any):Observable<any>{
     return this.http.put<any>(this.PutLinijaUrl, linija);
+  }
+
+  izbrisiLiniju(ime: string): Observable<any>{
+    return this.http.delete<any>(`${this.DeleteLinijaUrl}?ime=${ime}`);
   }
 
      /**

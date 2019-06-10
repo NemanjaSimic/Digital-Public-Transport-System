@@ -26,6 +26,7 @@
       <label>
         Termin:
         <input type="time" [formControlName] ="i">
+        <button type="button" (click)="IzbrisiTerminRadniDan(i)">Izbrisi termin</button>
       </label>
     </div>
     <button type="button" (click)="DodajRadniDanTermin()">Dodaj termin</button>
@@ -38,6 +39,7 @@
       <label>
         Termin:
         <input type="time" [formControlName] ="i">
+        <button type="button" (click)="IzbrisiTerminSubota(i)">Izbrisi termin</button>
       </label>
     </div>
     <button type="button" (click)="DodajSubotaTermin()">Dodaj termin</button>
@@ -50,6 +52,7 @@
       <label>
         Termin:
         <input type="time" [formControlName] ="i">
+        <button type="button" (click)="IzbrisiTerminNedelja(i)">Izbrisi termin</button>
       </label>
     </div>
     <button type="button" (click)="DodajNedeljaTermin()">Dodaj termin</button>
