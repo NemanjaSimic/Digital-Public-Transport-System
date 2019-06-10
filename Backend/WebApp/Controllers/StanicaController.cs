@@ -19,15 +19,81 @@ namespace WebApp.Controllers
             this.unitOfWork = unitOfWork;
         }
 
+		[HttpPut]
+		[AllowAnonymous]
+		[Route("PutStanica")]
+		public IHttpActionResult PutStanica(StanicaBindingModel stanica)
+		{
+			var tempStanica = new Stanica()
+			{
+				ID = stanica.ID,
+				Naziv = stanica.Naziv,
+				Adresa = stanica.Adresa,
+				Koordinata = new Koordinata() { X = stanica.X, Y = stanica.Y }
+			};
+
+			try
+			{
+				unitOfWork.Stanice.Update(tempStanica);
+				unitOfWork.Complete();
+
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+			}
+			
+			return Ok();
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		[Route("GetStanica")]
+		public List<StanicaBindingModel> GetStanica()
+		{
+			var result = new List<StanicaBindingModel>();
+			var lista = unitOfWork.Stanice.GettAllStanicaForSinglePage();
+			foreach (var item in lista)
+			{
+				result.Add(new StanicaBindingModel()
+				{
+					Naziv = item.Naziv,
+					Adresa = item.Adresa,
+					X = item.Koordinata.X,
+					Y = item.Koordinata.Y,
+					ID = item.ID
+				});
+			}
+
+			return result;
+		}
+
+		[HttpPost]
+		[AllowAnonymous]
         [Route("PostStanica")]
-        [Authorize(Roles ="Admin")]
-        public IHttpActionResult PostStanica(StanicaBindingModel newStanica)
+        public IHttpActionResult PostStanica(StanicaBindingModel novaStanica)
         {
-            var stanica = new Stanica() { Naziv = newStanica.Naziv, Adresa = "Micurinova", Koordinata = new Koordinata() };
+            var stanica = new Stanica()
+			{
+				Naziv = novaStanica.Naziv,
+				Adresa = novaStanica.Adresa,
+				Koordinata = new Koordinata()
+				{
+					X = novaStanica.X,
+					Y = novaStanica.Y
+				}
+			};
 
-
-            unitOfWork.Stanice.Add(stanica);
-            unitOfWork.Complete();
+			try
+			{
+				unitOfWork.Stanice.Add(stanica);
+				unitOfWork.Complete();
+			}
+			catch (Exception)
+			{
+				return BadRequest();
+			}
+          
 
             return Ok();
         }

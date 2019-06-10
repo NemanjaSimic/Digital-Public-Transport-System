@@ -7,6 +7,21 @@ using WebApp.Models.Enums;
 namespace WebApp.Models
 {
 	// Models used as parameters to AccountController actions.
+	public class StanicaBindingModel
+	{
+		[Required]
+		public string Naziv { get; set; }
+		[Required]
+		public string Adresa { get; set; }
+		[Required]
+		public double X { get; set; }
+		[Required]
+		public double Y { get; set; }
+		public int ID { get; set; }
+
+	}
+
+
 	public class NovaLinijaBindingModel
 	{
 		[Required]
@@ -51,12 +66,6 @@ namespace WebApp.Models
 		public float Cena { get; set; }
 	}
 	
-    public class StanicaBindingModel
-    {
-        [Required]
-        [Display(Name = "Naziv")]
-        public string Naziv { get; set; }
-    }
 
     public class ChangePasswordBindingModel
     {

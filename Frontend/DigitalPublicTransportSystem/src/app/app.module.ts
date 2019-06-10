@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,9 @@ import { EditProfilComponent } from './edit-profil/edit-profil.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-liniju.component';
 import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
+import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
+import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
+import { TokenInterceptor } from './interceptor/token.interceptor';
 
 
 @NgModule({
@@ -37,7 +41,9 @@ import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.comp
     EditLinijaComponent,
     EditProfilComponent,
     ChangePasswordComponent,
-    NapraviLinijuComponent
+    NapraviLinijuComponent,
+    NovaStanicaComponent,
+    EditStanicaComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +51,10 @@ import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.comp
     HttpClientModule,
     ReactiveFormsModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

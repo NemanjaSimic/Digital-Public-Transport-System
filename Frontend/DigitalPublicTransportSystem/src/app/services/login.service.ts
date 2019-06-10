@@ -23,15 +23,13 @@ export class LoginService
 
     logIn(email: string, password: string)
     {    
-        const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'});
         const query = `username=${email}&password=${password}&grant_type=password`;
         const httpOptions = {
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
           };
-          this.log.password = password;
-          this.log.username = email;
-        // return this.http.post(this.apiAddress, query, { headers: headers });
-            this.httpClient.post<any>(this.apiAddress, query, httpOptions).subscribe(
+        this.log.password = password;
+        this.log.username = email;
+        this.httpClient.post<any>(this.apiAddress, query, httpOptions).subscribe(
            (data) =>{
                     
             let jwt = data.access_token;
@@ -70,7 +68,7 @@ export class LoginService
     logOut(): Observable<any>{
 
         if(this.isLoggedIn() === true) {
-            let token = localStorage.getItem("token");
+            let token = localStorage.getItem("jwt");
 
             const httpOptions = {
                 headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -79,7 +77,7 @@ export class LoginService
 
             this.notificationService.sessionEvent.emit(false);
 
-            return this.httpClient.post<any>(this.logOutAddress, "", httpOptions );
+            return this.httpClient.post<any>(this.logOutAddress, token, httpOptions );
         }
      
         

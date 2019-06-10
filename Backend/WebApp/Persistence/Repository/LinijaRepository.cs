@@ -69,36 +69,36 @@ namespace WebApp.Persistence.Repository
 		public void IzmeniLiniju(Linija linija)
 		{
 			var tempLinija = AppDbContext.Linije.ToList().FirstOrDefault(l => l.Ime.Equals(linija.Ime));
-			var termini = new List<Termin>();
+			tempLinija.Termini.Clear();
 
-			foreach (var item in tempLinija.Termini)
-			{
-				var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Linije.Contains(tempLinija));
-				if (termin != null)
-				{
-					termini.Add(item);
-				}
-			}
+			//foreach (var item in tempLinija.Termini)
+			//{
+			//	var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Linije.Contains(tempLinija));
+			//	if (termin != null)
+			//	{
+			//		termini.Add(item);
+			//	}
+			//}
 
-			foreach (var item in termini)
-			{
-				item.Linije.Remove(tempLinija);
-				AppDbContext.SaveChanges();
-			}
+			//foreach (var item in termini)
+			//{
+			//	item.Linije.Remove(tempLinija);
+			//	AppDbContext.SaveChanges();
+			//}
 
-			termini = new List<Termin>();
-			foreach (var item in linija.Termini)
-			{
-				var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Dan == item.Dan && t.Polazak == item.Polazak );
-				if (termin != null)
-				{
-					termini.Add(termin);
-				}
-			}
+			//termini = new List<Termin>();
+			//foreach (var item in linija.Termini)
+			//{
+			//	var termin = AppDbContext.Termini.ToList().FirstOrDefault(t => t.Dan == item.Dan && t.Polazak == item.Polazak );
+			//	if (termin != null)
+			//	{
+			//		termini.Add(termin);
+			//	}
+			//}
 
 			tempLinija.RedniBroj = linija.RedniBroj;
-			tempLinija.Termini = termini;
 			tempLinija.TipLinije = linija.TipLinije;
+			tempLinija.Termini.AddRange(linija.Termini);
 			AppDbContext.SaveChanges();
 		}
 	}

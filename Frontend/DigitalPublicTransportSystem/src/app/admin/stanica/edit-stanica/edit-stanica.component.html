@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="form-group">
+    <select size="7" (change)="OnSelectStanica($event.target.value)">
+      <option *ngFor="let stanica of stanice">
+        {{stanica.Naziv}}
+      </option>
+    </select>
+  </div>
+
+    <form *ngIf="selectedStanica" [formGroup]="stanicaForm" autocomplete="off" (ngSubmit)="izmeniStanicu()">
+      <div class="form-group">
+        <label>Ime stanice:</label>
+        <input type="text" class="form-control" formControlName="Naziv" required>
+      </div>
+  
+      <div class="form-group">
+        <label>Adresa stanice:</label>
+        <input autocomplete="off" type="text" class="form-control" formControlName="Adresa" required>
+      </div>
+    
+      <div class="form-group">
+        <h3>Izaberite lokaciju stanice klikom na mapu</h3>
+        <agm-map [latitude]="45.242268" [longitude]="19.842954" [zoom]="14" (mapClick)="placeMarker($event)">  
+          <agm-marker *ngIf="geoLocation" [latitude]="geoLocation.latitude" [longitude]="geoLocation.longitude">
+          </agm-marker>    
+        </agm-map>
+      </div>
+      <button type="submit" [disabled]= "!stanicaForm.valid || !geoLocation" class="btn btn-primary btn-block">Izmeni stanicu</button>
+    </form>
+  </div>

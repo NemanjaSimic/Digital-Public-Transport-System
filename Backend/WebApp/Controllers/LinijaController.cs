@@ -118,7 +118,7 @@ namespace WebApp.Controllers
 			return retVal.Distinct().ToList();
 		}
 		[HttpPut]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("PutLinija")]
 		public IHttpActionResult PutLinija(NovaLinijaBindingModel novaLinija)
 		{
@@ -167,7 +167,7 @@ namespace WebApp.Controllers
 
 
 		[HttpPost]
-		[AllowAnonymous]
+		[Authorize(Roles = "Admin")]
 		[Route("PostLinija")]
 		public IHttpActionResult PostLinija(NovaLinijaBindingModel novaLinija)
 		{

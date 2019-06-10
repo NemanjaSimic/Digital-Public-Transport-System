@@ -15,9 +15,9 @@ namespace WebApp.Persistence.Repository
 
         }
 
-        public IEnumerable<Stanica> GettAllStanicaForSinglePage(int pageIndex, int pageSize)
+        public List<Stanica> GettAllStanicaForSinglePage()
         {
-            return AppDbContext.Stanice.Skip((pageIndex-1)*pageSize).Take(pageSize);
+            return AppDbContext.Stanice.ToList();
         }
     }
 }
