@@ -3,6 +3,8 @@ import { FormBuilder, FormArray } from '@angular/forms';
 import { LinijaService } from 'src/app/services/linija.service';
 import { Router } from '@angular/router';
 import { NovaLinija } from 'src/app/models/nova-linija';
+import { StanicaService } from 'src/app/services/stanica.service';
+import { Stanica } from 'src/app/models/stanica';
 
 @Component({
   selector: 'app-napravi-liniju',
@@ -23,11 +25,15 @@ export class NapraviLinijuComponent implements OnInit {
     ]),
     NedeljaTermini: this.fb.array([
       this.fb.control('')
-    ])
+    ]),
+    Stanice: [],
+    IzabraneStanice: []
   });
-  constructor(private fb: FormBuilder, private linijaService: LinijaService, private router: Router) { }
-
-  radniDanBrojac = 0;
+  constructor(private fb: FormBuilder, private linijaService: LinijaService, private router: Router, private stanicaService: StanicaService) { }
+  
+  stanice = [];
+  izabraneStanice = [];
+ 
 
   get RadniDanTermini(){
     return this.linijaForm.get('RadniDanTermini') as FormArray;
@@ -42,7 +48,35 @@ export class NapraviLinijuComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.stanicaService.getStanica().subscribe(
+      (data) =>{
+        data.forEach(element => {
+          this.stanice.push(element)
+        })
+        },
+        (error) =>{
+          console.log(error);
+        }
+        );
+    }
+
+    dodajStanicu(stanica: any){
+      this.stanice = this.stanice.filter(s=> s.Naziv != stanica.Naziv)
+      this.izabraneStanice.push(stanica);
+      this.updateStaniceInForm();
+      
+    }
+
+    izbrisiStanicu(stanica: any){
+      this.izabraneStanice = this.izabraneStanice.filter(s=> s.Naziv != stanica.Naziv)
+      this.stanice.push(stanica)
+      this.updateStaniceInForm();
+    }
+
+    updateStaniceInForm(){
+      this.linijaForm.controls['IzabraneStanice'].setValue(this.izabraneStanice);
+      this.linijaForm.controls['Stanice'].setValue(this.stanice);
+    }
 
   DodajRadniDanTermin(){
     this.RadniDanTermini.push(this.fb.control(''));
@@ -86,6 +120,9 @@ export class NapraviLinijuComponent implements OnInit {
       novaLinija.NedeljaTermini = novaLinija.NedeljaTermini.filter(l => l != "") as [];
     else
     novaLinija.NedeljaTermini = [];
+    this.izabraneStanice.forEach(element=>{
+      novaLinija.Stanice.push(element.Naziv as never);
+    })
 
     this.linijaService.napraviLiniju(novaLinija).subscribe(
       (response) => {

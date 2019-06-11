@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.comp
 import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
 import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
+
 
 
 @NgModule({
@@ -43,7 +46,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     ChangePasswordComponent,
     NapraviLinijuComponent,
     NovaStanicaComponent,
-    EditStanicaComponent
+    EditStanicaComponent,
+    MrezaLinijaComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     ReactiveFormsModule,
     HttpModule,
     FormsModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi:true}],
   bootstrap: [AppComponent]

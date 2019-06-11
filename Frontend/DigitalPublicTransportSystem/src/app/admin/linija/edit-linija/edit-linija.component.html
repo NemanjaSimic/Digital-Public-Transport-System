@@ -21,10 +21,26 @@
           <button class="btn btn-primary ml-4" type="button" [disabled]="this.selectLine ==''" (click)="IzbrisiLiniju()">Izbrisi</button>
       </form>
 
-      <hr>
-
       <form [formGroup]="izmenaForm" *ngIf="izmeni" (ngSubmit)="IzmeniLiniju()">
-          <div  class="form-group">
+          <hr>
+
+          <div class="form-group">
+              <h2>Dodajte stanice koje se nalaze na ovoj linije:</h2>
+              <select size=5 formControlName="Stanice">
+                <option (click)="dodajStanicu(stanica)" *ngFor="let stanica of stanice">{{stanica}}</option>
+              </select>
+          </div>
+      
+          <div class="form-group">
+              <h3>Dodate stanice:</h3>
+              <select size=5 formControlName="IzabraneStanice">
+                <option (click)="izbrisiStanicu(stanica)" *ngFor="let stanica of izabraneStanice">{{stanica}}</option>
+              </select>
+          </div>
+
+      <hr>  
+        
+        <div  class="form-group">
             <label>Ime linije:</label>
             <input type="text" readonly="true" class="form-control" formControlName="Ime"  required/>
           </div>

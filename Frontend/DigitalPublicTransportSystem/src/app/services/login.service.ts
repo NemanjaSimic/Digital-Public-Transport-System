@@ -67,11 +67,6 @@ export class LoginService
     logOut() : void{
 
         if(this.isLoggedIn() === true) {
-            let token = localStorage.getItem("jwt");
-
-            const httpOptions = {
-                headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-              };
             localStorage.clear();
             this.router.navigate(['/']);
             this.notificationService.sessionEvent.emit(false);

@@ -10,7 +10,7 @@
   <div class="group-control">
   <button class="btn btn-primary mt-5 ml-3" type="button" [disabled]="selectedStanica == undefined" (click)="izbrisiStanicu()">Izbtisi stanicu</button>
   </div>
-  <hr>
+  <hr>+
     <form *ngIf="selectedStanica" [formGroup]="stanicaForm" autocomplete="off" (ngSubmit)="izmeniStanicu()">
       <div class="form-group">
         <label>Ime stanice:</label>

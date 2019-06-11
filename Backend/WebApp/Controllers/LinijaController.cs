@@ -59,7 +59,8 @@ namespace WebApp.Controllers
 				VrstaLinije = linija.TipLinije.ToString(),
 				RadniDanTermini = new List<string>(),
 				SubotaTermini = new List<string>(),
-				NedeljaTermini = new List<string>()
+				NedeljaTermini = new List<string>(),
+				Stanice = new List<string>()
 			};
 
 			foreach (var item in linija.Termini)
@@ -78,6 +79,11 @@ namespace WebApp.Controllers
 					default:
 						break;
 				}
+			}
+
+			foreach (var item in linija.Stanice)
+			{
+				novaLinija.Stanice.Add(item.Naziv);
 			}
 
 			return Ok(novaLinija);
@@ -146,6 +152,15 @@ namespace WebApp.Controllers
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.RadniDanTermini, Dan.RadniDan));
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.SubotaTermini, Dan.Subota));
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.NedeljaTermini, Dan.Nedelja));
+
+				foreach (var item in novaLinija.Stanice)
+				{
+					var stanica = unitOfWork.Stanice.GetStanicaByNaziv(item);
+					if (stanica != null)
+					{
+						linija.Stanice.Add(stanica);
+					}
+				}
 			}
 			catch (Exception)
 			{
@@ -157,6 +172,7 @@ namespace WebApp.Controllers
 
 			return Ok();
 		}
+
 
 
 		[HttpPost]
@@ -200,6 +216,14 @@ namespace WebApp.Controllers
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.RadniDanTermini, Dan.RadniDan));
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.SubotaTermini, Dan.Subota));
 				linija.Termini.AddRange(ConvertToTermins(novaLinija.NedeljaTermini, Dan.Nedelja));
+				foreach (var item in novaLinija.Stanice)
+				{
+					var stanica = unitOfWork.Stanice.GetStanicaByNaziv(item);
+					if (stanica != null)
+					{
+						linija.Stanice.Add(stanica);
+					}
+				}
 			}
 			catch (Exception)
 			{

@@ -20,8 +20,8 @@ export class LinijaService{
 
     constructor(private http: HttpClient) { }
 
-  getLinija(name: string): Observable<NovaLinija>{
-    return this.http.get<NovaLinija>(`${this.GetLinijaUrl}?name=${name}`);
+  getLinija(name: string): Observable<any>{
+    return this.http.get(`${this.GetLinijaUrl}?name=${name}`);
   }
 
   getLinijeByTip (tip : any): Observable<Array<string>> {

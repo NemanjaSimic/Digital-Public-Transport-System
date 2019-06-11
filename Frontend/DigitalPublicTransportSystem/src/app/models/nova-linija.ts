@@ -1,3 +1,5 @@
+import { Stanica } from './stanica';
+
 export class NovaLinija{
     Ime:string;
     RedniBroj:number;
@@ -5,4 +7,5 @@ export class NovaLinija{
     RadniDanTermini:[];
     SubotaTermini:[];
     NedeljaTermini:[];
+    Stanice: [];
 }

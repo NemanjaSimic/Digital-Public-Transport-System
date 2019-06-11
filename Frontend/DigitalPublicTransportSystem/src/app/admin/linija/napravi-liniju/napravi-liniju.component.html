@@ -1,63 +1,80 @@
 <div class="container">
-  <form [formGroup]="linijaForm" autocomplete="off" (ngSubmit)="napraviLiniju()">
-    <h2>Unesite sve podatke:</h2>
-    <div  class="form-group">
-    <label>Ime linije:</label>
-    <input type="text" class="form-control" formControlName="Ime"  required/>
-    </div>
+  <div class="row mt-1">
+      <form [formGroup]="linijaForm" autocomplete="off" (ngSubmit)="napraviLiniju()">
+        <h2>Unesite sve podatke:</h2>
+        <div  class="form-group">
+        <label>Ime linije:</label>
+        <input type="text" class="form-control" formControlName="Ime"  required/>
+        </div>
 
-    <div  class="form-group">
-    <label>Redni broj linije:</label>
-    <input type="number" class="form-control" formControlName="RedniBroj"  required/>
-    </div>
+        <div  class="form-group">
+        <label>Redni broj linije:</label>
+        <input type="number" class="form-control" formControlName="RedniBroj"  required/>
+        </div>
+      
+        <div  class="form-group">
+        <label>Tip linije:</label>
+        <select class="form-control" formControlName="VrstaLinije" required>
+          <option>Gradski</option>
+          <option>Prigradski</option>
+        </select>
+      </div>
+
+      <hr>
+      <div  class="form-group">
+        <h3>Polasci za radni dan:</h3>
+        <div formArrayName="RadniDanTermini" *ngFor="let termin of RadniDanTermini.controls; let i=index;">
+          <label>
+            Termin:
+            <input type="time" [formControlName] ="i">
+            <button type="button" (click)="IzbrisiTerminRadniDan(i)">Izbrisi termin</button>
+          </label>
+        </div>
+        <button type="button" (click)="DodajRadniDanTermin()">Dodaj termin</button>
+      </div>
+
+      <hr>
+      <div  class="form-group">
+        <h3>Polasci za subotu:</h3>
+        <div formArrayName="SubotaTermini" *ngFor="let termin of SubotaTermini.controls; let i=index;">
+          <label>
+            Termin:
+            <input type="time" [formControlName] ="i">
+            <button type="button" (click)="IzbrisiTerminSubota(i)">Izbrisi termin</button>
+          </label>
+        </div>
+        <button type="button" (click)="DodajSubotaTermin()">Dodaj termin</button>
+      </div>
+
+      <hr>
+      <div  class="form-group">
+        <h3>Polasci za nedelju:</h3>
+        <div formArrayName="NedeljaTermini" *ngFor="let termin of NedeljaTermini.controls; let i=index;">
+          <label>
+            Termin:
+            <input type="time" [formControlName] ="i">
+            <button type="button" (click)="IzbrisiTerminNedelja(i)">Izbrisi termin</button>
+          </label>
+        </div>
+        <button type="button" (click)="DodajNedeljaTermin()">Dodaj termin</button>
+      </div>
+      
+      <div class="form-group">
+          <h2>Dodajte stanice koje se nalaze na ovoj linije:</h2>
+          <select size=5 formControlName="Stanice">
+            <option (click)="dodajStanicu(stanica)" *ngFor="let stanica of stanice">{{stanica.Naziv}}</option>
+          </select>
+      </div>
   
-    <div  class="form-group">
-    <label>Tip linije:</label>
-    <select class="form-control" formControlName="VrstaLinije" required>
-      <option>Gradski</option>
-      <option>Prigradski</option>
-    </select>
-  </div>
+      <div class="form-group">
+          <h3>Dodate stanice:</h3>
+          <select size=5 formControlName="IzabraneStanice">
+            <option (click)="izbrisiStanicu(stanica)" *ngFor="let stanica of izabraneStanice">{{stanica.Naziv}}</option>
+          </select>
+      </div>
 
-  <hr>
-  <div  class="form-group">
-    <h3>Polasci za radni dan:</h3>
-    <div formArrayName="RadniDanTermini" *ngFor="let termin of RadniDanTermini.controls; let i=index;">
-      <label>
-        Termin:
-        <input type="time" [formControlName] ="i">
-        <button type="button" (click)="IzbrisiTerminRadniDan(i)">Izbrisi termin</button>
-      </label>
-    </div>
-    <button type="button" (click)="DodajRadniDanTermin()">Dodaj termin</button>
-  </div>
+      <button class="btn btn-primary" [disabled]="!linijaForm.valid" type="submit">Napravi liniju</button>
+    </form>
 
-  <hr>
-  <div  class="form-group">
-    <h3>Polasci za subotu:</h3>
-    <div formArrayName="SubotaTermini" *ngFor="let termin of SubotaTermini.controls; let i=index;">
-      <label>
-        Termin:
-        <input type="time" [formControlName] ="i">
-        <button type="button" (click)="IzbrisiTerminSubota(i)">Izbrisi termin</button>
-      </label>
-    </div>
-    <button type="button" (click)="DodajSubotaTermin()">Dodaj termin</button>
   </div>
-
-  <hr>
-  <div  class="form-group">
-    <h3>Polasci za nedelju:</h3>
-    <div formArrayName="NedeljaTermini" *ngFor="let termin of NedeljaTermini.controls; let i=index;">
-      <label>
-        Termin:
-        <input type="time" [formControlName] ="i">
-        <button type="button" (click)="IzbrisiTerminNedelja(i)">Izbrisi termin</button>
-      </label>
-    </div>
-    <button type="button" (click)="DodajNedeljaTermin()">Dodaj termin</button>
-  </div>
-    
-  <button class="btn btn-primary" [disabled]="!linijaForm.valid" type="submit">Napravi liniju</button>
-</form>
 </div>

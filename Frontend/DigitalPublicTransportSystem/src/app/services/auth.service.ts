@@ -30,25 +30,6 @@ export class AuthService{
         // console.log(authdata);
     }
 
-    logOut(): void {       
-        // if(this.isLoggedIn() === true) {
-        //     let token = localStorage.getItem("token");
-
-        //     let headers = new Headers();
-        //     headers.append('Content-type', 'application/x-www-form-urlencoded');
-        //     headers.append('Authorization', 'Bearer ' +token);
-
-        //     localStorage.clear();
-
-        //     this.notificationService.sessionEvent.emit(false);
-
-        //     return this.http.post(this.logOutAddress, "", { headers: headers });
-        // }
-        localStorage.removeItem("jwt");
-        localStorage.removeItem("role");
-        localStorage.removeItem("userId");
-    }
-
     isLoggedIn(): boolean {
         if(!localStorage.getItem('jwt'))
             return false;

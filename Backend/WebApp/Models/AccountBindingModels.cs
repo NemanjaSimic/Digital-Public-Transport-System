@@ -31,6 +31,7 @@ namespace WebApp.Models
 		public List<string> RadniDanTermini { get; set; }
 		public List<string> SubotaTermini { get; set; }
 		public List<string> NedeljaTermini { get; set; }
+		public List<string> Stanice { get; set; }
 	}
 	public class NoviCenovnikBindingModel
 	{

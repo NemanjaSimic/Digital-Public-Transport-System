@@ -4,6 +4,7 @@ import { LinijaService } from 'src/app/services/linija.service';
 import { Router } from '@angular/router';
 import { NovaLinija } from 'src/app/models/nova-linija';
 import { Linija } from 'src/app/models/linija';
+import { StanicaService } from 'src/app/services/stanica.service';
 
 @Component({
   selector: 'app-edit-linija',
@@ -25,16 +26,19 @@ export class EditLinijaComponent implements OnInit {
     SubotaTermini: this.fb.array([
     ]),
     NedeljaTermini: this.fb.array([
-    ])
+    ]),
+    Stanice: [],
+    IzabraneStanice: []
   });
 
   constructor(private linijaService: LinijaService,
-    private fb: FormBuilder,private router: Router) { }
+    private fb: FormBuilder,private router: Router, private stanicaService: StanicaService) { }
 
   linije: Array<string> = [];
   izmeni: boolean = false;
   selectLine: string = '';
-
+  stanice = [];
+  izabraneStanice = [];
 
   get RadniDanTermini(){
     return this.izmenaForm.get('RadniDanTermini') as FormArray;
@@ -48,8 +52,25 @@ export class EditLinijaComponent implements OnInit {
     return this.izmenaForm.get('NedeljaTermini') as FormArray;
   }
 
-  ngOnInit() {
+  ngOnInit() {        
+  }
 
+  dodajStanicu(stanica: any){
+    this.stanice = this.stanice.filter(s=> s != stanica)
+    this.izabraneStanice.push(stanica);
+    this.updateStaniceInForm();
+    
+  }
+
+  izbrisiStanicu(stanica: any){
+    this.izabraneStanice = this.izabraneStanice.filter(s=> s != stanica)
+    this.stanice.push(stanica)
+    this.updateStaniceInForm();
+  }
+
+  updateStaniceInForm(){
+    this.izmenaForm.controls['IzabraneStanice'].setValue(this.izabraneStanice);
+    this.izmenaForm.controls['Stanice'].setValue(this.stanice);
   }
 
   criteriaChanged():void{
@@ -64,6 +85,18 @@ export class EditLinijaComponent implements OnInit {
   }
 
   getLiniju(){
+    this.stanicaService.getStanica().subscribe(
+      (data) =>{
+        this.stanice = [];
+        data.forEach(element => {
+          this.stanice.push(element.Naziv);
+        });
+        },
+        (error) =>{
+          console.log(error);
+        }
+        );
+
     this.linijaService.getLinija(this.linijaForm.get('Ime').value).subscribe(
       (linija) =>{
         this.izmenaForm.reset();
@@ -74,7 +107,10 @@ export class EditLinijaComponent implements OnInit {
         this.DodajRadniDanTerminList(linija.RadniDanTermini);
         this.DodajSubotaTerminList(linija.SubotaTermini);
         this.DodajNedeljaTerminList(linija.NedeljaTermini);
-        console.log(this.izmenaForm.value);
+        this.izabraneStanice = linija.Stanice;
+        this.izmenaForm.controls['IzabraneStanice'].setValue(this.izabraneStanice);
+        this.stanice = this.stanice.filter(s=> !this.izabraneStanice.includes(s));
+        this.izmenaForm.controls['Stanice'].setValue(this.stanice);
       },
       (error) =>{
         console.log(error);
@@ -147,7 +183,7 @@ export class EditLinijaComponent implements OnInit {
       novaLinija.NedeljaTermini = novaLinija.NedeljaTermini.filter(l => l != "") as [];
     else
     novaLinija.NedeljaTermini = [];
-
+    novaLinija.Stanice = this.izabraneStanice as [];
     this.linijaService.izmeniLiniju(novaLinija).subscribe(
       (response) => {
         this.router.navigate(['']);   
@@ -161,6 +197,7 @@ export class EditLinijaComponent implements OnInit {
       this.linijaService.izbrisiLiniju(this.selectLine).subscribe(
         (response) => {
           this.criteriaChanged();
+          this.izmeni = false;
         },
         (error) => {console.log(error);}
         );

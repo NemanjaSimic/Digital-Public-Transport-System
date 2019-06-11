@@ -277,6 +277,10 @@
     <Compile Include="Migrations\201906101141060_user-StatusZahteva.Designer.cs">
       <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906111136047_UserStatus.cs" />
+    <Compile Include="Migrations\201906111136047_UserStatus.Designer.cs">
+      <DependentUpon>201906111136047_UserStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -439,6 +443,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906101141060_user-StatusZahteva.resx">
       <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906111136047_UserStatus.resx">
+      <DependentUpon>201906111136047_UserStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
