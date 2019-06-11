@@ -67,10 +67,7 @@ export class LoginService
     logOut() : void{
 
         if(this.isLoggedIn() === true) {
-<<<<<<< HEAD
-=======
-           
->>>>>>> 570391e6b62d9162d62a41a0b2abbf78d5170fe9
+
             localStorage.clear();
             this.router.navigate(['/']);
             this.notificationService.sessionEvent.emit(false);

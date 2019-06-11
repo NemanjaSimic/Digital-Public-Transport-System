@@ -20,7 +20,7 @@ namespace WebApp.Persistence.Repository
 			try
 			{
 				StavkaCenovnika stavka = new StavkaCenovnika();
-				var lista = AppDbContext.Stavke.ToList();
+				var lista = AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan == true && !c.Izbrisano).Stavke;
 				stavka = lista.Find(s => s.TipKarte.VrstaKarte == vrstaKarte && s.TipPopusta.VrstaPopusta == vrstaPopusta);
 				var karta = new Karta() { DatumIzdavanja = DateTime.Now, Validna = true, StavkaCenovnika = stavka };
 				AppDbContext.Karte.Add(karta);

@@ -136,7 +136,7 @@ namespace WebApp.Migrations
             //context.TipPopustas.Add(new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.6 });
             //cen.Aktuelan = true;
             //var tipKarte = new TipKarte() { VrstaKarte = Models.Enums.VrstaKarte.Vremenska, CenaKarte = 120 };
-            //var tipPopusta = new TipPopusta() {VrstaPopusta = Models.Enums.VrstaPopusta.Penzionerska, Koeficijent = (float)0.4 };
+            //var tipPopusta = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Penzioner, Koeficijent = (float)0.4 };
             //var cen = new Cenovnik() { Od = new DateTime(2019, 1, 1), Do = new DateTime(2019, 12, 31) };
             //context.Cenovnici.Add(cen);
             //context.TipKartes.Add(tipKarte);
@@ -147,9 +147,9 @@ namespace WebApp.Migrations
             //var cen = context.Cenovnici.ToList().FirstOrDefault();
             //context.Stavke.Add(new StavkaCenovnika() { Cena = 120, TipKarte = tipKarte, TipPopusta = tipPopusta, Cenovnik = cen });
 
-            //var tipPopusta1 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Regularna, Koeficijent = 1 };
-            //var tipPopusta2 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Djacka, Koeficijent = (float)0.2 };
-            //var tipPopusta3 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Penzionerska, Koeficijent = (float)0.4 };
+            //var tipPopusta1 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Regular, Koeficijent = 1 };
+            //var tipPopusta2 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Student, Koeficijent = (float)0.2 };
+            //var tipPopusta3 = new TipPopusta() { VrstaPopusta = Models.Enums.VrstaPopusta.Penzioner, Koeficijent = (float)0.4 };
             //context.TipPopustas.Add(tipPopusta1);
             //context.TipPopustas.Add(tipPopusta2);
             //context.TipPopustas.Add(tipPopusta3);

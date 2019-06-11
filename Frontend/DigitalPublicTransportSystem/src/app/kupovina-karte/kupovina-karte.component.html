@@ -7,13 +7,23 @@
   </form>
 </div> -->
 <div class="container">
-  <h2 class="alert alert-danger mt-5" *ngIf="!role && (tipKarte !== 'Vremenska' || tipPopusta !== 'Regularna')">Neregistrovani korisnik moze da kupi samo regularnu vremenku kartu!</h2>
+  <h2 class="alert alert-danger mt-5" *ngIf="!role && (tipKarte !== 'Vremenska' || tipPopusta !== 'Regular')">Neregistrovani korisnik moze da kupi samo regularnu vremenku kartu!</h2>
   <!-- <form *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">   -->
-    <div class="form-group" *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">
+  <form [formGroup]="emailForm">
+    <div class="form-group" *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regular'">
         <label> Unestie email adresu na koju zelite da stigne karta:</label>
-        <input type="email" class="form-control" id="email">
-        <button (click)="kupiKartu()" class="btn btn-primary">Kupi</button>
+        <input formControlName="email" required class="form-control"  type="text" id="email">
+        <div *ngIf="f.email.invalid && f.email.touched" class="alert alert-danger">
+            <div *ngIf="f.email.errors.required">
+                <p>Email is required.</p>
+            </div>
+            <div *ngIf="f.email.errors.email">
+                <p>Please enter valid email address.</p>
+            </div>
+        </div>
+        <button [disabled]="emailForm.invalid" (click)="kupiKartu()" class="btn btn-primary">Kupi</button>
       </div>
+    </form>
   <!-- </form> -->
   <div *ngIf = "role">
       <h3>Podaci o karti:</h3>
