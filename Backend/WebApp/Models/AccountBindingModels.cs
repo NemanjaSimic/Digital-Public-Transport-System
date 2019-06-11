@@ -133,7 +133,17 @@ namespace WebApp.Models
         public string IsVerified { get; set; }
         [Display(Name = "OldUsername")]
         public string OldUsername { get; set; }
+    
+    }
 
+    public class ValidateUserBindingModel
+    {
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public StatusZahteva Status { get; set; }
+
+        public string Reason { get; set; }
     }
 
     public class RegisterExternalBindingModel

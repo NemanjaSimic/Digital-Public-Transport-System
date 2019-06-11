@@ -7,8 +7,8 @@ namespace WebApp.Models.Enums
 {
     public enum VrstaPopusta
     {
-        Djacka = 0,
-        Penzionerska,
-        Regularna
+        Student = 0,
+        Penzioner,
+        Regular
     }
 }

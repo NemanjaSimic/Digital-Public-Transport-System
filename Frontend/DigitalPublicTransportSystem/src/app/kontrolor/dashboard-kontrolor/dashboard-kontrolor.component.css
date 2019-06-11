@@ -1,0 +1,18 @@
+.pozadina{
+    background-color: #827B89;
+}
+
+.dugme {
+    background-color: #4592db;
+    color: #69537F;
+}
+
+
+.routdugme:hover {
+    background-color: #296cac;
+}
+
+.tekst{
+    color: #F3F3F3;
+    cursor: pointer;
+}

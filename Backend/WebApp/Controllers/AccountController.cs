@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -17,6 +20,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
 using WebApp.Models.Enums;
+using WebApp.Persistence;
 using WebApp.Persistence.UnitOfWork;
 using WebApp.Providers;
 using WebApp.Results;
@@ -82,6 +86,86 @@ namespace WebApp.Controllers
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetAllUsersForValidation")]
+      //  [Authorize(Roles = "Controller")]
+      [AllowAnonymous]
+        public List<RegisterBindingModel> GetAllUsersForValidation()
+        {
+            List<RegisterBindingModel> retVal = UserManager.Users.Where(x=> x.ImgUrl != null && !x.UserType.Equals("Regular")).
+                Select(y => new RegisterBindingModel()
+                {
+                    Name = y.Name,
+                    Surname = y.Surname,
+                    Username = y.UserName,
+                    UserType = y.UserType,
+                    Address = y.Address,
+                    DateOfBirth = y.DateOfBirth,
+                    Email = y.Email,
+                    Password = y.PasswordHash,
+                    ImgUrl = y.ImgUrl,
+                    IsVerified = y.IsVerified.ToString()
+                }).ToList();
+            return retVal;
+        }
+
+
+        [HttpPut]
+        [Route("ValidateUser")]
+        [AllowAnonymous]
+       // [Authorize(Roles = "Controller")]
+        public IHttpActionResult ValidateUser(ValidateUserBindingModel userToValidate)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            ApplicationUser user = UserManager.FindByName(userToValidate.Username);
+
+            if (user == null)
+            {
+                return BadRequest("Korisnik sa datim username-om ne postoji.");
+            }
+
+            
+            user.IsVerified = userToValidate.Status;
+
+            try
+            {
+                UserManager.Update(user);
+                UnitOfWork.Complete();
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+
+
+            MailMessage mail = new MailMessage("gulegjsp@gmail.com", user.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = true;
+            client.Credentials = new NetworkCredential("gulegjsp@gmail.com", "Gulice123!");
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Host = "smtp.gmail.com";
+            mail.Subject = "Zahtev za popust - GJSP Novi Sad";
+            mail.Body = $"Vas zahtev za {user.UserType.ToString()} popust je {user.IsVerified.ToString()}. {Environment.NewLine} Reason: {Environment.NewLine} {userToValidate.Reason} {Environment.NewLine} {Environment.NewLine} Svako dobro, {Environment.NewLine} GJSP Novi Sad";
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return Ok();
+
+
         }
 
         [AllowAnonymous]
@@ -151,9 +235,9 @@ namespace WebApp.Controllers
                     IdentityResult result = await UserManager.DeleteAsync(stariUser);
 
                     IdentityResult result2 = await UserManager.CreateAsync(temp);
-
+                    IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
                     UnitOfWork.Complete();
-                    if (!result.Succeeded || !result2.Succeeded)
+                    if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
                     {
                         return GetErrorResult(result);
                     }
@@ -191,8 +275,10 @@ namespace WebApp.Controllers
                     
 
                     IdentityResult result2 = await UserManager.CreateAsync(temp);
+                    IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
+                    UnitOfWork.Complete();
 
-                    if (!result.Succeeded || !result2.Succeeded)
+                    if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
                     {
                         return GetErrorResult(result);
                     }

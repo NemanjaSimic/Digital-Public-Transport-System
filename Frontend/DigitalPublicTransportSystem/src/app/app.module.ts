@@ -24,8 +24,13 @@ import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.comp
 import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
 import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+<<<<<<< HEAD
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 
+=======
+import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
+import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
+>>>>>>> 570391e6b62d9162d62a41a0b2abbf78d5170fe9
 
 
 @NgModule({
@@ -47,7 +52,12 @@ import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
     NapraviLinijuComponent,
     NovaStanicaComponent,
     EditStanicaComponent,
+<<<<<<< HEAD
     MrezaLinijaComponent
+=======
+    ValidacijaDokumenataComponent,
+    DashboardKontrolorComponent
+>>>>>>> 570391e6b62d9162d62a41a0b2abbf78d5170fe9
   ],
   imports: [
     BrowserModule,

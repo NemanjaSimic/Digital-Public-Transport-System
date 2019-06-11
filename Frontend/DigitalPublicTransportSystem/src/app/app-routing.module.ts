@@ -15,6 +15,8 @@ import { NapraviLinijuComponent } from './admin/linija/napravi-liniju/napravi-li
 import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.component';
 import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
 import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
+import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
+import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 
 const routes: Routes = [
   {
@@ -77,6 +79,14 @@ const routes: Routes = [
   {
     path: 'admin/editStanica',
     component: EditStanicaComponent
+  },
+  {
+    path: 'kontrolor/dashboard',
+    component: DashboardKontrolorComponent
+  },
+  {
+    path: 'kontrolor/validacijaDokumenata',
+    component: ValidacijaDokumenataComponent
   }
  
 ];

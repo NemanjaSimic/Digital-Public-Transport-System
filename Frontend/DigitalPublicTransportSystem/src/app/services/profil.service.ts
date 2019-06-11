@@ -22,11 +22,14 @@ export class ProfilService{
     private ChangePassUrl = 'http://localhost:52295/api/Account/ChangePassword';
     private UploadImageUrl = 'http://localhost:52295/api/Account/UploadImage/';
     private DownloadImageUrl = 'http://localhost:52295/api/Account/DownloadImage/';
+    private GetUsersForValidationUrl = 'http://localhost:52295/api/Account/GetAllUsersForValidation';
+    private ValidateUserUrl = 'http://localhost:52295/api/Account/ValidateUser';
+
     constructor(private http: HttpClient, private router: Router){}
 
    getUser(username:string) : Observable<Korisnik> {
         return this.http.get<Korisnik>(`${this.GetUserUrl}?username=${username}`).pipe(
-            catchError(this.handleError<Korisnik>(`getTermini`)
+            catchError(this.handleError<Korisnik>(`GetUser`)
         ));
    }
 
@@ -45,6 +48,14 @@ export class ProfilService{
 
    downloadImage(username: string) : Observable<any>{
     return this.http.get(this.DownloadImageUrl + username).pipe(catchError(this.handleError<any>('DownloadImage')));
+   }
+
+   getUsersForValidation() : Observable<any>{
+    return this.http.get(this.GetUsersForValidationUrl).pipe(catchError(this.handleError<Korisnik>(`GetUsersForValidation`)));
+   }
+
+   validateUser(data: any) : Observable<any>{
+     return this.http.put(this.ValidateUserUrl, data).pipe(catchError(this.handleError<Korisnik>(`ValidateUser`)));
    }
    
    private handleError<T> (operation = 'operation', result?: T) {
