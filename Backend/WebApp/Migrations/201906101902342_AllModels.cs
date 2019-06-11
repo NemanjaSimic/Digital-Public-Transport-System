@@ -134,7 +134,7 @@ namespace WebApp.Migrations
             AddColumn("dbo.AspNetUsers", "DateOfBirth", c => c.DateTime(nullable: false));
             AddColumn("dbo.AspNetUsers", "UserType", c => c.String());
             AddColumn("dbo.AspNetUsers", "ImgUrl", c => c.String());
-            AddColumn("dbo.AspNetUsers", "IsVerified", c => c.Boolean(nullable: false));
+            AddColumn("dbo.AspNetUsers", "IsVerified", c => c.Int(nullable: false));
             AddColumn("dbo.AspNetUsers", "Izbrisano", c => c.Boolean(nullable: false));
         }
         

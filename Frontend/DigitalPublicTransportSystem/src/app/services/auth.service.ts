@@ -74,10 +74,9 @@ export class AuthService{
             return false;
         }
 
-        let token = localStorage.getItem('jwt');
-        let role = JSON.parse(token).role;
+        let role = localStorage.getItem('role');
 
-        if (role=="Kontrolor") {
+        if (role=="Controller") {
             return true;
         } else {
             return false;
@@ -89,10 +88,9 @@ export class AuthService{
             return false;
         }
 
-        let token = localStorage.getItem('jwt');
-        let role = JSON.parse(token).role;
+        let role = localStorage.getItem('role');
 
-        if (role=="Korisnik") {
+        if (role=="AppUser") {
             return true;
         } else {
             return false;

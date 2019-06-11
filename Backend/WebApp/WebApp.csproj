@@ -273,9 +273,9 @@
     <Compile Include="Migrations\201906101912516_TerminPK.Designer.cs">
       <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906101141060_user-StatusZahteva.cs" />
-    <Compile Include="Migrations\201906101141060_user-StatusZahteva.Designer.cs">
-      <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
+    <Compile Include="Migrations\201906111422498_UserStatus.cs" />
+    <Compile Include="Migrations\201906111422498_UserStatus.Designer.cs">
+      <DependentUpon>201906111422498_UserStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -437,8 +437,8 @@
     <EmbeddedResource Include="Migrations\201906101912516_TerminPK.resx">
       <DependentUpon>201906101912516_TerminPK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906101141060_user-StatusZahteva.resx">
-      <DependentUpon>201906101141060_user-StatusZahteva.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906111422498_UserStatus.resx">
+      <DependentUpon>201906111422498_UserStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

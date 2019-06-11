@@ -16,38 +16,27 @@ export class NavbarComponent implements OnInit {
 
   IsLoggedIn : boolean;
   IsAdmin : boolean;
+  isKontrolor: boolean;
+  IsAppUser: boolean;
 
   ngOnInit() {
     this.loadData();
   }
 
   LogOut() : void{
-    if(this.authService.isLoggedIn())
-    {
-      this.loginService.logOut().subscribe(
-        (response) => {
-          this.IsLoggedIn = false;
-          this.notificationService.notifyEvent.emit('You have successfully logged out.');
-          this.loadData();
-          this.router.navigate(['/']);
-        },
-
-        (error) => {
-          this.notificationService.notifyEvent.emit('An error occured while logging out.');
-          this.loadData();
-          this.router.navigate(['/']);
-        }
-      )
-    }
+      this.loginService.logOut();
   }
 
   loadData() : void{
     this.notificationService.sessionEvent.subscribe((loggedIn : boolean) => {
       this.IsLoggedIn = this.authService.isLoggedIn();
       this.IsAdmin = this.authService.isAdmin();
+      this.isKontrolor = this.authService.isKontrolor();
+      this.IsAppUser = this.authService.isKorisnik();
   });
-
+  this.isKontrolor = this.authService.isKontrolor();
   this.IsLoggedIn = this.authService.isLoggedIn();
   this.IsAdmin = this.authService.isAdmin();
+  this.IsAppUser = this.authService.isKorisnik();
   }
 }

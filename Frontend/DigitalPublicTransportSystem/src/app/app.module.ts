@@ -23,6 +23,8 @@ import { EditLinijaComponent } from './admin/linija/edit-linija/edit-linija.comp
 import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.component';
 import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
+import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
     ChangePasswordComponent,
     NapraviLinijuComponent,
     NovaStanicaComponent,
-    EditStanicaComponent
+    EditStanicaComponent,
+    ValidacijaDokumenataComponent,
+    DashboardKontrolorComponent
   ],
   imports: [
     BrowserModule,

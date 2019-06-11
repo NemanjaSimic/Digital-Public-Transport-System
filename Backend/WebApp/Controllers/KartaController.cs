@@ -25,25 +25,24 @@ namespace WebApp.Controllers
 		{
 			var req = HttpContext.Current.Request;
 			var email = req.Form["email"];
-			int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regularna);
+			int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
 			if (id != -1)
 			{
-				MailMessage mail = new MailMessage();
-				SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-				mail.From = new MailAddress("simke966@gmail.com");
-				mail.To.Add(email);
-				mail.Subject = "how to send email via a webapi";
-				mail.Body = "sending emails can be fun and very profitable.";
-				SmtpClient client = new SmtpClient();
-				client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                MailMessage mail = new MailMessage("gulegjsp@gmail.com", email);
+                SmtpClient client = new SmtpClient();
+                client.Port = 587;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = true;
+                client.Credentials = new NetworkCredential("gulegjsp@gmail.com", "Gulice123!");
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = true;
+                client.Host = "smtp.gmail.com";
+                mail.Subject = "Karta za autobus - GJSP Novi Sad";
+                mail.Body = $"Sifra vase karte za autobuski prevoz je -> {id}";
 
-				client.Host = "relay-hosting.secureserver.net";
-				client.Port = 25;
 
-	
-
-				//Send the msg
-				client.Send(mail);
+               //Send the msg
+               client.Send(mail);
 				return Ok();
 			}
 			else
