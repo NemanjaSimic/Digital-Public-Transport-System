@@ -11,7 +11,7 @@
   <!-- <form *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">   -->
   <form [formGroup]="emailForm">
     <div class="form-group" *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regular'">
-        <label> Unestie email adresu na koju zelite da stigne karta:</label>
+        <label> Unesite email adresu na koju zelite da Vam stigne sifra karte:</label>
         <input formControlName="email" required class="form-control"  type="text" id="email">
         <div *ngIf="f.email.invalid && f.email.touched" class="alert alert-danger">
             <div *ngIf="f.email.errors.required">

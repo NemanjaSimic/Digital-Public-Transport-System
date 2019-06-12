@@ -89,9 +89,71 @@ namespace WebApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        [Route("GetUserType/{username}")]
+        public string GetUserType(string username)
+        {
+            ApplicationUser user = UserManager.FindByName(username);
+            if(user == null)
+            {
+                return "";
+            }
+            else
+            {
+                return user.UserType;
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "AppUser")]
+        [Route("PostKartaRegistrovani")]
+        public IHttpActionResult PostKartaRegistrovani(KartaBindingModel karta)
+        {
+            ApplicationUser user = UserManager.FindByName(karta.Korisnik);
+            if (user == null)
+            {
+                return BadRequest("Korisnik ne postoji.");
+            }
+
+            if (!user.UserType.Equals(karta.TipPopusta) && karta.TipPopusta != "Regular")
+            {
+                return BadRequest("Korisniku nije dozvoljeno da uzme kartu datog tipa");
+            }
+
+            if (!karta.TipPopusta.Equals("Regular") && !user.IsVerified.ToString().Equals("Prihvacen"))
+            {
+                return BadRequest("Korisniku nije validiran od strane kontrolora.");
+            }
+
+            List<StavkaCenovnika> stavke = UnitOfWork.Cenovnici.GetAktuelanCenovnik();
+            StavkaCenovnika stavka = stavke.FirstOrDefault(item => item.TipKarte.VrstaKarte.ToString().Equals(karta.TipKarte) && item.TipPopusta.VrstaPopusta.ToString().Equals(karta.TipPopusta));
+            Karta novaKarta = new Karta()
+            {
+                DatumIzdavanja = DateTime.Now,
+                Validna = true,
+                Izbrisano = false,
+                Korisnik = karta.Korisnik,
+                StavkaCenovnika = stavka
+               
+            };
+
+            try
+            {
+                UnitOfWork.Karte.Add(novaKarta);
+                UnitOfWork.Complete();
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Desila se greska prilikom kupovine karte.");
+            }
+           
+        }
+
+        [HttpGet]
         [Route("GetAllUsersForValidation")]
-      //  [Authorize(Roles = "Controller")]
-      [AllowAnonymous]
+        [Authorize(Roles = "Controller")]
         public List<RegisterBindingModel> GetAllUsersForValidation()
         {
             List<RegisterBindingModel> retVal = UserManager.Users.Where(x=> x.ImgUrl != null && !x.UserType.Equals("Regular") && !x.Izbrisano).
@@ -114,8 +176,7 @@ namespace WebApp.Controllers
 
         [HttpPut]
         [Route("ValidateUser")]
-        [AllowAnonymous]
-       // [Authorize(Roles = "Controller")]
+        [Authorize(Roles = "Controller")]
         public IHttpActionResult ValidateUser(ValidateUserBindingModel userToValidate)
         {
             if (!ModelState.IsValid)
@@ -194,7 +255,7 @@ namespace WebApp.Controllers
             return retVal;
         }
         [HttpPut]
-        [AllowAnonymous]
+        [Authorize(Roles = "AppUser")]
         [Route("EditUser")]
         public async Task<IHttpActionResult> EditUser(RegisterBindingModel user)
         {

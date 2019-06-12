@@ -9,12 +9,17 @@ const httpOptions = {
 
 @Injectable({ providedIn: 'root' })
 export class KartaService{
-    private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKarta';
+    private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKartaNeregistrovani';
+    private KupiKartuRegistrovaniUrl = 'http://localhost:52295/api/Account/PostKartaRegistrovani';
 
     constructor(private http: HttpClient) { }
 
     kupiKartuNeregistrovani(email: any) : Observable<any>{
         return this.http.post<any>(this.KupiKartuNeregistrovaniUrl, email, httpOptions);
+    }
+
+    kupiKartuRegistrovani(data: any) : Observable<any>{
+        return this.http.post<any>(this.KupiKartuRegistrovaniUrl, data);
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

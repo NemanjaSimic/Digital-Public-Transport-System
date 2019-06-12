@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { KartaService } from '../services/karta.service';
+import { Karta } from '../models/karta';
 
 @Component({
   selector: 'app-kupovina-karte',
@@ -10,7 +11,8 @@ import { KartaService } from '../services/karta.service';
 })
 export class KupovinaKarteComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private route: ActivatedRoute, private kartaService : KartaService) { }
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, private kartaService : KartaService,
+    private router: Router) { }
 
   emailForm = this.fb.group({
     email : ["", Validators.email]
@@ -38,6 +40,7 @@ export class KupovinaKarteComponent implements OnInit {
     this.kartaService.kupiKartuNeregistrovani(this.emailForm.get('email').value).subscribe(
       response => {
         alert("Uspesno ste kupili vremensku kartu u trajanju od 60 min. Poslali smo Vam sifru karte na Vas email.");
+        this.router.navigate(['/']);
       },
       error => {
         alert("Desila se greska prilikom kupovine karte. Pokusajte ponovo.");
@@ -46,7 +49,16 @@ export class KupovinaKarteComponent implements OnInit {
   }
 
   potvrdiKupovinu():void{
-
+    let karta = new Karta(localStorage.getItem('userId'), this.tipKarte, this.tipPopusta, this.cena);
+    this.kartaService.kupiKartuRegistrovani(karta).subscribe(
+      response => {
+        alert("Uspesno ste kupili kartu tipa ->"  + this.tipKarte);
+        
+      },
+      error => {
+        alert("Vas dokument nije validiran ili Vam nije dozvoljeno da kupite izabran tip karte. Pokusajte ponovo.");
+      }
+    )
   }
 
 }
