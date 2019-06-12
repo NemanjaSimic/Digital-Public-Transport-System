@@ -24,11 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   LogOut() : void{
-<<<<<<< HEAD
-      this.loginService.logOut()
-=======
       this.loginService.logOut();
->>>>>>> 570391e6b62d9162d62a41a0b2abbf78d5170fe9
   }
 
   loadData() : void{

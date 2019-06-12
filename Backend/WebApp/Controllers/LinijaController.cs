@@ -89,6 +89,35 @@ namespace WebApp.Controllers
 			return Ok(novaLinija);
 		}
 
+		[HttpGet]
+		[AllowAnonymous]
+		[ResponseType(typeof(List<StanicaBindingModel>))]
+		[Route("GetStaniceOfLinija")]
+		public IHttpActionResult GetStaniceOfLinija(string ime)
+		{
+			var lista = new List<StanicaBindingModel>();
+
+			Linija linija = unitOfWork.Linije.GetLinijaByName(ime);
+			if (linija == null)
+			{
+				return BadRequest();
+			}
+
+			foreach (var item in linija.Stanice)
+			{
+				lista.Add(new StanicaBindingModel()
+				{
+					Naziv = item.Naziv,
+					Adresa = item.Adresa,
+					X = item.X,
+					Y = item.Y
+				});
+			}
+
+			return Ok(lista);
+		}
+
+		[HttpGet]
 		[AllowAnonymous]
 		[Route("GetLinijeByTip")]
 		public List<string> GetAllLinijeByTip(string TipVoznje)
@@ -96,6 +125,7 @@ namespace WebApp.Controllers
 			return unitOfWork.Linije.GetAllLinijaNamesByTip(TipVoznje);
 		}
 
+		[HttpGet]
 		[AllowAnonymous]
 		[Route("GetTerminiOfLinija")]
 		public List<string> GetTerminiOfLinija(string Ime,string Dan)

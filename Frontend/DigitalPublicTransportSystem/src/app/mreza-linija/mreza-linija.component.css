@@ -1,0 +1,27 @@
+div#button-linije ul{
+    list-style: outside none none;
+    overflow: hidden;
+    padding: 0px;
+}
+
+div#button-linije li {
+    float: left;
+    margin: 0px 2px 2px 0px;
+    font-size:12px;
+}
+    
+.button-linija{
+    display: inline-block;
+    padding: 2px;
+    width: 35px;
+    height: 24px;
+    line-height: 25px;
+    text-align: center;
+    background-color: #0066A9;
+    color:#fff;
+}
+
+
+.button-linija:hover{
+    background-color:#75C5EB;
+}

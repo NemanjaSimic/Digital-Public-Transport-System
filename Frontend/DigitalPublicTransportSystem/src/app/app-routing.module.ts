@@ -17,6 +17,7 @@ import { NovaStanicaComponent } from './admin/stanica/nova-stanica/nova-stanica.
 import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.component';
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
+import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'cenovnik',
     component: CenovnikPrikazComponent
+  },
+  {
+    path: 'mreza',
+    component: MrezaLinijaComponent
   },
   {
     path: 'kupiKartu/:tip/:popust/:cena',

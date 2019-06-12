@@ -27,7 +27,7 @@ export class KupovinaKarteComponent implements OnInit {
   }
 
   kupiKartu(): void{
-
+    
   }
 
   potvrdiKupovinu():void{

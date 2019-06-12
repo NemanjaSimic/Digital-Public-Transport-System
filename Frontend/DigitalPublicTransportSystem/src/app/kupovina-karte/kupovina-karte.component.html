@@ -7,9 +7,9 @@
   </form>
 </div> -->
 <div class="container">
-  <h2 class="alert alert-danger mt-5" *ngIf="!role && (tipKarte !== 'Vremenska' || tipPopusta !== 'Regularna')">Neregistrovani korisnik moze da kupi samo regularnu vremenku kartu!</h2>
-  <!-- <form *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">   -->
-    <div class="form-group" *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">
+  <h2 class="alert alert-danger mt-5" *ngIf="!role && (tipKarte !== 'Vremenska' || tipPopusta !== 'Regularna')">Neregistrovani korisnik moze da kupi samo regularnu vremensku kartu!</h2>
+    
+  <div class="form-group" *ngIf="!role && tipKarte === 'Vremenska' && tipPopusta === 'Regularna'">
         <label> Unestie email adresu na koju zelite da stigne karta:</label>
         <input type="email" class="form-control" id="email">
         <button (click)="kupiKartu()" class="btn btn-primary">Kupi</button>

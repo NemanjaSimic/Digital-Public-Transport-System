@@ -17,6 +17,7 @@ export class LinijaService{
   private GetLinijeByTipUrl = 'http://localhost:52295/api/Linija/GetLinijeByTip';
   private GetTerminiOfLinijaUrl = 'http://localhost:52295/api/Linija/GetTerminiOfLinija';
   private PostLinijaUrl = 'http://localhost:52295/api/Linija/PostLinija';
+  private GetStaniceOfLinijaUrl = 'http://localhost:52295/api/Linija/GetStaniceOfLinija';
 
     constructor(private http: HttpClient) { }
 
@@ -34,6 +35,10 @@ export class LinijaService{
     return this.http.get<Array<string>>(`${this.GetTerminiOfLinijaUrl}?Ime=${ime}&Dan=${dan}`).pipe(
       catchError(this.handleError<Array<string>>(`getTermini`))
     );   
+  }
+
+  getStaniceOfLinija(ime:any): Observable<any>{
+    return this.http.get(`${this.GetStaniceOfLinijaUrl}?ime=${ime}`);
   }
 
   napraviLiniju(linija:any):Observable<any>{
