@@ -104,6 +104,7 @@ const routes: Routes = [
     component: DeaktivirajProfilComponent
    },
    {
+    path: 'kontrolor/validacijaDokumenata',
     component: ValidacijaDokumenataComponent,
     canActivate: [KontrolorGuard]
   }

@@ -25,6 +25,9 @@ export class EditProfilComponent implements OnInit {
     username: [[Validators.required, Validators.minLength(6)]],
     email: [[Validators.email]],
     imgUrl: [],
+    password: [[Validators.required,
+      Validators.minLength(6),
+      Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W])/)]]
     
   });
   selectedFile: File = null;
@@ -57,7 +60,8 @@ export class EditProfilComponent implements OnInit {
           type: this.user.UserType,
           username: this.user.Username,
           email: this.user.Email,
-          imgUrl: this.user.ImgUrl
+          imgUrl: this.user.ImgUrl,
+          password: ""
         });
         this.oldUsername = this.user.Username;
         this.date = this.user.DateOfBirth.toString().substring(0,10);
@@ -87,7 +91,7 @@ export class EditProfilComponent implements OnInit {
       this.editedUser.UserType = this.editForm.get('type').value;
       this.editedUser.OldUsername = this.oldUsername;
       this.editedUser.ImgUrl = this.mySrc;
-    
+      this.editedUser.Password = this.editForm.get('password').value;
 
     if(this.authService.isLoggedIn()){
       this.profilService.editProfile(this.editedUser).subscribe(
@@ -102,7 +106,7 @@ export class EditProfilComponent implements OnInit {
           }
           this.router.navigate(['/']);   
         },
-        (error) => {}
+        (error) => { alert("Pogresna lozinka, neuspesna izmena profila. Pokusajte ponovo."); }
       );
     }
   }

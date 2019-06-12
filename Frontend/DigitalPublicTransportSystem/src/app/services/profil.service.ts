@@ -35,28 +35,28 @@ export class ProfilService{
    }
 
    editProfile(user: Korisnik) : Observable<any> {
-      return this.http.put(this.EditUserUrl, user, httpOptions).pipe(catchError(this.handleError<any>('EditUser')));
+      return this.http.put(this.EditUserUrl, user, httpOptions);
    }
 
    changePassword(passwordModel : ChangePassModel) : Observable<any>{
-    return this.http.post(this.ChangePassUrl, passwordModel, httpOptions).pipe(catchError(this.handleError<any>('ChangePassword')));
+    return this.http.post(this.ChangePassUrl, passwordModel, httpOptions);
    }
 
    uploadImage(data: any, username: string) : Observable<any> {
      
-    return this.http.post(this.UploadImageUrl + username, data).pipe(catchError(this.handleError<any>('UploadImage')));
+    return this.http.post(this.UploadImageUrl + username, data);
    }
 
    downloadImage(username: string) : Observable<any>{
-    return this.http.get(this.DownloadImageUrl + username).pipe(catchError(this.handleError<any>('DownloadImage')));
+    return this.http.get(this.DownloadImageUrl + username);
    }
 
    getUsersForValidation() : Observable<any>{
-    return this.http.get(this.GetUsersForValidationUrl).pipe(catchError(this.handleError<Korisnik>(`GetUsersForValidation`)));
+    return this.http.get(this.GetUsersForValidationUrl);
    }
 
    validateUser(data: any) : Observable<any>{
-     return this.http.put(this.ValidateUserUrl, data).pipe(catchError(this.handleError<Korisnik>(`ValidateUser`)));
+     return this.http.put(this.ValidateUserUrl, data);
    }
 
    deactivateMyProfil(data: any) : Observable<any>{
