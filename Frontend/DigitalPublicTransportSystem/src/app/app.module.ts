@@ -30,7 +30,6 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

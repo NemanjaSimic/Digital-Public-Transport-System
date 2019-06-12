@@ -53,7 +53,7 @@ export class KupovinaKarteComponent implements OnInit {
     this.kartaService.kupiKartuRegistrovani(karta).subscribe(
       response => {
         alert("Uspesno ste kupili kartu tipa ->"  + this.tipKarte);
-        
+        this.router.navigate(['/']);
       },
       error => {
         alert("Vas dokument nije validiran ili Vam nije dozvoljeno da kupite izabran tip karte. Pokusajte ponovo.");
