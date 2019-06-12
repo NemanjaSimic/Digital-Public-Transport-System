@@ -18,6 +18,8 @@ import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
+import { AdminGuard } from './guards/admin.guard';
+import { KontrolorGuard } from './guards/kontrolor.guard';
 
 const routes: Routes = [
   {
@@ -55,11 +57,13 @@ const routes: Routes = [
    },
    {
     path: 'admin/dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/noviCenovnik',
-    component: NoviCenovnikComponent
+    component: NoviCenovnikComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'editProfil',
@@ -71,27 +75,33 @@ const routes: Routes = [
    },
   {
     path: 'admin/novaLinija',
-    component: NapraviLinijuComponent
+    component: NapraviLinijuComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/editLinija',
-    component: EditLinijaComponent
+    component: EditLinijaComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/napraviStanicu',
-    component: NovaStanicaComponent
+    component: NovaStanicaComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/editStanica',
-    component: EditStanicaComponent
+    component: EditStanicaComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'kontrolor/dashboard',
-    component: DashboardKontrolorComponent
+    component: DashboardKontrolorComponent,
+    canActivate: [KontrolorGuard]
   },
   {
     path: 'kontrolor/validacijaDokumenata',
-    component: ValidacijaDokumenataComponent
+    component: ValidacijaDokumenataComponent,
+    canActivate: [KontrolorGuard]
   }
  
 ];

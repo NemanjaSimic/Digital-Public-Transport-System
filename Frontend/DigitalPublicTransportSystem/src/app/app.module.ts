@@ -29,7 +29,6 @@ import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +50,7 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
     EditStanicaComponent,
     MrezaLinijaComponent,
     ValidacijaDokumenataComponent,
-    DashboardKontrolorComponent
+    DashboardKontrolorComponent,
   ],
   imports: [
     BrowserModule,
