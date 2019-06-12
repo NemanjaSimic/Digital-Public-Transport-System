@@ -94,7 +94,7 @@ namespace WebApp.Controllers
       [AllowAnonymous]
         public List<RegisterBindingModel> GetAllUsersForValidation()
         {
-            List<RegisterBindingModel> retVal = UserManager.Users.Where(x=> x.ImgUrl != null && !x.UserType.Equals("Regular")).
+            List<RegisterBindingModel> retVal = UserManager.Users.Where(x=> x.ImgUrl != null && !x.UserType.Equals("Regular") && !x.Izbrisano).
                 Select(y => new RegisterBindingModel()
                 {
                     Name = y.Name,
@@ -232,7 +232,7 @@ namespace WebApp.Controllers
                         PasswordHash = stariUser.PasswordHash
                     };
 
-                    IdentityResult result = await UserManager.DeleteAsync(stariUser);
+					IdentityResult result = await UserManager.DeleteAsync(stariUser);
 
                     IdentityResult result2 = await UserManager.CreateAsync(temp);
                     IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
@@ -246,39 +246,36 @@ namespace WebApp.Controllers
             }
             else
             {
-                ApplicationUser temp = UserManager.FindByName(user.Username);
-                if (temp != null)
+                ApplicationUser stariUser = UserManager.FindByName(user.Username);
+                if (stariUser != null)
                 {
-                    IdentityResult result = await UserManager.DeleteAsync(temp);
+                    //IdentityResult result = await UserManager.DeleteAsync(temp);
 
-                    if (temp.UserType != user.UserType)
+                    if (stariUser.UserType != user.UserType)
                     {
                         user.IsVerified = "ProcesiraSe";
                         user.ImgUrl = "";
                     }
 
-                    temp = new ApplicationUser()
-                    {
-                        Id = user.Username,
-                        UserName = user.Username,
-                        Name = user.Name,
-                        Surname = user.Surname,
-                        Email = user.Email,
-                        Address = user.Address,
-                        DateOfBirth = user.DateOfBirth,
-                        UserType = user.UserType,
-                        IsVerified = (StatusZahteva)Enum.Parse(typeof(StatusZahteva),user.IsVerified),
-                        ImgUrl = user.ImgUrl,
-                        PasswordHash = temp.PasswordHash
-                    };
+					stariUser.Id = user.Username;
+					stariUser.UserName = user.Username;
+					stariUser.Name = user.Name;
+					stariUser.Surname = user.Surname;
+					stariUser.Email = user.Email;
+					stariUser.Address = user.Address;
+					stariUser.DateOfBirth = user.DateOfBirth;
+					stariUser.UserType = user.UserType;
+					stariUser.IsVerified = (StatusZahteva)Enum.Parse(typeof(StatusZahteva), user.IsVerified);
+					stariUser.ImgUrl = user.ImgUrl;
+					stariUser.PasswordHash = stariUser.PasswordHash;
 
-                    
 
-                    IdentityResult result2 = await UserManager.CreateAsync(temp);
-                    IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
-                    UnitOfWork.Complete();
 
-                    if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
+					IdentityResult result = await UserManager.UpdateAsync(stariUser);
+                    //IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
+                    //UnitOfWork.Complete();
+
+                    if (!result.Succeeded )
                     {
                         return GetErrorResult(result);
                     }
@@ -379,12 +376,12 @@ namespace WebApp.Controllers
                             return BadRequest("Greska prilikom uploada slike");
                         }
 
-                            IdentityResult result = UserManager.Delete(user);
+                            //IdentityResult result = UserManager.Delete(user);
 
-                            if (!result.Succeeded)
-                            {
-                                return BadRequest("Greska prilikom uploada slike");
-                            }
+                            //if (!result.Succeeded)
+                            //{
+                            //    return BadRequest("Greska prilikom uploada slike");
+                            //}
 
                             var postedFile = httpRequest.Files[file];
                             string fileName = username + "_" + postedFile.FileName;
@@ -395,9 +392,9 @@ namespace WebApp.Controllers
                             user.IsVerified = StatusZahteva.ProcesiraSe;
 
                             postedFile.SaveAs(filePath);
-                            IdentityResult result2 = UserManager.Create(user);
-                            UnitOfWork.Complete();
-                            if (!result2.Succeeded)
+                            IdentityResult result = UserManager.Update(user);
+                            //UnitOfWork.Complete();
+                            if (!result.Succeeded)
                             {
                                 return BadRequest("Greska prilikom uploada slike");
                             }
@@ -680,7 +677,7 @@ namespace WebApp.Controllers
 				ApplicationUser currentUser = UserManager.FindByName(user.UserName);
 
 				IdentityResult roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "AppUser");
-                UnitOfWork.Complete();
+                //UnitOfWork.Complete();
 				if (!roleResult.Succeeded)
 				{
 					return GetErrorResult(roleResult);
