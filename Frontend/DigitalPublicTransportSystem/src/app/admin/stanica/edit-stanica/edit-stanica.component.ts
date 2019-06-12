@@ -21,7 +21,7 @@ export class EditStanicaComponent implements OnInit {
   public zoom: number;
   stanice: Stanica[] = [];
   selectedStanica: Stanica;
-
+  verzija:number;
   constructor(private fb: FormBuilder, private ngZone: NgZone, private stanicService: StanicaService, private router:Router) { }
 
   ngOnInit() {
@@ -37,12 +37,13 @@ export class EditStanicaComponent implements OnInit {
     stanica = this.stanicaForm.value;
     stanica.X = this.geoLocation.latitude;
     stanica.Y = this.geoLocation.longitude;
+    stanica.Verzija = this.verzija
     this.stanicService.putStanica(stanica).subscribe(
       (response)=>{
-        this.router.navigate(['/admin/editStanica']);
+        this.router.navigate(['']);
       },
       (error)=>{
-        console.log(error);
+        alert(error.error.Message);
       }
     );
   }
@@ -53,13 +54,14 @@ export class EditStanicaComponent implements OnInit {
       this.stanice = data;
     },
     (error)=>{
-      console.log(error);
+      alert(error.error.Message);
     });
   }
 
   OnSelectStanica(ime: string){
     let stanica = this.stanice.find(f=> f.Naziv === ime);
     this.selectedStanica = stanica;
+    this.verzija = stanica.Verzija;
     this.stanicaForm.controls["Naziv"].setValue(stanica.Naziv);
     this.stanicaForm.controls["Adresa"].setValue(stanica.Adresa);
     this.geoLocation = new GeoLocation(stanica.X, stanica.Y);
@@ -72,7 +74,7 @@ export class EditStanicaComponent implements OnInit {
           this.getStanice();
       },
       (error)=>{
-        console.log(error);
+        alert(error.error.Message);
       }
     );
   }

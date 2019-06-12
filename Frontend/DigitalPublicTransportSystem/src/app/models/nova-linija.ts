@@ -8,4 +8,5 @@ export class NovaLinija{
     SubotaTermini:[];
     NedeljaTermini:[];
     Stanice: [];
+    Verzija:number;
 }

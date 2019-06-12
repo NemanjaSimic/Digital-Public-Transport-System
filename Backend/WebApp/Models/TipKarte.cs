@@ -11,6 +11,7 @@ namespace WebApp.Models
     {
         [Key]
         public VrstaKarte VrstaKarte { get; set; }
-        public float CenaKarte { get; set; }
+		[ConcurrencyCheck]
+		public float CenaKarte { get; set; }
     }
 }

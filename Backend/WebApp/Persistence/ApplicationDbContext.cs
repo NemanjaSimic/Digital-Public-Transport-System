@@ -23,8 +23,9 @@ namespace WebApp.Persistence
             : base("name=DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
-        public static ApplicationDbContext Create()
+
+
+		public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }

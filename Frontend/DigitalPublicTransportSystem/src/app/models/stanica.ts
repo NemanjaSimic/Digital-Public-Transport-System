@@ -3,4 +3,5 @@ export class Stanica{
     Adresa:string;
     X:number;
     Y:number;
+    Verzija:number;
 }

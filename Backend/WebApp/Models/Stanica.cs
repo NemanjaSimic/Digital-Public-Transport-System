@@ -11,11 +11,17 @@ namespace WebApp.Models
     {
         [Key]
         public string Naziv { get; set; }
-        public string Adresa { get; set; }
+		
+		public string Adresa { get; set; }
+		
 		public bool Izbrisano { get; set; }
+		
 		public double X { get; set; }
+	
 		public double Y { get; set; }
 
-        public virtual List<Linija> Linije { get; set; }
+		public int Verzija { get; set; }
+		
+		public virtual List<Linija> Linije { get; set; }
     }
 }

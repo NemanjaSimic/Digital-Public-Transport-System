@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -60,7 +61,8 @@ namespace WebApp.Controllers
 				RadniDanTermini = new List<string>(),
 				SubotaTermini = new List<string>(),
 				NedeljaTermini = new List<string>(),
-				Stanice = new List<string>()
+				Stanice = new List<string>(),
+				Verzija = linija.Verzija
 			};
 
 			foreach (var item in linija.Termini)
@@ -172,6 +174,11 @@ namespace WebApp.Controllers
 
 			}
 
+			if (linija.Verzija != novaLinija.Verzija)
+			{
+				return BadRequest("Linija je izmenjena u medjuvremenu.");
+			}
+
 			linija.RedniBroj = novaLinija.RedniBroj;
 			linija.TipLinije = (VrstaLinije)Enum.Parse(typeof(VrstaLinije), novaLinija.VrstaLinije);
 			linija.Termini.Clear();
@@ -197,8 +204,16 @@ namespace WebApp.Controllers
 				return BadRequest("Format polazaka je los.");
 			}
 
-			unitOfWork.Linije.Update(linija);
-			unitOfWork.Complete();
+			linija.Verzija++;
+			try
+			{
+				unitOfWork.Linije.Update(linija);
+				unitOfWork.Complete();
+			}
+			catch (Exception)
+			{
+				return BadRequest("Greska prilikom update-a.");
+			}
 
 			return Ok();
 		}
@@ -238,7 +253,8 @@ namespace WebApp.Controllers
 				RedniBroj = novaLinija.RedniBroj,
 				TipLinije = (VrstaLinije)Enum.Parse(typeof(VrstaLinije), novaLinija.VrstaLinije),
 				Termini = new List<Termin>(),
-				Stanice = new List<Stanica>()
+				Stanice = new List<Stanica>(),
+				Verzija = 1
 			};
 
 			try

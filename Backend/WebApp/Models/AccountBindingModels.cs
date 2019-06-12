@@ -17,6 +17,7 @@ namespace WebApp.Models
 		public double X { get; set; }
 		[Required]
 		public double Y { get; set; }
+		public int Verzija { get; set; }
 	}
 
 
@@ -32,6 +33,7 @@ namespace WebApp.Models
 		public List<string> SubotaTermini { get; set; }
 		public List<string> NedeljaTermini { get; set; }
 		public List<string> Stanice { get; set; }
+		public int Verzija { get; set; }
 	}
 	public class NoviCenovnikBindingModel
 	{

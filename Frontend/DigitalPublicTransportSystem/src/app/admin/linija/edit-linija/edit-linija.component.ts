@@ -39,7 +39,8 @@ export class EditLinijaComponent implements OnInit {
   selectLine: string = '';
   stanice = [];
   izabraneStanice = [];
-
+  novaLinija: NovaLinija = new NovaLinija();
+  verzija:number;
   get RadniDanTermini(){
     return this.izmenaForm.get('RadniDanTermini') as FormArray;
   }
@@ -111,6 +112,7 @@ export class EditLinijaComponent implements OnInit {
         this.izmenaForm.controls['IzabraneStanice'].setValue(this.izabraneStanice);
         this.stanice = this.stanice.filter(s=> !this.izabraneStanice.includes(s));
         this.izmenaForm.controls['Stanice'].setValue(this.stanice);
+        this.verzija = linija.Verzija;
       },
       (error) =>{
         console.log(error);
@@ -166,29 +168,29 @@ export class EditLinijaComponent implements OnInit {
   }
 
   IzmeniLiniju(){
-    let novaLinija = new NovaLinija();
-    novaLinija = this.izmenaForm.value;
-
-    if(novaLinija.RadniDanTermini != undefined)
-      novaLinija.RadniDanTermini = novaLinija.RadniDanTermini.filter(l => l != "") as [];
+   
+    this.novaLinija = this.izmenaForm.value;
+    this.novaLinija.Verzija = this.verzija;
+    if(this.novaLinija.RadniDanTermini != undefined)
+    this.novaLinija.RadniDanTermini = this.novaLinija.RadniDanTermini.filter(l => l != "") as [];
     else
-      novaLinija.RadniDanTermini = [];
+    this.novaLinija.RadniDanTermini = [];
 
-    if(novaLinija.SubotaTermini != undefined)
-      novaLinija.SubotaTermini = novaLinija.SubotaTermini.filter(l => l != "") as [];
+    if(this.novaLinija.SubotaTermini != undefined)
+    this.novaLinija.SubotaTermini = this.novaLinija.SubotaTermini.filter(l => l != "") as [];
     else
-      novaLinija.SubotaTermini = [];
+      this.novaLinija.SubotaTermini = [];
 
-    if(novaLinija.NedeljaTermini != undefined)
-      novaLinija.NedeljaTermini = novaLinija.NedeljaTermini.filter(l => l != "") as [];
+    if(this.novaLinija.NedeljaTermini != undefined)
+      this.novaLinija.NedeljaTermini = this.novaLinija.NedeljaTermini.filter(l => l != "") as [];
     else
-    novaLinija.NedeljaTermini = [];
-    novaLinija.Stanice = this.izabraneStanice as [];
-    this.linijaService.izmeniLiniju(novaLinija).subscribe(
+      this.novaLinija.NedeljaTermini = [];
+    this.novaLinija.Stanice = this.izabraneStanice as [];
+    this.linijaService.izmeniLiniju(this.novaLinija).subscribe(
       (response) => {
         this.router.navigate(['']);   
       },
-      (error) => {console.log(error);}
+      (error) => {alert(error.error.Message);}
       );
   }
 
@@ -199,7 +201,7 @@ export class EditLinijaComponent implements OnInit {
           this.criteriaChanged();
           this.izmeni = false;
         },
-        (error) => {console.log(error);}
+        (error) => {console.log(error.Message);}
         );
   }
 

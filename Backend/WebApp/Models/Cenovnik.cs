@@ -12,12 +12,16 @@ namespace WebApp.Models
     {
         [Key]
         public int ID { get; set; }
-        public DateTime Od { get; set; }
-        public DateTime Do { get; set; }
+
+		public DateTime Od { get; set; }
+
+		public DateTime Do { get; set; }
+
 		public bool Aktuelan { get; set; }
+
 		public bool Izbrisano { get; set; }
 
-        [InverseProperty("Cenovnik")]
+		[InverseProperty("Cenovnik")]
         public virtual List<StavkaCenovnika> Stavke { get; set; }
     }
 }

@@ -281,6 +281,10 @@
     <Compile Include="Migrations\201906121438414_KartaIzmena.Designer.cs">
       <DependentUpon>201906121438414_KartaIzmena.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906122342360_OptimisticConcurrency.cs" />
+    <Compile Include="Migrations\201906122342360_OptimisticConcurrency.Designer.cs">
+      <DependentUpon>201906122342360_OptimisticConcurrency.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -446,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906121438414_KartaIzmena.resx">
       <DependentUpon>201906121438414_KartaIzmena.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906122342360_OptimisticConcurrency.resx">
+      <DependentUpon>201906122342360_OptimisticConcurrency.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -27,7 +27,7 @@ namespace WebApp.Controllers
 			var tempStanica = unitOfWork.Stanice.GetStanicaByNaziv(naziv);
 			if (tempStanica == null || (tempStanica != null && tempStanica.Izbrisano))
 			{
-				return BadRequest($"Stanica sa nazivom {naziv}");
+				return BadRequest($"Stanica sa nazivom {naziv} ne postoji ili je u medjuvremenu izbrisana.");
 			}
 
 			tempStanica.Izbrisano = true;
@@ -47,11 +47,15 @@ namespace WebApp.Controllers
 			{
 				return BadRequest($"Stanica sa nazivom {stanica.Naziv}");
 			}
+			if (stanica.Verzija != tempStanica.Verzija)
+			{
+				return BadRequest("Stanica je izmenjena u medjuvremenu.");
+			}
 
 			tempStanica.X = stanica.X;
 			tempStanica.Y = stanica.Y;
 			tempStanica.Adresa = stanica.Adresa;
-			
+			tempStanica.Verzija++;
 
 			try
 			{
@@ -81,7 +85,8 @@ namespace WebApp.Controllers
 					Naziv = item.Naziv,
 					Adresa = item.Adresa,
 					X = item.X,
-					Y = item.Y
+					Y = item.Y,
+					Verzija = item.Verzija
 				});
 			}
 			return result;
@@ -108,7 +113,7 @@ namespace WebApp.Controllers
 
 
 			novaStanica.Izbrisano = false;
-
+			novaStanica.Verzija = 1;
 			try
 			{
 				unitOfWork.Stanice.Add(novaStanica);
