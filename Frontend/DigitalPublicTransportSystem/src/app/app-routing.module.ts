@@ -22,6 +22,7 @@ import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-pro
 import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
+import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 
 const routes: Routes = [
   {
@@ -112,7 +113,13 @@ const routes: Routes = [
    {
     path: 'prikazTransakcija',
     component: PrikazTransakcijaComponent
-   }
+   },
+   {
+    path: 'kontrolor/validacijaKarte',
+    component: ValidacijaKartaComponent,
+    canActivate: [KontrolorGuard]
+  }
+
  
 ];
 

@@ -27,6 +27,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
+import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 
@@ -55,7 +56,8 @@ import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakc
     DashboardKontrolorComponent,
     DeaktivirajProfilComponent,
     PrikazTransakcijaComponent
-  ],
+    ValidacijaKartaComponent  
+],
   imports: [
     BrowserModule,
     AppRoutingModule,

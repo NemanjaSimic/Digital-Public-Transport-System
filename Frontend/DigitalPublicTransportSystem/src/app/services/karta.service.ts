@@ -13,6 +13,8 @@ export class KartaService{
     private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKartaNeregistrovani';
     private KupiKartuRegistrovaniUrl = 'http://localhost:52295/api/Account/PostKartaRegistrovani';
     private GetKarteKorisnikaUrl = 'http://localhost:52295/api/Account/GetKarteKorisnika/';
+    private ValidateKartaUrl = 'http://localhost:52295/api/Karta/Validate';
+
 
     constructor(private http: HttpClient) { }
 
@@ -24,8 +26,13 @@ export class KartaService{
         return this.http.post<any>(this.KupiKartuRegistrovaniUrl, data);
     }
 
+
     getKarteKorisnika(username: string) : Observable<Karta[]>{
         return this.http.get<Karta[]>(this.GetKarteKorisnikaUrl+username);
+
+    validateKarta(id: any) : Observable<any>{
+        return this.http.get<any>(`${this.ValidateKartaUrl}?ID=${id}`)
+
     }
 
     private handleError<T> (operation = 'operation', result?: T) {
