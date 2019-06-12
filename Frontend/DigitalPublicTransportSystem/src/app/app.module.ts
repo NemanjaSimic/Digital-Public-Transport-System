@@ -27,6 +27,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
+import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
     MrezaLinijaComponent,
     ValidacijaDokumenataComponent,
     DashboardKontrolorComponent,
+    ValidacijaKartaComponent,
   ],
   imports: [
     BrowserModule,

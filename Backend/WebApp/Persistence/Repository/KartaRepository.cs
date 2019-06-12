@@ -33,5 +33,10 @@ namespace WebApp.Persistence.Repository
 			}
 
 		}
+
+		public Karta GetKarta(int ID)
+		{
+			return AppDbContext.Karte.ToList().FirstOrDefault(k => k.ID == ID);
+		}
 	}
 }

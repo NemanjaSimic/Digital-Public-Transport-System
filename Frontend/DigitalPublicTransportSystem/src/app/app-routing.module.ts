@@ -20,6 +20,7 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
+import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 
 const routes: Routes = [
   {
@@ -101,6 +102,11 @@ const routes: Routes = [
   {
     path: 'kontrolor/validacijaDokumenata',
     component: ValidacijaDokumenataComponent,
+    canActivate: [KontrolorGuard]
+  },
+  {
+    path: 'kontrolor/validacijaKarte',
+    component: ValidacijaKartaComponent,
     canActivate: [KontrolorGuard]
   }
  

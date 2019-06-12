@@ -1,0 +1,14 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="validirajKartu(f.value)">
+    <div class="form-group" >
+    <h2>Unesite ID karte:</h2>
+    <input class="form-control" name="ID" type="number" ngModel required>
+    <button class="btn btn-primary btn-block" type="submit" [disabled]="f.invalid">Proveri kartu</button>
+    </div>
+  </form>
+  <div *ngIf="porukaStigla" class="alert alert-success">
+      <ul>
+        <li *ngFor="let p of poruka"><span>{{p}}</span></li>
+      </ul>    
+    </div>
+</div>

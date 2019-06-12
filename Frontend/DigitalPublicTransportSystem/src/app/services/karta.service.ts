@@ -11,6 +11,7 @@ const httpOptions = {
 export class KartaService{
     private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKartaNeregistrovani';
     private KupiKartuRegistrovaniUrl = 'http://localhost:52295/api/Account/PostKartaRegistrovani';
+    private ValidateKartaUrl = 'http://localhost:52295/api/Karta/Validate';
 
     constructor(private http: HttpClient) { }
 
@@ -20,6 +21,10 @@ export class KartaService{
 
     kupiKartuRegistrovani(data: any) : Observable<any>{
         return this.http.post<any>(this.KupiKartuRegistrovaniUrl, data);
+    }
+
+    validateKarta(id: any) : Observable<any>{
+        return this.http.get<any>(`${this.ValidateKartaUrl}?ID=${id}`)
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

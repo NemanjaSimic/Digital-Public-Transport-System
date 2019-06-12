@@ -11,6 +11,7 @@ namespace WebApp.Persistence.Repository
     public interface IKartaRepository : IRepository<Karta, int>
 	{
 		int NapraviKartu(string korisnik, VrstaKarte vrstaKarte, VrstaPopusta vrstaPopusta);
+		Karta GetKarta(int ID);
 
 	}
 }
