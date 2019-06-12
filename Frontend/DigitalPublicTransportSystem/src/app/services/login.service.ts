@@ -16,6 +16,7 @@ export class LoginService
 {
     log:LOG = new LOG;
     private apiAddress: string = `http://localhost:52295/oauth/token`;
+    private getTipKorisnikaUrl : string = `http://localhost:52295/api/Account/GetUserType/`
 
     constructor(private httpClient : HttpClient,private notificationService: NotificationService,
                 private authService: AuthService,private router: Router) { }
@@ -62,6 +63,11 @@ export class LoginService
                 }        
               }
         );
+    }
+
+    getUserType(username: string) : Observable<string>{
+        const query = `username=${username}`;
+        return this.httpClient.get<string>(this.getTipKorisnikaUrl+query);
     }
 
     logOut() : void{

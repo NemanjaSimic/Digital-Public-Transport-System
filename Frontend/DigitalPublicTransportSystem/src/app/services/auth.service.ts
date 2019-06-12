@@ -2,12 +2,14 @@ import { Response, Http, Headers } from '@angular/http'
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { NotificationService } from './notification.service';
+import { LoginService } from './login.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root'})
 export class AuthService{
 
-    constructor(private notificationService : NotificationService) { }
-
+    constructor(private notificationService : NotificationService, private httpClient : HttpClient) { }
+    private getTipKorisnikaUrl : string = `http://localhost:52295/api/Account/GetUserType/`;
     logIn(response: any) : void {
 
         // let responseJson = response.json();
@@ -28,6 +30,22 @@ export class AuthService{
         // let authdata = new AuthData(accessToken, role, id);
         // localStorage.setItem('token', JSON.stringify(authdata));
         // console.log(authdata);
+        let tip = '';
+        this.getTipKorisnika(userId).subscribe(
+            (data)=>{
+                tip = data;
+                if(tip != "")
+            {
+                localStorage.setItem('userType', tip);
+            }
+            }
+            
+        );
+      
+    }
+
+    getTipKorisnika(username : string) : Observable<string>{
+      return this.httpClient.get<string>(this.getTipKorisnikaUrl+`${username}`);
     }
 
     isLoggedIn(): boolean {

@@ -11,9 +11,12 @@ export class CenovnikPrikazComponent implements OnInit {
 
   stavke: Stavka[] = [];
   constructor(private cenovnikService: CenovnikService) { }
-
+  role : string;
+  type : string;
   ngOnInit() {
     this.getCenovnik();
+    this.role = localStorage.getItem('role');
+    this.type = localStorage.getItem('userType');
   }
 
   getCenovnik():void{

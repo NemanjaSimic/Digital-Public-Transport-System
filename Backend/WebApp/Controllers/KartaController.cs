@@ -22,15 +22,15 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("PostKarta")]
-        public IHttpActionResult PostKarta()
+        [Route("PostKartaNeregistrovani")]
+        public IHttpActionResult PostKartaNeregistrovani()
         {
             var req = HttpContext.Current.Request;
             var temp = req.Form.ToString();
-            var email = temp.Replace("%40", "@");
+            var email = temp.Replace("%40", "@"); //don't even ask
 
             //napravi kartu
-            int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
+            int id = unitOfWork.Karte.NapraviKartu("Neregistrovani korisnik", Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
             if (id != -1)
             {
                 try
@@ -48,8 +48,6 @@ namespace WebApp.Controllers
                     mail.Subject = "Karta za autobus - GJSP Novi Sad";
                     mail.Body = $"Sifra vase karte za autobuski prevoz je -> {id}";
 
-
-                    //Send the msg
                     client.Send(mail);
 
                 }
@@ -64,6 +62,5 @@ namespace WebApp.Controllers
                 return BadRequest();
             }
         }
-
     }
 }

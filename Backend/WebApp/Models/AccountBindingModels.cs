@@ -136,6 +136,18 @@ namespace WebApp.Models
     
     }
 
+    public class KartaBindingModel
+    {
+        [Display(Name = "Korisnik")]
+        public string Korisnik { get; set; }
+        [Display(Name = "TipKarte")]
+        public string TipKarte { get; set; }
+        [Display(Name = "TipPopusta")]
+        public string TipPopusta { get; set; }
+        [Display(Name = "Cena")]
+        public float Cena { get; set; }
+    }
+
     public class ValidateUserBindingModel
     {
         [Required]

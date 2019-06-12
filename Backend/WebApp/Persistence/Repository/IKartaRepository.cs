@@ -10,7 +10,7 @@ namespace WebApp.Persistence.Repository
 {
     public interface IKartaRepository : IRepository<Karta, int>
 	{
-		int NapraviKartu(VrstaKarte vrstaKarte, VrstaPopusta vrstaPopusta);
+		int NapraviKartu(string korisnik, VrstaKarte vrstaKarte, VrstaPopusta vrstaPopusta);
 
 	}
 }

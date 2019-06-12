@@ -15,14 +15,14 @@ namespace WebApp.Persistence.Repository
         {
         }
 
-		public int NapraviKartu(VrstaKarte vrstaKarte, VrstaPopusta vrstaPopusta)
+		public int NapraviKartu(string korisnik, VrstaKarte vrstaKarte, VrstaPopusta vrstaPopusta)
 		{
 			try
 			{
 				StavkaCenovnika stavka = new StavkaCenovnika();
 				var lista = AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan == true && !c.Izbrisano).Stavke;
 				stavka = lista.Find(s => s.TipKarte.VrstaKarte == vrstaKarte && s.TipPopusta.VrstaPopusta == vrstaPopusta);
-				var karta = new Karta() { DatumIzdavanja = DateTime.Now, Validna = true, StavkaCenovnika = stavka };
+				var karta = new Karta() { Korisnik = korisnik, DatumIzdavanja = DateTime.Now, Validna = true, StavkaCenovnika = stavka };
 				AppDbContext.Karte.Add(karta);
 				AppDbContext.SaveChanges();
 				return karta.ID;
