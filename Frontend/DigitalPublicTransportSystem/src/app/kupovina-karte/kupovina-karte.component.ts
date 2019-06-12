@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { KartaService } from '../services/karta.service';
 
 @Component({
   selector: 'app-kupovina-karte',
@@ -9,12 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class KupovinaKarteComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, private kartaService : KartaService) { }
+
+  emailForm = this.fb.group({
+    email : ["", Validators.email]
+  });
 
   tipKarte: string;
   tipPopusta: string;
   cena: number;
   role:any;
+
+  get f() { return this.emailForm.controls; }
+
   ngOnInit() {
     this.getInfo();
   }
@@ -27,11 +35,18 @@ export class KupovinaKarteComponent implements OnInit {
   }
 
   kupiKartu(): void{
-    
+    this.kartaService.kupiKartuNeregistrovani(this.emailForm.get('email').value).subscribe(
+      response => {
+        alert("Uspesno ste kupili vremensku kartu u trajanju od 60 min. Poslali smo Vam sifru karte na Vas email.");
+      },
+      error => {
+        alert("Desila se greska prilikom kupovine karte. Pokusajte ponovo.");
+      }
+    )
   }
 
   potvrdiKupovinu():void{
-    
+
   }
 
 }

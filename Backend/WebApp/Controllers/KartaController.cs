@@ -10,46 +10,60 @@ using WebApp.Persistence.UnitOfWork;
 
 namespace WebApp.Controllers
 {
-	[RoutePrefix("api/Karta")]
+    [RoutePrefix("api/Karta")]
     public class KartaController : ApiController
     {
-		private readonly IUnitOfWork unitOfWork;
-		public KartaController(IUnitOfWork unitOfWork)
-		{
-			this.unitOfWork = unitOfWork;
-		}
+        private readonly IUnitOfWork unitOfWork;
+        public KartaController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
 
-		[Route("PostNeregKarta")]
-		public IHttpActionResult PostNeregKarta()
-		{
-			var req = HttpContext.Current.Request;
-			var email = req.Form["email"];
-			int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
-			if (id != -1)
-			{
-                MailMessage mail = new MailMessage("gulegjsp@gmail.com", email);
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = true;
-                client.Credentials = new NetworkCredential("gulegjsp@gmail.com", "Gulice123!");
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.EnableSsl = true;
-                client.Host = "smtp.gmail.com";
-                mail.Subject = "Karta za autobus - GJSP Novi Sad";
-                mail.Body = $"Sifra vase karte za autobuski prevoz je -> {id}";
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("PostKarta")]
+        public IHttpActionResult PostKarta()
+        {
+            var req = HttpContext.Current.Request;
+            var temp = req.Form.ToString();
+            var email = temp.Replace("%40", "@");
+
+            //napravi kartu
+            int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
+            if (id != -1)
+            {
+                try
+                {
+
+                    MailMessage mail = new MailMessage("gulegjsp@gmail.com", email);
+                    SmtpClient client = new SmtpClient();
+                    client.Port = 587;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = true;
+                    client.Credentials = new NetworkCredential("gulegjsp@gmail.com", "Gulice123!");
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.EnableSsl = true;
+                    client.Host = "smtp.gmail.com";
+                    mail.Subject = "Karta za autobus - GJSP Novi Sad";
+                    mail.Body = $"Sifra vase karte za autobuski prevoz je -> {id}";
 
 
-               //Send the msg
-               client.Send(mail);
-				return Ok();
-			}
-			else
-			{
-				return BadRequest();
-			}
-		}
+                    //Send the msg
+                    client.Send(mail);
+
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }

@@ -18,7 +18,7 @@ namespace WebApp.Persistence.Repository
 		{
 			try
 			{
-				return AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan == true).Stavke;
+				return AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan == true && !c.Izbrisano).Stavke;
 			}
 			catch (Exception)
 			{
@@ -28,7 +28,7 @@ namespace WebApp.Persistence.Repository
 
 		public bool NapraviCenovnik(Cenovnik noviCenovnik)
 		{
-			var cenovnik = AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan);
+			var cenovnik = AppDbContext.Cenovnici.ToList().FirstOrDefault(c => c.Aktuelan && !c.Izbrisano);
 			if (cenovnik != null)
 			{
 				cenovnik.Aktuelan = false;
