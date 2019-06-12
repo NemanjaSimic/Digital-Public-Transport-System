@@ -24,6 +24,10 @@ namespace WebApp.Persistence.Repository
 				{
 					names.Add(item.Ime);
 				}
+				else if(String.IsNullOrEmpty(TipVoznje) && !item.Izbrisano)
+				{
+					names.Add(item.Ime);
+				}
 			}
 			return names;
 		}

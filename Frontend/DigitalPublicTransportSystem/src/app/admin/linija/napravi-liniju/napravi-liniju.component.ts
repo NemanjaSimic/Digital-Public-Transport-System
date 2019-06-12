@@ -120,6 +120,7 @@ export class NapraviLinijuComponent implements OnInit {
       novaLinija.NedeljaTermini = novaLinija.NedeljaTermini.filter(l => l != "") as [];
     else
     novaLinija.NedeljaTermini = [];
+    novaLinija.Stanice = [];
     this.izabraneStanice.forEach(element=>{
       novaLinija.Stanice.push(element.Naziv as never);
     })

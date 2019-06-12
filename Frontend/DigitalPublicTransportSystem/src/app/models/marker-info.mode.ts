@@ -1,14 +1,14 @@
 import { GeoLocation } from "./geolocation";
 
 export class MarkerInfo {
-    iconUrl: string;
+    icon: any;
     title: string;
     label: string;
     location: GeoLocation;
     link: string;
 
-    constructor(location: GeoLocation, icon: string, title:string, label:string, link: string){
-        this.iconUrl = icon;
+    constructor(location: GeoLocation, icon: any, title:string, label:string, link: string){
+        this.icon = icon;
         this.title = title;
         this.label = label;
         this.location = location;

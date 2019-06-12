@@ -22,7 +22,7 @@ export class LoginService
                 private authService: AuthService,private router: Router) { }
 
     logIn(email: string, password: string)
-    {    
+    {
         const query = `username=${email}&password=${password}&grant_type=password`;
         const httpOptions = {
             headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -31,7 +31,7 @@ export class LoginService
         this.log.username = email;
         this.httpClient.post<any>(this.apiAddress, query, httpOptions).subscribe(
            (data) =>{
-                    
+
             let jwt = data.access_token;
 
             let jwtData = jwt.split('.')[1]
@@ -60,7 +60,7 @@ export class LoginService
                 if(error.status !== 0){
                     let errorBody = JSON.parse(error._body);
                     this.notificationService.notifyEvent.emit(errorBody.error_description);
-                }        
+                }
               }
         );
     }
@@ -72,14 +72,14 @@ export class LoginService
 
     logOut() : void{
 
-        if(this.isLoggedIn() === true) {
 
+        if(this.isLoggedIn() === true) {           
             localStorage.clear();
             this.router.navigate(['/']);
             this.notificationService.sessionEvent.emit(false);
         }
-     
-        
+
+
     }
 
     isLoggedIn(): boolean{
