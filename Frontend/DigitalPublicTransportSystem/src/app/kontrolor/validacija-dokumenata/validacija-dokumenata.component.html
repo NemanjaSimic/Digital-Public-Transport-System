@@ -1,32 +1,48 @@
 <h2>Korisnici za validaciju:</h2>
 
 <div id="unvalidatedUsers" *ngIf="usersToValidate != null && usersToValidate != []">
+  <table class="table">
+      <thead class="thead-dark">
+          <tr>
+              <th></th>
+              <th>Username korisnika</th>
+              <th>Tip korisnika</th>
+              <th>Status zahteva</th>
+              <th></th>
+            </tr>
+      </thead>
+      <tbody>
   <tr *ngFor="let user of usersToValidate; let i = index">
     <td>{{i+1}}. </td>
     <td>
-      {{user.UserName}}
+      {{user.Username}}
     </td>
     <td>
       {{user.UserType}}
     </td>
     <td>
-      <button type="button" (click)="onValidateClick(i)">Validiraj</button>
+      {{user.IsVerified}}
+    </td>
+    <td>
+      <button type="button" class="btn btn-warning" (click)="onValidateClick(i)">Validiraj</button>
     </td>
   </tr>
+</tbody>
+</table>
 </div>
 
 <div id="userToValidate" *ngIf="userToValidate != null && userToValidate != undefined">
-  <h3>User to validate</h3>
+  <h3>Korisnik za validaciju</h3>
   <label>Username: {{userToValidate.Username}}</label><br/>
   <label>Tip korisnika: {{userToValidate.UserType}}</label><br/>
   <label>Slika dokumenta: </label>
-  <img [src]="imageToValidate" style="max-width: 200px; max-height: 200px;" class="btn-md img-fluid img-thumbnail"/><br/>
+  <img [src]="imageToValidate" style="width: 300px;height: 300px;" class="btn-md img-fluid img-thumbnail"/><br/>
   <br/>
-  <label>Reason: </label>
+  <label>Razlog: </label>
   <form [formGroup]="reasonForm">
     <input type="text" formControlName="reason" />
-    <button type="input" (click)="onValidateUser('Prihvacen')" [disabled]= "userToValidate.IsVerified === 'Prihvacen'">Prihvati</button>
-    <button type="input" (click)="onValidateUser('Odbijen')">Odbij</button>
+    <button type="input" class="btn btn-success" (click)="onValidateUser('Prihvacen')" [disabled]= "userToValidate.IsVerified === 'Prihvacen'">Prihvati</button>
+    <button type="input" class="btn btn-danger" (click)="onValidateUser('Odbijen')">Odbij</button>
   </form>
 
 </div>

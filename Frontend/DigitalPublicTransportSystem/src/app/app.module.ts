@@ -55,7 +55,7 @@ import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakc
     ValidacijaDokumenataComponent,
     DashboardKontrolorComponent,
     DeaktivirajProfilComponent,
-    PrikazTransakcijaComponent
+    PrikazTransakcijaComponent,
     ValidacijaKartaComponent  
 ],
   imports: [

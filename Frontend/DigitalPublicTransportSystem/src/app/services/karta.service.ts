@@ -29,10 +29,10 @@ export class KartaService{
 
     getKarteKorisnika(username: string) : Observable<Karta[]>{
         return this.http.get<Karta[]>(this.GetKarteKorisnikaUrl+username);
+    }
 
     validateKarta(id: any) : Observable<any>{
-        return this.http.get<any>(`${this.ValidateKartaUrl}?ID=${id}`)
-
+        return this.http.get<any>(`${this.ValidateKartaUrl}?ID=${id}`);
     }
 
     private handleError<T> (operation = 'operation', result?: T) {
