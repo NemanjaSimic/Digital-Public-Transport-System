@@ -24,6 +24,7 @@ export class ProfilService{
     private DownloadImageUrl = 'http://localhost:52295/api/Account/DownloadImage/';
     private GetUsersForValidationUrl = 'http://localhost:52295/api/Account/GetAllUsersForValidation';
     private ValidateUserUrl = 'http://localhost:52295/api/Account/ValidateUser';
+    private DeactivateMyProfilUrl = 'http://localhost:52295/api/Account/DeactivateMyProfil';
 
     constructor(private http: HttpClient, private router: Router){}
 
@@ -56,6 +57,10 @@ export class ProfilService{
 
    validateUser(data: any) : Observable<any>{
      return this.http.put(this.ValidateUserUrl, data).pipe(catchError(this.handleError<Korisnik>(`ValidateUser`)));
+   }
+
+   deactivateMyProfil(data: any) : Observable<any>{
+     return this.http.post(this.DeactivateMyProfilUrl, data);
    }
    
    private handleError<T> (operation = 'operation', result?: T) {

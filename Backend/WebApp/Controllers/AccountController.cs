@@ -348,6 +348,40 @@ namespace WebApp.Controllers
             
         }
 
+        [HttpPost]
+        [Authorize(Roles = "AppUser")]
+        [Route("DeactivateMyProfil")]
+        public IHttpActionResult DeactivateMyProfil(UserPassModel userPass)
+        {
+            try
+            {
+                string username = userPass.Username;
+                string password = userPass.Password;
+                var user = UserManager.FindByName(username);
+                if (user == null)
+                {
+                    return BadRequest("Korisnik sa datim username-om ne postoji.");
+                }
+                string sifra = ApplicationUser.HashPassword(password);
+               
+                if (!ApplicationUser.VerifyHashedPassword(user.PasswordHash, password))
+                {
+                    return BadRequest("Pogresna lozinka! Neuspesna deaktivacija profila.");
+                }
+
+                // user.Izbrisano = true;
+                // UserManager.Update(user);
+
+                UserManager.Delete(user);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Neuspesna deaktivacija profila.");
+            }
+
+        }
+
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)

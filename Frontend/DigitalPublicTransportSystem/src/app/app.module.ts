@@ -27,6 +27,7 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
+import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 
 
 
@@ -51,7 +52,8 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
     EditStanicaComponent,
     MrezaLinijaComponent,
     ValidacijaDokumenataComponent,
-    DashboardKontrolorComponent
+    DashboardKontrolorComponent,
+    DeaktivirajProfilComponent
   ],
   imports: [
     BrowserModule,

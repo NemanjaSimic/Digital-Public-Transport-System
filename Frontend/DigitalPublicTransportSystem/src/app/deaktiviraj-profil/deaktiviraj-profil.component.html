@@ -1,0 +1,24 @@
+<h2>Deaktivacija profila:</h2>
+<div class="form">
+  <div class="col-7">
+  <form [formGroup]="deactivateForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">   
+        <input type="password" formControlName="password" placeholder="Password" required class="form-control">
+        <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
+          <ng-container *ngIf="f.password.errors.required">
+            Please enter your password for deactivation.
+          </ng-container>
+          <ng-container *ngIf="f.password.errors.minlength">
+            <p>Password must be at least 6 characters long.</p>
+          </ng-container>
+          <ng-container *ngIf="f.password.errors.pattern">
+            <p>Passwords must have at least one non letter or digit character. Passwords must have at least one digit ('0'-'9'). Passwords must have at least one uppercase ('A'-'Z').</p>
+          </ng-container>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="deactivateForm.invalid" style="background: rgba(217, 23, 16) !important; outline-color: rgba(217, 23, 16, 0.3) !important">Deaktiviraj profil</button>
+      </div>
+    </form>
+  </div>
+</div>
