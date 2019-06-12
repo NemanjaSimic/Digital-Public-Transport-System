@@ -257,9 +257,15 @@ namespace WebApp.Controllers
         [HttpPut]
         [Authorize(Roles = "AppUser")]
         [Route("EditUser")]
-        public async Task<IHttpActionResult> EditUser(RegisterBindingModel user)
+        public IHttpActionResult EditUser(RegisterBindingModel user)
         {
             string username = user.OldUsername;
+            ApplicationUser userCheck = UserManager.FindByName(user.OldUsername);
+            if(!ApplicationUser.VerifyHashedPassword(userCheck.PasswordHash, user.Password))
+            {
+                return BadRequest("Pogresna lozinka.Neuspesna izmena profila.");
+            }
+
             if(!user.Username.Equals(username))
             {
                 ApplicationUser temp = UserManager.FindByName(user.Username);
@@ -293,10 +299,10 @@ namespace WebApp.Controllers
                         PasswordHash = stariUser.PasswordHash
                     };
 
-					IdentityResult result = await UserManager.DeleteAsync(stariUser);
+					IdentityResult result = UserManager.Delete(stariUser);
 
-                    IdentityResult result2 = await UserManager.CreateAsync(temp);
-                    IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
+                    IdentityResult result2 = UserManager.Create(temp);
+                    IdentityResult roleResult = UserManager.AddToRole(temp.UserName, "AppUser");
                     UnitOfWork.Complete();
                     if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
                     {
@@ -330,9 +336,7 @@ namespace WebApp.Controllers
 					stariUser.ImgUrl = user.ImgUrl;
 					stariUser.PasswordHash = stariUser.PasswordHash;
 
-
-
-					IdentityResult result = await UserManager.UpdateAsync(stariUser);
+					IdentityResult result = UserManager.Update(stariUser);
                     //IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
                     //UnitOfWork.Complete();
 
@@ -346,6 +350,40 @@ namespace WebApp.Controllers
             }
 
             
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "AppUser")]
+        [Route("DeactivateMyProfil")]
+        public IHttpActionResult DeactivateMyProfil(UserPassModel userPass)
+        {
+            try
+            {
+                string username = userPass.Username;
+                string password = userPass.Password;
+                var user = UserManager.FindByName(username);
+                if (user == null)
+                {
+                    return BadRequest("Korisnik sa datim username-om ne postoji.");
+                }
+                string sifra = ApplicationUser.HashPassword(password);
+               
+                if (!ApplicationUser.VerifyHashedPassword(user.PasswordHash, password))
+                {
+                    return BadRequest("Pogresna lozinka! Neuspesna deaktivacija profila.");
+                }
+
+                // user.Izbrisano = true;
+                // UserManager.Update(user);
+
+                UserManager.Delete(user);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Neuspesna deaktivacija profila.");
+            }
+
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true

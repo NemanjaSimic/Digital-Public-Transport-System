@@ -85,6 +85,14 @@ namespace WebApp.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class UserPassModel
+    {
+        [Display(Name ="Username")]
+        public string Username { get; set; }
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+    }
+
 	public class RegisterBindingModel
 	{
 		[Required]

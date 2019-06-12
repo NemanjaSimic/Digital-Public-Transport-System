@@ -18,6 +18,7 @@ import { EditStanicaComponent } from './admin/stanica/edit-stanica/edit-stanica.
 import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata/validacija-dokumenata.component';
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
+import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
@@ -99,7 +100,11 @@ const routes: Routes = [
     component: DashboardKontrolorComponent,
     canActivate: [KontrolorGuard]
   },
-  {
+   {
+    path: 'deaktivirajProfil',
+    component: DeaktivirajProfilComponent
+   },
+   {
     path: 'kontrolor/validacijaDokumenata',
     component: ValidacijaDokumenataComponent,
     canActivate: [KontrolorGuard]
