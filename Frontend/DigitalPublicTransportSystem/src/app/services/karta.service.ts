@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Karta } from '../models/karta';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -11,6 +12,7 @@ const httpOptions = {
 export class KartaService{
     private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKartaNeregistrovani';
     private KupiKartuRegistrovaniUrl = 'http://localhost:52295/api/Account/PostKartaRegistrovani';
+    private GetKarteKorisnikaUrl = 'http://localhost:52295/api/Account/GetKarteKorisnika/';
 
     constructor(private http: HttpClient) { }
 
@@ -20,6 +22,10 @@ export class KartaService{
 
     kupiKartuRegistrovani(data: any) : Observable<any>{
         return this.http.post<any>(this.KupiKartuRegistrovaniUrl, data);
+    }
+
+    getKarteKorisnika(username: string) : Observable<Karta[]>{
+        return this.http.get<Karta[]>(this.GetKarteKorisnikaUrl+username);
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

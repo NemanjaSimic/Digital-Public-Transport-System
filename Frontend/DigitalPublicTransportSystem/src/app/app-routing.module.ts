@@ -21,6 +21,7 @@ import { MrezaLinijaComponent } from './mreza-linija/mreza-linija.component';
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
+import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 
 const routes: Routes = [
   {
@@ -107,7 +108,11 @@ const routes: Routes = [
     path: 'kontrolor/validacijaDokumenata',
     component: ValidacijaDokumenataComponent,
     canActivate: [KontrolorGuard]
-  }
+   },
+   {
+    path: 'prikazTransakcija',
+    component: PrikazTransakcijaComponent
+   }
  
 ];
 

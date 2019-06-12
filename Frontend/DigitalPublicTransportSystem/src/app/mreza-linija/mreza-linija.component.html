@@ -9,7 +9,7 @@
 </div>
   <agm-map *ngIf="selectedLinija" [latitude]="45.242268" [longitude]="19.842954" [zoom]="14">  
 
-    <agm-marker *ngFor="let marker of markeri" [latitude]="marker.location.latitude" [longitude]="marker.location.longitude" [iconUrl]="marker.iconUrl" [title]="marker.title" [label]="marker.label">
+    <agm-marker *ngFor="let marker of markeri" [latitude]="marker.location.latitude" [longitude]="marker.location.longitude" [iconUrl]="marker.icon" [title]="marker.title" [label]="marker.label">
     </agm-marker>
 
     <agm-polyline [strokeColor]="mreza.color">

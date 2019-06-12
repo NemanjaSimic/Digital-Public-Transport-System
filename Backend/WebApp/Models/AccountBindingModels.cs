@@ -154,6 +154,8 @@ namespace WebApp.Models
         public string TipPopusta { get; set; }
         [Display(Name = "Cena")]
         public float Cena { get; set; }
+        [Display(Name = "Datum")]
+        public string Datum { get; set; }
     }
 
     public class ValidateUserBindingModel

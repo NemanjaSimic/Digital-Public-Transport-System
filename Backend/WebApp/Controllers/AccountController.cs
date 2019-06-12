@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -11,6 +12,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -102,6 +104,36 @@ namespace WebApp.Controllers
             {
                 return user.UserType;
             }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "AppUser")]
+        [ResponseType(typeof(List<KartaBindingModel>))]
+        [Route("GetKarteKorisnika/{username}")]
+        public IHttpActionResult GetKarteKorisnika(string username)
+        {
+            List<KartaBindingModel> retVal = new List<KartaBindingModel>();
+            var user = UserManager.FindByName(username);
+            var karte = UnitOfWork.Karte.GetAll().ToList();
+            if (user != null)
+            {
+                foreach (var item in karte)
+                {
+                    if (item.Korisnik.Equals(username))
+                    {
+                        retVal.Add(new KartaBindingModel()
+                        {
+                            Korisnik = item.Korisnik,
+                            Datum = item.DatumIzdavanja.ToString("f",
+                      CultureInfo.CreateSpecificCulture("en-GB")),
+                            Cena = item.StavkaCenovnika.Cena,
+                            TipKarte = item.StavkaCenovnika.TipKarte.VrstaKarte.ToString(),
+                            TipPopusta = item.StavkaCenovnika.TipPopusta.VrstaPopusta.ToString()
+                        });
+                    }
+                }
+            }
+            return Ok(retVal);
         }
 
         [HttpPost]
