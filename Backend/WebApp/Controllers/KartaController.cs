@@ -22,11 +22,12 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [Route("PostNeregKarta")]
-        public IHttpActionResult PostNeregKarta(string email)
+        [Route("PostKarta")]
+        public IHttpActionResult PostKarta()
         {
-            //var req = HttpContext.Current.Request;
-            //var email = req.Form["email"];
+            var req = HttpContext.Current.Request;
+            var temp = req.Form.ToString();
+            var email = temp.Replace("%40", "@");
 
             //napravi kartu
             int id = unitOfWork.Karte.NapraviKartu(Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);

@@ -4,17 +4,17 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
   };
 
 @Injectable({ providedIn: 'root' })
 export class KartaService{
-    private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostNeregKarta';
+    private KupiKartuNeregistrovaniUrl = 'http://localhost:52295/api/Karta/PostKarta';
 
     constructor(private http: HttpClient) { }
 
-    kupiKartuNeregistrovani(email: string) : Observable<any>{
-        return this.http.post<string>(this.KupiKartuNeregistrovaniUrl, email, httpOptions);
+    kupiKartuNeregistrovani(email: any) : Observable<any>{
+        return this.http.post<any>(this.KupiKartuNeregistrovaniUrl, email, httpOptions);
     }
 
     private handleError<T> (operation = 'operation', result?: T) {
