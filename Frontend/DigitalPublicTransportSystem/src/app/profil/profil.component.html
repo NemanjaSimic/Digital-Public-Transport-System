@@ -48,7 +48,7 @@
                                       <label>Datum rodjenja:</label>
                                   </div>
                                   <div class="col-md-6">
-                                      <p>{{user.DateOfBirth}}</p>
+                                      <p>{{datum}}</p>
                                   </div>
                               </div>
                               <div class="row">
@@ -68,13 +68,13 @@
                                   </div>
                               </div>
                               <div class="row" *ngIf="user.UserType !== 'Regular'">
-                                  <div class="col-md-6">
+                                  <div class="col-md-2">
                                       <label>Slika dokumenta:</label>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="profile-img">
                                             <img *ngIf="mySrc!=undefined && mySrc!=null; else noImg" [src]="mySrc"
-                                            style="max-width: 200px; max-height: 200px;" class="btn-md img-fluid img-thumbnail">
+                                            style="width: 400px; height: 300px;" class="btn-md img-fluid img-thumbnail">
                                             <ng-template #noImg >
                                             <img src="" alt="Slika ne postoji"> 
                                             </ng-template>                                     

@@ -12,12 +12,14 @@ export class ProfilComponent implements OnInit {
 
   user: Korisnik = new Korisnik();
   mySrc : string;
+  datum : string
   constructor(private http: HttpClient, private profilService : ProfilService) { }
 
   ngOnInit() {
     this.profilService.getUser(localStorage.getItem('userId')).subscribe(
       user => {
         this.user = user;
+        this.datum = user.DateOfBirth.toString().substring(0,10);
         if(this.user.ImgUrl != null)
         {
         this.profilService.downloadImage(localStorage.getItem('userId')).subscribe(
