@@ -35,9 +35,9 @@ export class AuthService{
             (data)=>{
                 tip = data;
                 if(tip != "")
-            {
-                localStorage.setItem('userType', tip);
-            }
+                {
+                    localStorage.setItem('userType', tip);
+                }
             }
             
         );

@@ -23,6 +23,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
+import { KorisniciComponent } from './admin/korisnici/korisnici.component';
 
 const routes: Routes = [
   {
@@ -94,6 +95,11 @@ const routes: Routes = [
   {
     path: 'admin/editStanica',
     component: EditStanicaComponent,
+    canActivate: [AdminGuard]
+  },
+  {
+    path: 'admin/korisnici',
+    component: KorisniciComponent,
     canActivate: [AdminGuard]
   },
   {

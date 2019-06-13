@@ -30,6 +30,7 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
+import { KorisniciComponent } from './admin/korisnici/korisnici.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakc
     DashboardKontrolorComponent,
     DeaktivirajProfilComponent,
     PrikazTransakcijaComponent,
-    ValidacijaKartaComponent  
+    ValidacijaKartaComponent,
+    KorisniciComponent  
 ],
   imports: [
     BrowserModule,

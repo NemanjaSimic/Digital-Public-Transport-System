@@ -1,0 +1,39 @@
+<div *ngIf="users != null && users != []">
+<h2>Aktivni korisnici:</h2>
+  <table class="table" id="myTable">
+      <thead class="thead-dark">
+          <tr>
+              <th>#</th>
+              <th>Username</th>
+              <th>Ime</th>
+              <th>Prezime</th>
+              <th>Email</th>
+              <th>Tip korisnika</th>
+              <th></th>
+            </tr>
+      </thead>
+      <tbody>
+  <tr *ngFor="let user of users; let i = index">
+    <td>{{i+1}}. </td>
+    <td>
+      {{user.Username}}
+    </td>
+    <td>
+      {{user.Name}}
+    </td>
+    <td>
+      {{user.Surname}}
+    </td>
+    <td>
+      {{user.Email}}
+    </td>
+    <td>
+      {{user.UserType}}
+    </td>
+    <td>
+      <button type="button" class="btn btn-danger" (click)="onClick(user.Username)">Izbrisi</button>
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>

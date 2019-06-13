@@ -286,6 +286,37 @@ namespace WebApp.Controllers
 
             return retVal;
         }
+
+        [Route("GetAllUsers")]
+        [HttpGet]
+        [Authorize(Roles ="Admin")]
+        public List<RegisterBindingModel> GetAllUsers()
+        {
+            List<RegisterBindingModel> retVal = new List<RegisterBindingModel>();
+            List<ApplicationUser> temp = new List<ApplicationUser>();
+            List<ApplicationUser> temp2 = new List<ApplicationUser>();
+            temp = UserManager.Users.Where(x => x.Izbrisano == false).ToList();
+            foreach (var item in temp)
+            {
+                if(UserManager.IsInRole(item.Id, "AppUser"))
+                {
+                    temp2.Add(item);
+                }
+            }
+            foreach(var user in temp2)
+            {
+                retVal.Add(new RegisterBindingModel()
+                {
+                    Username = user.UserName,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    UserType = user.UserType,
+                    Email = user.Email
+                });
+            }
+            return retVal;
+        }
+
         [HttpPut]
         [Authorize(Roles = "AppUser")]
         [Route("EditUser")]
@@ -407,6 +438,32 @@ namespace WebApp.Controllers
 
                 // user.Izbrisano = true;
                 // UserManager.Update(user);
+
+                UserManager.Delete(user);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Neuspesna deaktivacija profila.");
+            }
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("DeactivateProfilByAdmin")]
+        public IHttpActionResult DeactivateProfilByAdmin()
+        {
+
+            var req = HttpContext.Current.Request;
+            var username = req.Form.ToString();
+            try
+            {
+                var user = UserManager.FindByName(username);
+                if (user == null)
+                {
+                    return BadRequest("Korisnik sa datim username-om ne postoji.");
+                }
 
                 UserManager.Delete(user);
                 return Ok();
