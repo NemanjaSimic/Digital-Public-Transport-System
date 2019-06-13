@@ -29,6 +29,7 @@ import { ValidacijaDokumenataComponent } from './kontrolor/validacija-dokumenata
 import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/dashboard-kontrolor.component';
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
+import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 
 
 @NgModule({
@@ -53,9 +54,10 @@ import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-pro
     MrezaLinijaComponent,
     ValidacijaDokumenataComponent,
     DashboardKontrolorComponent,
-    ValidacijaKartaComponent,
-    DeaktivirajProfilComponent
-  ],
+    DeaktivirajProfilComponent,
+    PrikazTransakcijaComponent,
+    ValidacijaKartaComponent  
+],
   imports: [
     BrowserModule,
     AppRoutingModule,

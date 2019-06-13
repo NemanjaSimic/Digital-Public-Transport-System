@@ -7,7 +7,7 @@
         <input type="text" id="name" value="{{user.Name}}" formControlName="name" required class="form-control" />
           <div *ngIf="f.name.invalid && f.name.touched" class="alert alert-danger">
             <ng-container *ngIf="f.name.errors.required">
-              <p>Name is required.</p>
+              <p>Morate uneti ime.</p>
             </ng-container>
           </div>
        </div>
@@ -17,7 +17,7 @@
            <input type="text" id="surname" value ="{{user.Surname}}" formControlName="surname" required class="form-control" />
               <div *ngIf="f.surname.invalid && (f.surname.touched)" class="alert alert-danger">
                 <ng-container *ngIf="f.surname.errors.required">
-                  <p>Surname is required.</p>
+                  <p>Morate uneti prezime.</p>
                 </ng-container>
               </div>
         </div>
@@ -27,7 +27,7 @@
             <input type="text" id="address" value ="{{user.Address}}" formControlName="address" required class="form-control" />
               <div *ngIf="f.address.invalid && f.address.touched " class="alert alert-danger">
                 <ng-container *ngIf="f.address.errors.required">
-                  <p>Address is required.</p>
+                  <p>Morate uneti adresu.</p>
                  </ng-container>
               </div>
         </div>
@@ -37,10 +37,10 @@
             <input type="text" value ="{{user.Email}}" formControlName="email" required class="form-control" />
               <div *ngIf="f.email.invalid && f.email.touched" class="alert alert-danger">
                 <div *ngIf="f.email.errors.required">
-                  <p>Email is required.</p>
+                  <p>Morate uneti email adresu.</p>
                 </div>
                 <div *ngIf="f.email.errors.email">
-                  <p>Please enter valid email address.</p>
+                  <p>Unesite validnu email adresu.</p>
                 </div>
               </div>
         </div>
@@ -50,16 +50,16 @@
           <input type="text" id="username" value ="{{user.Username}}" formControlName="username" required class="form-control">
             <div *ngIf="f.username.invalid && f.username.touched" class="alert alert-danger">
               <ng-container *ngIf="f.username.errors.required">
-                <p>Username is required.</p>
+                <p>Morate uneti vase korisnicko ime.</p>
               </ng-container>
               <ng-container *ngIf="f.username.errors.minlength">
-                 <p>Username must be at least 6 characters long.</p>
+                 <p>Korisnicko ime mora sadrzati bar 6 karaktera.</p>
               </ng-container>
            </div>
       </div>
       <div class="form-group">
           <label>Datum rodjenja:</label>
-            <input type="date" min="1900-01-01" max="2019-01-01" value="{{date}}" id="dateOfBirth" formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
+            <input type="date" min="1900-01-01" max="2019-01-01" value="{{date}}" id="dateOfBirth" required formControlName="dateOfBirth" placeholder="Date of Birth" class="form-control" style="margin-left: 20px; width: 250px" />
       </div>
               
           <div class="form-group">
@@ -92,7 +92,7 @@
               <input type="password" formControlName="password" placeholder="Password" required class="form-control">
               <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
                 <ng-container *ngIf="f.password.errors.required">
-                  Please enter your password for edit profile.
+                  Unesite lozinku da biste potvrdili izmene na profilu.
                 </ng-container>
               </div>
           </div>

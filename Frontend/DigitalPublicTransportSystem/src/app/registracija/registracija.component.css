@@ -1,3 +1,8 @@
+#registracija{
+  align-items: center;
+  justify-content: space-around;
+}
+
 .img-fluid {
     margin-top: 50px !important;
     margin-left: -200px !important;

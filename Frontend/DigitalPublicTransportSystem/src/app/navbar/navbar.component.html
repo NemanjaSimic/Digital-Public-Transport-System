@@ -12,7 +12,8 @@
       <li class="nav-item"><a class="nav-link" routerLink="/cenovnik">Cenovnik</a></li>
       <li class="nav-item"><a class="nav-link" *ngIf="IsAdmin" routerLink="/admin/dashboard">Admin panel</a></li>
       <li class="nav-item"><a class="nav-link" *ngIf="isKontrolor"  routerLink="/kontrolor/dashboard">Kontrolor panel</a></li>
-  </ul>
+      <li class="nav-item"><a class="nav-link" *ngIf="IsAppUser"  routerLink="prikazTransakcija">Moje transakcije</a></li>
+    </ul>
   <ul class="navbar-nav ml-auto mr-1">
       <li class="nav-item"><a a class="nav-link" *ngIf="!IsLoggedIn" routerLink ="/login">Prijava</a></li>
       <li class="nav-item"><a a class="nav-link" *ngIf="!IsLoggedIn" routerLink="/registracija">Registracija</a></li>
@@ -29,6 +30,6 @@
                 </div>
               </div>
         </li>     
-      <li class="nav-item"><button *ngIf="IsLoggedIn" (click)="LogOut()">Odjava</button></li>
+      <li class="nav-item"><button *ngIf="IsLoggedIn" class="btn btn-outline-primary" (click)="LogOut()">Odjava</button></li>
   </ul>
 </nav>

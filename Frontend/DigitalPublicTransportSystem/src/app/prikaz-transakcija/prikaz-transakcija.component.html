@@ -1,0 +1,25 @@
+<div *ngIf="karte.length == 0">
+  <h3>Trenutno nemate transkacije kupljenih karata.</h3>
+</div>
+
+<div *ngIf="karte.length > 0">
+  <h3>Kupljene karte:</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Vrsta karte</th>
+        <th scope="col">Vrsta popusta</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Datum izdavanja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let karta of karte">
+        <td>{{karta.TipKarte}}</td>
+        <td>{{karta.TipPopusta}}</td>
+        <td>{{karta.Cena}}</td>        
+        <td>{{karta.Datum}}</td>        
+      </tr>
+    </tbody>
+  </table>
+</div>
