@@ -24,6 +24,7 @@ import { KontrolorGuard } from './guards/kontrolor.guard';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 import { KorisniciComponent } from './admin/korisnici/korisnici.component';
+import { AppKorisnikGuard } from './guards/appKorisnik.guard';
 
 const routes: Routes = [
   {
@@ -57,7 +58,8 @@ const routes: Routes = [
   },
   {
     path: 'profil',
-    component: ProfilComponent
+    component: ProfilComponent,
+    canActivate: [AppKorisnikGuard]
    },
    {
     path: 'admin/dashboard',
@@ -71,11 +73,13 @@ const routes: Routes = [
   },
   {
     path: 'editProfil',
-    component: EditProfilComponent
+    component: EditProfilComponent,
+    canActivate: [AppKorisnikGuard]
   },
   {
     path: 'changePassword',
-    component: ChangePasswordComponent
+    component: ChangePasswordComponent,
+    canActivate: [AppKorisnikGuard]
    },
   {
     path: 'admin/novaLinija',
@@ -109,7 +113,8 @@ const routes: Routes = [
   },
    {
     path: 'deaktivirajProfil',
-    component: DeaktivirajProfilComponent
+    component: DeaktivirajProfilComponent,
+    canActivate: [AppKorisnikGuard]
    },
    {
     path: 'kontrolor/validacijaDokumenata',
@@ -118,7 +123,8 @@ const routes: Routes = [
    },
    {
     path: 'prikazTransakcija',
-    component: PrikazTransakcijaComponent
+    component: PrikazTransakcijaComponent,
+    canActivate: [AppKorisnikGuard]
    },
    {
     path: 'kontrolor/validacijaKarte',
