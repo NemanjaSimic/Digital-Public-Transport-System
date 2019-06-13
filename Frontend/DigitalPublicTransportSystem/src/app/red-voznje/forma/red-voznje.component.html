@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row mt-1">
-    <form class="form-group form-inline" [formGroup]="redVoznjeForm" (ngSubmit)="prkaziTermine()">
+    <form class="form-group form-inline shadow mt-5" [formGroup]="redVoznjeForm" (ngSubmit)="prkaziTermine()">
           <label class="mr-sm-2">Tip linije:</label>
           <select class="form-control mr-sm-5" formControlName="TipVoznje" (change)="criteriaChanged()">
             <option>Gradski</option>
@@ -21,8 +21,8 @@
   </div>
   <div class="row">
     <div class="container">
-      <ul class="list-group">
-        <li  class="list-group-item" *ngFor="let termin of termini">
+      <ul class="list-group-item-dark">
+        <li class="pt-2 pb-2" *ngFor="let termin of termini">
           <span>{{termin}}</span>
         </li>
       </ul>

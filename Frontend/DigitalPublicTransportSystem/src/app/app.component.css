@@ -1,0 +1,17 @@
+@font-face{
+    font-family: myFont;
+    src: url(/src//assets//fonts/RobotoSlab-Bold.ttf)
+}
+h2{
+    font-family: myFont;
+}
+h3{
+    font-family: myFont;
+}
+label{
+    font-family: myFont;
+}
+
+select{
+    min-width: 300px;
+}

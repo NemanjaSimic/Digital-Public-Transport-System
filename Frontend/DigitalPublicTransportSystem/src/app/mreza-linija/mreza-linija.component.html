@@ -1,15 +1,23 @@
 <div class="container">
-  <h2>Izaberite liniju za prikaz putanje</h2>
-  <div class="form-group mt-5">
-  <form #f="ngForm" >
-    <select size="5" name="selectedLinija" ngModel class="form-control" (change)="prikaziMrezu($event.target.value)">
-      <option *ngFor="let linija of linije">{{linija}}</option>
-    </select>
-  </form>
-</div>
+    <h2 class="text-info">Izaberite liniju za prikaz putanje</h2>
+    <div class="form-group mt-5">
+    <form #f="ngForm" >
+      <select class="form-group bg-info" size="5" name="selectedLinija" ngModel class="form-control" (change)="prikaziMrezu($event.target.value)">
+        <option *ngFor="let linija of linije">{{linija}}</option>
+      </select>  
+    </form>
+
   <agm-map *ngIf="selectedLinija" [latitude]="45.242268" [longitude]="19.842954" [zoom]="14">  
 
     <agm-marker *ngFor="let marker of markeri" [latitude]="marker.location.latitude" [longitude]="marker.location.longitude" [iconUrl]="marker.icon" [title]="marker.title" [label]="marker.label">
+      
+        <agm-info-window [latitude]="marker.location.latitude" [longitude]="marker.location.longitude" >
+
+            <span style="font-size: 16px;font-family:'Times New Roman'">{{marker.title}}</span>
+            <br/>
+            <span style="font-family:'Times New Roman'; color:gray;">{{marker.label}}</span>
+        </agm-info-window>
+    
     </agm-marker>
 
     <agm-polyline [strokeColor]="mreza.color">

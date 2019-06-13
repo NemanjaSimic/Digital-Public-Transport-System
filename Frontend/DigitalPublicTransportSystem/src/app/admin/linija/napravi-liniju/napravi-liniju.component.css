@@ -1,0 +1,23 @@
+form{
+    min-width: 100%;
+    justify-content: center;
+}
+.test{
+    justify-content: center;
+    width: 33%;
+ }
+ 
+ .form-group{
+     display: block !important;
+     margin: 10% auto;
+     text-align: center;
+ }
+
+ .stanice{
+     min-width: 250px;
+ }
+
+ .napravi{
+     min-width: 250px;
+     text-align: center;
+ }

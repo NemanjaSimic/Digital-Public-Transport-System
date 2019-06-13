@@ -1,8 +1,8 @@
 <div class="container">
-  <h2>Izaberite liniju za prikaz trenutne lokacije autobusa</h2>
+  <h2 class="text-info">Izaberite liniju za prikaz trenutne lokacije autobusa</h2>
   <div class="form-group mt-5">
   <form #f="ngForm" >
-    <select size="5" name="selectedLinija" ngModel class="form-control" (change)="prikaziBus($event.target.value)">
+    <select class="form-group bg-info" size="5" name="selectedLinija" ngModel class="form-control" (change)="prikaziBus($event.target.value)">
       <option *ngFor="let linija of linije">{{linija}}</option>
     </select>
   </form>

@@ -633,6 +633,7 @@ namespace WebApp.Controllers
             string type = fileInfo.Extension.Split('.')[1];
             byte[] data = new byte[fileInfo.Length];
 
+
             HttpResponseMessage response = new HttpResponseMessage();
             using (FileStream fs = fileInfo.OpenRead())
             {
