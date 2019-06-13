@@ -104,6 +104,7 @@ export class EditProfilComponent implements OnInit {
               data =>  { }
             )
           }
+          localStorage.setItem('userId', this.editedUser.Username);
           this.router.navigate(['/']);   
         },
         (error) => { alert("Pogresna lozinka, neuspesna izmena profila. Pokusajte ponovo."); }

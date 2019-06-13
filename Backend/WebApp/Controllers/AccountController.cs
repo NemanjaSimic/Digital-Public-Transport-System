@@ -366,6 +366,12 @@ namespace WebApp.Controllers
 
                     IdentityResult result2 = UserManager.Create(temp);
                     IdentityResult roleResult = UserManager.AddToRole(temp.UserName, "AppUser");
+                    List<Karta> karte = UnitOfWork.Karte.GetAll().Where(x => x.Korisnik.Equals(user.OldUsername)).ToList();
+                    foreach (var item in karte)
+                    {
+                        item.Korisnik = user.Username;
+                    }
+
                     UnitOfWork.Complete();
                     if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
                     {
@@ -399,7 +405,7 @@ namespace WebApp.Controllers
 					stariUser.ImgUrl = user.ImgUrl;
 					stariUser.PasswordHash = stariUser.PasswordHash;
 
-					IdentityResult result = UserManager.Update(stariUser);
+                    IdentityResult result = UserManager.Update(stariUser);
                     //IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
                     //UnitOfWork.Complete();
 
@@ -831,11 +837,17 @@ namespace WebApp.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public IHttpActionResult Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            ApplicationUser userCheck = UserManager.FindByName(model.Username);
+            if (userCheck != null)
+            {
+                return BadRequest("Korisnik sa korisnickim imenom -> " + model.Username + " vec postoji. Pokusajte ponovo.");
             }
 
 			var user = new ApplicationUser()
@@ -854,7 +866,7 @@ namespace WebApp.Controllers
 				EmailConfirmed = false
 			};
 
-			IdentityResult result = await UserManager.CreateAsync(user);
+			IdentityResult result = UserManager.Create(user);
 
             if (!result.Succeeded)
             {
@@ -864,7 +876,7 @@ namespace WebApp.Controllers
 			{
 				ApplicationUser currentUser = UserManager.FindByName(user.UserName);
 
-				IdentityResult roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "AppUser");
+				IdentityResult roleResult = UserManager.AddToRole(currentUser.Id, "AppUser");
                 //UnitOfWork.Complete();
 				if (!roleResult.Succeeded)
 				{
