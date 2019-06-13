@@ -18,6 +18,7 @@ const httpOptions = {
 export class ProfilService{
 
     private GetUserUrl = 'http://localhost:52295/api/Account/GetUser';
+    private GetAllUsersUrl = 'http://localhost:52295/api/Account/GetAllUsers';
     private EditUserUrl = 'http://localhost:52295/api/Account/EditUser';
     private ChangePassUrl = 'http://localhost:52295/api/Account/ChangePassword';
     private UploadImageUrl = 'http://localhost:52295/api/Account/UploadImage/';
@@ -25,15 +26,18 @@ export class ProfilService{
     private GetUsersForValidationUrl = 'http://localhost:52295/api/Account/GetAllUsersForValidation';
     private ValidateUserUrl = 'http://localhost:52295/api/Account/ValidateUser';
     private DeactivateMyProfilUrl = 'http://localhost:52295/api/Account/DeactivateMyProfil';
+    private DeactivateProfilByAdminUrl = 'http://localhost:52295/api/Account/DeactivateProfilByAdmin';
 
     constructor(private http: HttpClient, private router: Router){}
 
    getUser(username:string) : Observable<Korisnik> {
-        return this.http.get<Korisnik>(`${this.GetUserUrl}?username=${username}`).pipe(
-            catchError(this.handleError<Korisnik>(`GetUser`)
-        ));
+        return this.http.get<Korisnik>(`${this.GetUserUrl}?username=${username}`);    
    }
 
+   getAllUsers() : Observable<Korisnik[]>{
+      return this.http.get<Korisnik[]>(this.GetAllUsersUrl);
+   }
+   
    editProfile(user: Korisnik) : Observable<any> {
       return this.http.put(this.EditUserUrl, user, httpOptions);
    }
@@ -61,6 +65,11 @@ export class ProfilService{
 
    deactivateMyProfil(data: any) : Observable<any>{
      return this.http.post(this.DeactivateMyProfilUrl, data);
+   }
+
+   deactivateProfilByAdmin(username: string) : Observable<any>{
+     let httpOpt = {headers : new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'})}
+     return this.http.post(this.DeactivateProfilByAdminUrl, username, httpOpt);
    }
    
    private handleError<T> (operation = 'operation', result?: T) {

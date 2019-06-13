@@ -17,7 +17,7 @@ export class RegisterService{
     constructor(private http: HttpClient, private router: Router){}
 
     register(user: Korisnik): Observable<Korisnik> {
-        return this.http.post<Korisnik>(this.UserRegisterUrl, user, httpOptions).pipe(catchError(this.handleError<any>('RegisterUser')));
+        return this.http.post<Korisnik>(this.UserRegisterUrl, user, httpOptions);
     }
 
     private handleError<T> (operation = 'operation', result?: T) {

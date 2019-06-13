@@ -74,7 +74,7 @@ export class EditStanicaComponent implements OnInit {
           this.getStanice();
       },
       (error)=>{
-        alert(error.error.Message);
+        alert("Neuspesna izmena stanice. Moguce brisanje ili izmena od strane drugog admina u medjuvremenu. Pokusajte ponovo.");
       }
     );
   }

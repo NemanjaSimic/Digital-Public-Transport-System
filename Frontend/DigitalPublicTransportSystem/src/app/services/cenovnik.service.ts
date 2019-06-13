@@ -15,17 +15,13 @@ export class CenovnikService{
     constructor(private http: HttpClient) {}
 
     getCenovnik(): Observable<Stavka[]>{
-        return this.http.get<Stavka[]>(this.GetCenovnikUrl).pipe(
-            catchError(this.handleError<Stavka[]>(`getCenovnik`))
-        );
+        return this.http.get<Stavka[]>(this.GetCenovnikUrl);
     }
 
     napraviCenovnik(cenovnik: NoviCenovnik): Observable<any>{
         console.log(localStorage.jwt);
-        return this.http.post<NoviCenovnik>(this.NapraviCenovnikUrl, cenovnik).pipe(catchError(this.handleError<any>('NapraviCenovnik')));
+        return this.http.post<NoviCenovnik>(this.NapraviCenovnikUrl, cenovnik);
     }
-
-
 
       /**
    * Handle Http operation that failed.

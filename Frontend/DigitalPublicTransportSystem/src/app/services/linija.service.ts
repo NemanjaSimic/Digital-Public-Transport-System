@@ -26,15 +26,11 @@ export class LinijaService{
   }
 
   getLinijeByTip (tip : any): Observable<Array<string>> {
-      return this.http.get<Array<string>>(`${this.GetLinijeByTipUrl}?TipVoznje=${tip}`).pipe(
-          catchError(this.handleError<Array<string>>(`getLinija`))
-        );   
+      return this.http.get<Array<string>>(`${this.GetLinijeByTipUrl}?TipVoznje=${tip}`);
   }
 
   getTerminiOfLinija(ime:any,dan:any):Observable<Array<string>>{
-    return this.http.get<Array<string>>(`${this.GetTerminiOfLinijaUrl}?Ime=${ime}&Dan=${dan}`).pipe(
-      catchError(this.handleError<Array<string>>(`getTermini`))
-    );   
+    return this.http.get<Array<string>>(`${this.GetTerminiOfLinijaUrl}?Ime=${ime}&Dan=${dan}`);
   }
 
   getStaniceOfLinija(ime:any): Observable<any>{

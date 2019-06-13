@@ -286,6 +286,37 @@ namespace WebApp.Controllers
 
             return retVal;
         }
+
+        [Route("GetAllUsers")]
+        [HttpGet]
+        [Authorize(Roles ="Admin")]
+        public List<RegisterBindingModel> GetAllUsers()
+        {
+            List<RegisterBindingModel> retVal = new List<RegisterBindingModel>();
+            List<ApplicationUser> temp = new List<ApplicationUser>();
+            List<ApplicationUser> temp2 = new List<ApplicationUser>();
+            temp = UserManager.Users.Where(x => x.Izbrisano == false).ToList();
+            foreach (var item in temp)
+            {
+                if(UserManager.IsInRole(item.Id, "AppUser"))
+                {
+                    temp2.Add(item);
+                }
+            }
+            foreach(var user in temp2)
+            {
+                retVal.Add(new RegisterBindingModel()
+                {
+                    Username = user.UserName,
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    UserType = user.UserType,
+                    Email = user.Email
+                });
+            }
+            return retVal;
+        }
+
         [HttpPut]
         [Authorize(Roles = "AppUser")]
         [Route("EditUser")]
@@ -335,6 +366,12 @@ namespace WebApp.Controllers
 
                     IdentityResult result2 = UserManager.Create(temp);
                     IdentityResult roleResult = UserManager.AddToRole(temp.UserName, "AppUser");
+                    List<Karta> karte = UnitOfWork.Karte.GetAll().Where(x => x.Korisnik.Equals(user.OldUsername)).ToList();
+                    foreach (var item in karte)
+                    {
+                        item.Korisnik = user.Username;
+                    }
+
                     UnitOfWork.Complete();
                     if (!result.Succeeded || !result2.Succeeded || !roleResult.Succeeded)
                     {
@@ -368,7 +405,7 @@ namespace WebApp.Controllers
 					stariUser.ImgUrl = user.ImgUrl;
 					stariUser.PasswordHash = stariUser.PasswordHash;
 
-					IdentityResult result = UserManager.Update(stariUser);
+                    IdentityResult result = UserManager.Update(stariUser);
                     //IdentityResult roleResult = await UserManager.AddToRoleAsync(temp.UserName, "AppUser");
                     //UnitOfWork.Complete();
 
@@ -407,6 +444,32 @@ namespace WebApp.Controllers
 
                 // user.Izbrisano = true;
                 // UserManager.Update(user);
+
+                UserManager.Delete(user);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest("Neuspesna deaktivacija profila.");
+            }
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("DeactivateProfilByAdmin")]
+        public IHttpActionResult DeactivateProfilByAdmin()
+        {
+
+            var req = HttpContext.Current.Request;
+            var username = req.Form.ToString();
+            try
+            {
+                var user = UserManager.FindByName(username);
+                if (user == null)
+                {
+                    return BadRequest("Korisnik sa datim username-om ne postoji.");
+                }
 
                 UserManager.Delete(user);
                 return Ok();
@@ -774,11 +837,17 @@ namespace WebApp.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public IHttpActionResult Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            ApplicationUser userCheck = UserManager.FindByName(model.Username);
+            if (userCheck != null)
+            {
+                return BadRequest("Korisnik sa korisnickim imenom -> " + model.Username + " vec postoji. Pokusajte ponovo.");
             }
 
 			var user = new ApplicationUser()
@@ -797,7 +866,7 @@ namespace WebApp.Controllers
 				EmailConfirmed = false
 			};
 
-			IdentityResult result = await UserManager.CreateAsync(user);
+			IdentityResult result = UserManager.Create(user);
 
             if (!result.Succeeded)
             {
@@ -807,7 +876,7 @@ namespace WebApp.Controllers
 			{
 				ApplicationUser currentUser = UserManager.FindByName(user.UserName);
 
-				IdentityResult roleResult = await UserManager.AddToRoleAsync(currentUser.Id, "AppUser");
+				IdentityResult roleResult = UserManager.AddToRole(currentUser.Id, "AppUser");
                 //UnitOfWork.Complete();
 				if (!roleResult.Succeeded)
 				{

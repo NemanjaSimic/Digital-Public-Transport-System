@@ -32,6 +32,7 @@ import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-pro
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 import { LokacijaVozilaComponent } from './lokacija-vozila/lokacija-vozila.component';
 import { LokacijaService } from './services/lokacija.service';
+import { KorisniciComponent } from './admin/korisnici/korisnici.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { LokacijaService } from './services/lokacija.service';
     DeaktivirajProfilComponent,
     PrikazTransakcijaComponent,
     ValidacijaKartaComponent,
-    LokacijaVozilaComponent  
+    LokacijaVozilaComponent,  
+    KorisniciComponent
 ],
   imports: [
     BrowserModule,

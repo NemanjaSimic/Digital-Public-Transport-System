@@ -38,7 +38,7 @@ export class NovaStanicaComponent implements OnInit {
         this.router.navigate(['']);
       },
       (error)=>{
-        console.log(error);
+        alert("Neuspesno dodavanje stanice. Naziv vec postoji. Pokusajte ponovo.");
       }
     );
   }

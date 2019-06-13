@@ -103,7 +103,11 @@ export class RegistracijaComponent implements OnInit {
           }
           this.router.navigate(['/login']);   
         },
-        (error) => {}
+        (error) => 
+        { 
+          alert("Korisnik sa korisnickim imenom -> " + this.registerForm.get('username').value + " vec postoji. Pokusajte ponovo." );
+          this.registerForm.patchValue({username : ''});
+        }
       );
     }
   }
