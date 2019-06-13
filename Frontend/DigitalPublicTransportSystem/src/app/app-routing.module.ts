@@ -23,6 +23,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { KontrolorGuard } from './guards/kontrolor.guard';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
+import { LokacijaVozilaComponent } from './lokacija-vozila/lokacija-vozila.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'mreza',
     component: MrezaLinijaComponent
+  },
+  {
+    path: 'lokacijaVozila',
+    component: LokacijaVozilaComponent
   },
   {
     path: 'kupiKartu/:tip/:popust/:cena',

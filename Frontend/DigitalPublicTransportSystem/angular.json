@@ -28,8 +28,9 @@
           ],
           "scripts": [
               "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
-          ]
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/jquery.signalR-2.4.1.min.js"
+            ]
           },
           "configurations": {
             "production": {

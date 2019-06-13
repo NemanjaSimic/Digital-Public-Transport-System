@@ -8,6 +8,7 @@ using System.Web.Http.Dependencies;
 using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
+using WebApp.Hubs;
 using WebApp.Models;
 using WebApp.Persistence;
 using WebApp.Persistence.Repository;
@@ -77,6 +78,7 @@ namespace WebApp.App_Start
             container.RegisterType<ICenovnikRepository, CenovnikRepository>();
             container.RegisterType<IStavkaRepository, StavkaRepository>();
             container.RegisterType<ITerminRepository, TerminRepository>();
+			container.RegisterType<LocationHub>();
 
 
         }

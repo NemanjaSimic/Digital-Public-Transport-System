@@ -8,13 +8,13 @@ namespace WebApp.Migrations
         public override void Up()
         {
             AddColumn("dbo.Stanicas", "Verzija", c => c.Int(nullable: false));
-			AddColumn("dbo.Liijas", "Verzija", c => c.Int(nullable: false));
+			AddColumn("dbo.Linijas", "Verzija", c => c.Int(nullable: false));
 		}
         
         public override void Down()
         {
             DropColumn("dbo.Stanicas", "Verzija");
-			DropColumn("dbo.Liijas", "Verzija");
+			DropColumn("dbo.Linijas", "Verzija");
 		}
     }
 }

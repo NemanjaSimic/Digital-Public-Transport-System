@@ -7,6 +7,13 @@ using WebApp.Models.Enums;
 namespace WebApp.Models
 {
 	// Models used as parameters to AccountController actions.
+	public class LokacijaBindingModel
+	{
+		public string Linija { get; set; }
+		public double X { get; set; }
+		public double Y { get; set; }
+	}
+
 	public class StanicaBindingModel
 	{
 		[Required]

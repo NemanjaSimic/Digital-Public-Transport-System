@@ -30,6 +30,8 @@ import { DashboardKontrolorComponent } from './kontrolor/dashboard-kontrolor/das
 import { ValidacijaKartaComponent } from './kontrolor/validacija-karta/validacija-karta.component';
 import { DeaktivirajProfilComponent } from './deaktiviraj-profil/deaktiviraj-profil.component';
 import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakcija.component';
+import { LokacijaVozilaComponent } from './lokacija-vozila/lokacija-vozila.component';
+import { LokacijaService } from './services/lokacija.service';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakc
     DashboardKontrolorComponent,
     DeaktivirajProfilComponent,
     PrikazTransakcijaComponent,
-    ValidacijaKartaComponent  
+    ValidacijaKartaComponent,
+    LokacijaVozilaComponent  
 ],
   imports: [
     BrowserModule,
@@ -68,7 +71,7 @@ import { PrikazTransakcijaComponent } from './prikaz-transakcija/prikaz-transakc
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
     NgMultiSelectDropDownModule.forRoot()
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi:true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi:true}, LokacijaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
