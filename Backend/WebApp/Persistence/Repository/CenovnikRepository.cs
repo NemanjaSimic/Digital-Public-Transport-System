@@ -38,16 +38,18 @@ namespace WebApp.Persistence.Repository
 				}
 			}
 
-			try
-			{
-				AppDbContext.Cenovnici.Add(noviCenovnik);
-				AppDbContext.SaveChanges();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
+
+			return true;
+			//try
+			//{
+			//	AppDbContext.Cenovnici.Add(noviCenovnik);
+			//	AppDbContext.SaveChanges();
+			//	return true;
+			//}
+			//catch (Exception)
+			//{
+			//	return false;
+			//}
 		}
 	}
 }

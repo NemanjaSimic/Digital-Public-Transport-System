@@ -53,9 +53,11 @@ namespace WebApp.Controllers
 			}
 			try
 			{
-				var cenovnik = new Cenovnik() { Od = DateTime.Now, Do = noviCenovnik.Do, Aktuelan = true, Stavke = new List<StavkaCenovnika>() };
+				var cenovnik = new Cenovnik() { Od = DateTime.Now, Do = noviCenovnik.Do, Aktuelan = true, Stavke = new List<StavkaCenovnika>(), Izbrisano = false};
 				unitOfWork.Cenovnici.NapraviCenovnik(cenovnik);
-			
+				unitOfWork.Cenovnici.Add(cenovnik);
+				unitOfWork.Complete();
+
 				var tkarta1 = new TipKarte() { CenaKarte = noviCenovnik.Godisnja, VrstaKarte = Models.Enums.VrstaKarte.Godisnja };
 				var tkarta2 = new TipKarte() { CenaKarte = noviCenovnik.Vremenska, VrstaKarte = Models.Enums.VrstaKarte.Vremenska };
 				var tkarta3 = new TipKarte() { CenaKarte = noviCenovnik.Dnevna, VrstaKarte = Models.Enums.VrstaKarte.Dnevna };

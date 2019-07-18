@@ -27,7 +27,7 @@ namespace WebApp.Persistence.Repository
 				{
 					AppDbContext.Stavke.Add(new StavkaCenovnika()
 					{
-						TipKarte = karta,
+						TipKarte = AppDbContext.TipKartes.ToList().Find(k => k.VrstaKarte == karta.VrstaKarte),
 						TipPopusta = item,
 						Cena = (item.Koeficijent != 1) ? karta.CenaKarte - (karta.CenaKarte * item.Koeficijent) : karta.CenaKarte,
 						Cenovnik = cenovnik
