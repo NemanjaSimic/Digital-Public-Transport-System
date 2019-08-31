@@ -15,13 +15,16 @@
         <input formControlName="email" required class="form-control"  type="text" id="email">
         <div *ngIf="f.email.invalid && f.email.touched" class="alert alert-danger">
             <div *ngIf="f.email.errors.required">
-                <p>Email is required.</p>
+                <p>Email is required.</p>             
             </div>
             <div *ngIf="f.email.errors.email">
                 <p>Please enter valid email address.</p>
             </div>
         </div>
-        <button [disabled]="emailForm.invalid" (click)="kupiKartu()" class="btn btn-primary">Kupi</button>
+        <div *ngIf ="!emailForm.invalid">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          <!-- <button [disabled]="emailForm.invalid" (click)="kupiKartu()" class="btn btn-primary">Kupi</button> -->
+        </div>
       </div>
     </form>
   <!-- </form> -->
@@ -30,6 +33,7 @@
       <label class="alert alert-inforamtion">Tip karte:{{tipKarte}}</label>
       <label class="alert alert-inforamtion">Tip popusta:{{tipPopusta}}</label>
       <label class="alert alert-inforamtion">Cena karte:{{cena}}</label>
-      <button (click)="potvrdiKupovinu()" class="btn btn-primary">Potvrdi kupovinu</button>
+      <!-- <button (click)="potvrdiKupovinu()" class="btn btn-primary">Potvrdi kupovinu</button> -->
+      <ngx-paypal [config]="payPalConfig"></ngx-paypal>
   </div>
 </div>

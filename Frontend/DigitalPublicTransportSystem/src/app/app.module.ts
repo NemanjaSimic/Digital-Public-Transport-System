@@ -4,6 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
+import {NgxPayPalModule} from 'ngx-paypal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,6 +71,7 @@ import { KorisniciComponent } from './admin/korisnici/korisnici.component';
     ReactiveFormsModule,
     HttpModule,
     FormsModule,
+    NgxPayPalModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
     NgMultiSelectDropDownModule.forRoot()
   ],

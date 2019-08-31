@@ -15,6 +15,7 @@ namespace WebApp.Models
         public bool Validna { get; set; }
         public DateTime DatumIzdavanja { get; set; }
 		public bool Izbrisano { get; set; }
+		public string IdTransakcije { get; set; }
 
 		public virtual StavkaCenovnika StavkaCenovnika { get; set; }
     }

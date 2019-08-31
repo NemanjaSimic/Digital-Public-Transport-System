@@ -95,10 +95,11 @@ namespace WebApp.Controllers
         {
             var req = HttpContext.Current.Request;
             var temp = req.Form.ToString();
-            var email = temp.Replace("%40", "@"); //don't even ask
+            var email = temp.Split('-').First().Replace("%40", "@"); //don't even ask
+			var idKarte = temp.Split('-').Last();
 
             //napravi kartu
-            int id = unitOfWork.Karte.NapraviKartu("Neregistrovani korisnik", Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular);
+            int id = unitOfWork.Karte.NapraviKartu("Neregistrovani korisnik", Models.Enums.VrstaKarte.Vremenska, Models.Enums.VrstaPopusta.Regular, idKarte);
             if (id != -1)
             {
                 try

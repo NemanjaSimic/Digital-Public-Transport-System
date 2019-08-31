@@ -287,6 +287,10 @@
     <Compile Include="Migrations\201906122342360_OptimisticConcurrency.Designer.cs">
       <DependentUpon>201906122342360_OptimisticConcurrency.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908211535048_PayPal.cs" />
+    <Compile Include="Migrations\201908211535048_PayPal.Designer.cs">
+      <DependentUpon>201908211535048_PayPal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -455,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906122342360_OptimisticConcurrency.resx">
       <DependentUpon>201906122342360_OptimisticConcurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908211535048_PayPal.resx">
+      <DependentUpon>201908211535048_PayPal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

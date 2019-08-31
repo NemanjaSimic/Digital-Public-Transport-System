@@ -128,7 +128,8 @@ namespace WebApp.Controllers
                       CultureInfo.CreateSpecificCulture("en-GB")),
                             Cena = item.StavkaCenovnika.Cena,
                             TipKarte = item.StavkaCenovnika.TipKarte.VrstaKarte.ToString(),
-                            TipPopusta = item.StavkaCenovnika.TipPopusta.VrstaPopusta.ToString()
+                            TipPopusta = item.StavkaCenovnika.TipPopusta.VrstaPopusta.ToString(),
+							Id = item.IdTransakcije
                         });
                     }
                 }
@@ -165,8 +166,8 @@ namespace WebApp.Controllers
                 Validna = true,
                 Izbrisano = false,
                 Korisnik = karta.Korisnik,
-                StavkaCenovnika = stavka
-               
+                StavkaCenovnika = stavka,
+				IdTransakcije = karta.Id         
             };
 
             try

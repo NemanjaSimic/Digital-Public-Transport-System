@@ -165,6 +165,8 @@ namespace WebApp.Models
         public float Cena { get; set; }
         [Display(Name = "Datum")]
         public string Datum { get; set; }
+		[Display(Name = "Id")]
+		public string Id { get; set; }
     }
 
     public class ValidateUserBindingModel
