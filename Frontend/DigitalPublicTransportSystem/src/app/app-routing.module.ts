@@ -50,7 +50,7 @@ const routes: Routes = [
     component: LokacijaVozilaComponent
   },
   {
-    path: 'kupiKartu/:tip/:popust/:cena',
+    path: 'kupiKartu',
     component: KupovinaKarteComponent
   },
   {

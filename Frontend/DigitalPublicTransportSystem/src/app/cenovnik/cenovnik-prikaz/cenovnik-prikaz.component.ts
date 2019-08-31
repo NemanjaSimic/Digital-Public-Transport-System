@@ -22,5 +22,11 @@ export class CenovnikPrikazComponent implements OnInit {
   getCenovnik():void{
     this.cenovnikService.getCenovnik().subscribe(stavka => this.stavke = stavka);
   }
+
+  kupiKartu(cena: string,popust: string,tip: string):void{
+    localStorage.setItem('cena', cena);
+    localStorage.setItem('popust', popust);
+    localStorage.setItem('tip', tip);
+  }
   
 }

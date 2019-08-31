@@ -34,9 +34,12 @@ export class KupovinaKarteComponent implements OnInit {
   }
 
   getInfo(): void{
-    this.tipKarte = this.route.snapshot.paramMap.get('tip');
-    this.tipPopusta = this.route.snapshot.paramMap.get('popust');
-    this.cena = +this.route.snapshot.paramMap.get('cena');
+    // this.tipKarte = this.route.snapshot.paramMap.get('tip');
+    // this.tipPopusta = this.route.snapshot.paramMap.get('popust');
+    // this.cena = +this.route.snapshot.paramMap.get('cena');
+    this.tipKarte = localStorage.getItem('tip');
+    this.tipPopusta = localStorage.getItem('popust');
+    this.cena = +localStorage.getItem('cena');
     this.role = localStorage.role;
   }
 

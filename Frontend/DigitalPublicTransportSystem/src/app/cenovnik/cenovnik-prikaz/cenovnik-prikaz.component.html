@@ -12,7 +12,7 @@
       <td>{{stavka.VrstaPopusta}}</td>
       <td>{{stavka.Cena}}</td>
       <td ><button *ngIf="(role == 'AppUser' && (stavka.VrstaPopusta == type || stavka.VrstaPopusta == 'Regular')) || (!role && stavka.VrstaPopusta == 'Regular' && stavka.VrstaKarte == 'Vremenska')"
-        routerLink="/kupiKartu/{{stavka.VrstaKarte}}/{{stavka.VrstaPopusta}}/{{stavka.Cena}}">
+        (click) = "kupiKartu(stavka.Cena,stavka.VrstaPopusta,stavka.VrstaKarte)" routerLink="/kupiKartu">
         Kupi</button>
     </td>
     </tr>
